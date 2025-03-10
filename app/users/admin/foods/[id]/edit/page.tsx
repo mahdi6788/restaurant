@@ -2,11 +2,11 @@ import { getFoods } from "@/app/lib/data";
 import EditForm from "@/app/components/admin/EditForm";
 import Breadcrumbs from "@/app/components/Breadcrumbs";
 
-export default async function editFoodsForm({
-  params,
-}: {
+type Props = {
   params: { id: string };
-}) {
+};
+
+export default async function editFoodsForm({ params }: Props) {
   /// await the dynamic API (params) to access its properties
   const { id } = params;
 
