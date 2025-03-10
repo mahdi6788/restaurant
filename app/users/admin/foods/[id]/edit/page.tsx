@@ -8,7 +8,7 @@ export default async function editFoodsForm({
   params: { id: string };
 }) {
   /// await the dynamic API (params) to access its properties
-  const {id} = await params;
+  const { id } = params;
 
   const breadcrumbs = [
     { href: "/users/admin/foods", label: "Foods" },
