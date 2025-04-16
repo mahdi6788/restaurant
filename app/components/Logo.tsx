@@ -1,12 +1,23 @@
-import { GiFoodTruck } from "react-icons/gi";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function Logo() {
   return (
-    <div
-      className= "flex items-center justify-center"
-    >
-      <p className="text-4xl">Royal Food </p>
-      <GiFoodTruck className="w-16 h-16 mb-3" />
-    </div>
+    <header className="fixed top-1.5 -left-2.5 z-50 ">
+      <div className="container mx-auto px-4">
+        <div className="flex items-center justify-between">
+          <Link href="/">
+            <Image
+              src="/images/logo/LOGO.jpg"
+              width={85.6}
+              height={80}
+              alt="Zeyton"
+              className=" opacity-80 rounded-full "
+              priority // Add this to prioritize loading
+            />
+          </Link>
+        </div>
+      </div>
+    </header>
   );
 }

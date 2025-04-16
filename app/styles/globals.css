@@ -1,3 +1,31 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+@layer utilities {
+    .grid-cols-autofit {
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+  }
+
+/* shimmer effect for a polished look for the professional skeleton loader  */
+  @keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: 200px 0;
+  }
+}
+
+.animate-pulse {
+  animation: shimmer 2s infinite linear;
+  background: linear-gradient(
+    to right,
+    #e5e7eb 4%,
+    #f3f4f6 25%,
+    #e5e7eb 36%
+  );
+  background-size: 200px 100%;
+}

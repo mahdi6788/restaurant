@@ -1,37 +1,40 @@
 "use client";
 
+import toast from "react-hot-toast";
+import Link from "next/link";
+import Button from "../ui/Button";
 import { CurrencyDollarIcon } from "@heroicons/react/24/outline";
 import { MdDescription } from "react-icons/md";
 import { BiFoodMenu } from "react-icons/bi";
-import Link from "next/link";
-import { editFood } from "@/app/lib/actions";
-import { FoodCardProps } from "@/app/lib/types";
+import { editFood } from "@/app/lib/foodActions";
 import { ImageUploader } from "./ImageUploader";
 import { useRouter } from "next/navigation";
-import Button from "../ui/Button";
-import toast from "react-hot-toast";
-import { useFoodsContext } from "@/app/context/FoodsContext";
 import { useState } from "react";
+import { MenuItem } from "@prisma/client";
+import { useMenu } from "@/hooks/useMenu";
 
-export default function EditForm({ food }: { food: FoodCardProps }) {
-  const { refetch } = useFoodsContext();
+export default function EditForm({ food }: { food: MenuItem }) {
+  const { menuRefetch } = useMenu();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  async function handleSubmit(formData: FormData) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
     setIsLoading(true);
-    try {
-      if (!food._id) return;
-      const result = await editFood(formData, food._id);
+    const formData = new FormData(event.target as HTMLFormElement);
 
-      if (result.success) {
-        toast.success(result.message);
+    try {
+      if (!food.id) return;
+      const { message, status } = await editFood({ formData, food });
+
+      if (status === 200) {
+        toast.success(message);
         // Force a client-side refresh before navigation
         router.refresh();
         router.push("/users/admin/foods");
-        await refetch();
+        await menuRefetch();
       } else {
-        toast.error(result.message);
+        toast.error(message);
       }
     } catch (error) {
       console.error(error);
@@ -42,18 +45,18 @@ export default function EditForm({ food }: { food: FoodCardProps }) {
   }
 
   return (
-    <form action={handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <div className="rounded-md bg-gray-50 p-4 md:p-6">
         {/* Name */}
         <div className="mb-4 relative">
-          <label htmlFor="title" className="mb-2 block text-sm font-medium">
+          <label htmlFor="name" className="mb-2 block text-sm font-medium">
             Choose a Name
           </label>
           <input
-            defaultValue={food.title}
+            defaultValue={food.name}
             type="text"
-            id="title"
-            name="title"
+            id="name"
+            name="name"
             placeholder="Food Name"
             className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
           />
@@ -68,7 +71,7 @@ export default function EditForm({ food }: { food: FoodCardProps }) {
             Description
           </label>
           <input
-            defaultValue={food.description}
+            defaultValue={food.description ?? ""}
             type="text"
             id="description"
             name="description"
@@ -92,8 +95,31 @@ export default function EditForm({ food }: { food: FoodCardProps }) {
           />
           <CurrencyDollarIcon className="pointer-events-none absolute left-3 top-2/3 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
         </div>
+        {/* Category */}
+        <div className="mb-4 relative">
+          <label htmlFor="category" className="mb-2 block text-sm font-medium">
+            Category
+          </label>
+          <select
+            defaultValue={food.category}
+            id="category"
+            name="category"
+            className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+          >
+            <option value="MainCourse">MainCourse</option>
+            <option value="Appetizers">Appetizers</option>
+            <option value="Drinks">Drinks</option>
+          </select>
+        </div>
+        {/* Availability */}
+        {/* <div className="mb-4 relative">
+          <div className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500">
+            <label htmlFor="availability">Is Availabile?</label>
+            <input type="checkbox" id="availability" name="availability" defaultChecked/>
+          </div>
+        </div> */}
         {/* Image */}
-        <ImageUploader />
+        <ImageUploader prevImage={food.imageUrl ?? ""} />
       </div>
       <div className="flex justify-end mt-6 gap-4 ">
         <Link

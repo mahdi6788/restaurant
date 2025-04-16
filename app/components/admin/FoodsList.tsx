@@ -1,80 +1,113 @@
 "use client";
 
-import { useFoodContext } from "@/app/context/FoodContext";
-import { useFoodsContext } from "@/app/context/FoodsContext";
-import { FALLBACK_IMAGE } from "@/app/lib/constants";
-import { FoodCardProps } from "@/app/lib/types";
-import { formatCurrency } from "@/app/lib/utils";
-import { DeleteFood, UpdateFood } from "@/app/components/ui/buttons";
 import Image from "next/image";
+import { formatCurrency } from "@/app/lib/utils";
+import { MenuItem } from "@prisma/client";
+import { DeleteFood, UpdateFood } from "../ui/buttons";
+import { FoodsListSkeleton } from "../skeleton";
+import { useMenu } from "@/hooks/useMenu";
+
 
 export default function FoodsList() {
-  const { checkedFood, handleCheckbox } = useFoodContext();
-  const { foods, loading } = useFoodsContext();
+  /// fetch foods using hook contaning use query
+  const { menu, menuLoading, menuRefetch } = useMenu();
 
-  if (loading) return <p>Loading...</p>;
-  if (!foods.length) return <p>No foods available.</p>;
+  /// use skeleton for loading time
+  if (menuLoading) return <FoodsListSkeleton />;
+
+  const handleAvailibility = async (food: MenuItem) => {
+    const response = await fetch("/api/foods", {
+      method: "PUT",
+      body: JSON.stringify({ ...food, isAvailable: !food.isAvailable }),
+      headers: { "Content-Type": "application/json" },
+    });
+    if (response.ok) {
+      await menuRefetch(); // Refresh the context data after update
+    } else {
+      console.error("Failed to update availability");
+    }
+  };
 
   return (
-    <div className="mt-6 flow-root">
+    <div className="mt-1 flow-root">
       <div className="inline-block min-w-full align-middle">
         <div className="rounded-lg bg-gray-50 p-2 sm:pt-0">
           {/* Mobile Version */}
           {/* pointing to hidden in small screen into the parent tag */}
           <div className="sm:hidden">
-            {foods?.map((food: FoodCardProps) => (
+            {menu?.map((food: MenuItem) => (
               <div
-                key={food._id}
+                key={food.id}
                 className="mb-2 w-full rounded-md bg-white p-4"
               >
                 <div className="flex items-center justify-between border-b pb-4">
                   <div>
-                    <div className="flex items-center mb-2 gap-">
-                      <input
-                        type="checkbox"
-                        onChange={(e) => handleCheckbox(e, food)}
-                        checked={checkedFood.includes(food._id ?? "")}
-                        className="size-4"
-                      />
+                    <div className="flex items-center mb-2 gap-1">
+                      {/* Availibility */}
+                      <div className="flex items-center justify-center gap-1 peer w-full rounded-md py-2 pl-10 text-sm outline-2 placeholder:text-gray-500">
+                        <label htmlFor={`availability-${food.id}`}>
+                          Is Availabile?{" "}
+                        </label>
+                        <input
+                          checked={food.isAvailable ?? false}
+                          onChange={() => handleAvailibility(food)}
+                          type="checkbox"
+                          id={`availability-${food.id}`}
+                          name="availability"
+                        />
+                      </div>
+                      {/* Image */}
                       <Image
                         src={
-                          typeof food.image === "string"
-                            ? food.image
-                            : FALLBACK_IMAGE
+                          typeof food.imageUrl === "string"
+                            ? food.imageUrl
+                            : "/public/images/logo/LOGO.jpg"
                         }
-                        alt={food.title || "Food image"}
+                        alt={food.name || "Food image"}
                         className="mr-2 rounded-full object-cover"
                         width={70}
                         height={70}
                       />
-                      <p>{food.title}</p>
+                      {/* Category */}
+                      <p>{food.category}</p>
+                      {/* Name */}
+                      <p>{food.name}</p>
                     </div>
+                    {/* Description */}
                     <p className="text-sm text-gray-500">{food.description}</p>
                   </div>
-                  {/* food statuse may be needed in future */}
                 </div>
+                {/* Price */}
                 <div className="flex w-full items-center justify-between pt-4">
                   <div>
                     <p className="text-xl font-medium">
                       {formatCurrency(food.price || 0)}
                     </p>
-                    {/* <p>{formatDateToLocal(food.date)} </p> */}
                   </div>
+                  {/* Update/Delete */}
                   <div className="flex justify-end gap-2">
-                    <UpdateFood id={food?._id ?? ""} />
-                    <DeleteFood id={food?._id ?? ""} />
+                    <UpdateFood id={food.id} />
+                    <DeleteFood id={food.id} />
                   </div>
                 </div>
               </div>
             ))}
           </div>
+          
           {/* Desktop Version */}
           {/* when pointing to hidden and sm:table in advance, no need to point the screen size for other tags  */}
           <table className="hidden min-w-full text-gray-900 sm:table">
             <thead className="rounded-lg text-left text-sm">
               <tr>
                 <th className="pl-6 py-5 font-medium" scope="col">
-                  Title
+                  Availibility
+                </th>
+                <th>Image</th>
+                <th className="pl-6 py-5 font-medium" scope="col">
+                  Category
+                </th>
+                <th className="pl-3 py-5 font-medium" scope="col">
+                  Name
                 </th>
                 <th className="px-3 py-5 font-medium" scope="col">
                   Description
@@ -88,45 +121,63 @@ export default function FoodsList() {
               </tr>
             </thead>
             <tbody className="bg-white">
-              {foods?.map((food: FoodCardProps) => (
+              {menu?.map((food: MenuItem) => (
                 <tr
-                  key={food._id}
+                  key={food.id}
                   className="w-full border-b py-3 text-sm last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
                 >
-                  <td className="whitespace-nowrap py-3 px-3">
-                    <div className="flex flex-col items-center gap-3">
-                      <div className="flex items-center gap-6 -ml-6 x">
+                  {/* Availibility */}
+                  <td>
+                    <div className="flex items-center gap-6 -ml-6">
+                      <div className="flex items-center justify-center gap-1 peer w-full rounded-md py-2 pl-10 text-sm outline-2 placeholder:text-gray-500">
+                        <label htmlFor={`availabilityDesktop-${food.id}`}>
+                          Is Availabile?
+                        </label>
                         <input
+                          checked={food.isAvailable ?? false}
+                          onChange={() => handleAvailibility(food)}
                           type="checkbox"
-                          onChange={(e) => handleCheckbox(e, food)}
-                          checked={checkedFood.includes(food._id ?? "")}
-                          className="size-4"
-                        />
-                        <Image
-                          alt={food.title || "Food image"}
-                          src={
-                            typeof food.image === "string"
-                              ? food.image
-                              : FALLBACK_IMAGE
-                          }
-                          className="rounded-full object-cover"
-                          width={70}
-                          height={70}
+                          id={`availabilityDesktop-${food.id}`}
+                          name="availability"
                         />
                       </div>
-                      <p>{food.title}</p>
                     </div>
                   </td>
+                  {/* Image */}
+                  <td>
+                    <Image
+                      alt={food.name || "Food image"}
+                      src={
+                        typeof food.imageUrl === "string"
+                          ? food.imageUrl
+                          : "/public/images/logo/LOGO.jpg"
+                      }
+                      className="rounded-full object-cover"
+                      width={70}
+                      height={70}
+                    />
+                  </td>
+                  {/* Category */}
+                  <td className="whitespace-nowrap py-3 px-3">
+                    <p>{food.category}</p>
+                  </td>
+                  {/* Name */}
+                  <td className="whitespace-nowrap py-3 px-3">
+                    <p>{food.name}</p>
+                  </td>
+                  {/* Description */}
                   <td className="whitespace-nowrap py-3 px-3">
                     {food.description}
                   </td>
+                  {/* Price */}
                   <td className="whitespace-nowrap py-3 px-3">
                     {formatCurrency(food.price || 0)}
                   </td>
+                  {/* Update/Delete */}
                   <td className="whitespace-nowrap py-3 px-3">
                     <div className="flex justify-end gap-3">
-                      <UpdateFood id={food._id ?? ""} />
-                      <DeleteFood id={food._id ?? ""} />
+                      <UpdateFood id={food.id} />
+                      <DeleteFood id={food.id} />
                     </div>
                   </td>
                 </tr>

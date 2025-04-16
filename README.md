@@ -1,0 +1,2 @@
+LCP is a key web performance metric that measures the time it takes for the largest visible content element (often an image) to render. Next.js suggests adding the priority prop to optimize loading for images that appear "above the fold" (i.e., in the initial viewport without scrolling).
+Without priority, Next.js lazy-loads images by default, which can delay rendering of critical content. Adding priority tells Next.js to preload the image, improving performance.
