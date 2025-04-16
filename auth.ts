@@ -4,6 +4,7 @@ import { prisma } from "./app/lib/prisma";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { getUserbyEmail, getUserbyId } from "./data/user";
 import { getTwoFactorConfirmationByUserId } from "./data/two-factor-confirmation";
+import { cookies } from "next/headers";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   ...authConfig,
@@ -24,6 +25,39 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   },
   callbacks: {
     async signIn({ user, account, profile }) {
+      /// 0. Quest    
+        const guestCartId = cookies().get("guestCartId")?.value;
+        if (guestCartId) {
+          const guestCart = await prisma.cart.findUnique({
+            where: { id: guestCartId },
+            include: { items: { include: { menuItem: true } } },
+          });
+          if (guestCart && guestCart.items.length > 0) {
+            const userCart = await prisma.cart.findUnique({
+              where: { userId: user.id },
+              include: { items: { include: { menuItem: true } } },
+            });
+            if (userCart) {
+              // Merge items into existing user cart
+              await prisma.cartItem.createMany({
+                data: guestCart.items.map((item) => ({
+                  cartId: userCart.id,
+                  menuItemId: item.menuItemId,
+                  quantity: item.quantity,
+                })),
+                skipDuplicates: true,
+              });
+              await prisma.cart.delete({ where: { id: guestCartId } });
+            } else {
+              // Assign guest cart to user
+              await prisma.cart.update({
+                where: { id: guestCartId },
+                data: { userId: user.id },
+              });
+            }
+            cookies().delete("guestCartId");
+          }
+        }
       /// 1. OAuth provider:
       if (account?.provider !== "credentials") {
         if (!profile?.email) throw new Error("No Profile");
