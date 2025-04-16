@@ -1,48 +1,26 @@
 /// as the prisma does not support the edge so we should use authConfig to extract auth
 
-import NextAuth from "next-auth";
-import authConfig from "./auth.config";
-// import {
-//   apiAuthPrefix,
-//   authRoutes,
-//   DEFAULT_LOGIN_REDIRECT,
-//   publicRoutes,
-// } from "./routes";
+import { NextRequest, NextResponse } from "next/server";
+import {getToken} from "next-auth/jwt"
 
-const { auth } = NextAuth(authConfig);
 
-export default auth((req) => {
-  if (!req.auth && req.nextUrl.pathname !== "/login") {
-    const newUrl = new URL('/login', req.nextUrl.origin)
-    return (Response.redirect(newUrl))
+export default async function middleware(req:NextRequest) {
+  // Get the token
+  const token = await getToken({
+    req,
+    secret: process.env.NEXTAUTH_SECRET
+  })
+  // If no token and not on login page, redirect to login
+  if (!token && req.nextUrl.pathname !== "/login") {
+    const loginUrl = new URL('/login', req.nextUrl.origin)
+    return (NextResponse.redirect(loginUrl))
   }
-
-  // const { nextUrl } = req;
-
-  // const isLoggedIn = !!req.auth;
-
-  // const isApiAuthPrefix = nextUrl.pathname.startsWith(apiAuthPrefix);
-  // const isAuthRoutes = authRoutes.includes(nextUrl.pathname);
-  // const isPublicRoutes = publicRoutes.includes(nextUrl.pathname);
-
-  // if (isApiAuthPrefix) return null;
-
-  // if (isAuthRoutes) {
-  //   if (isLoggedIn) {
-  //     return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl));
-  //   }
-  //   return null;
-  // }
-
-  // if (!isLoggedIn && !isPublicRoutes) {
-  //   return Response.redirect(new URL("/login", nextUrl));
-  // }
-  // return null;
-});
+  // Allow the request to proceed if token exists or on login page
+  return NextResponse.next()
+};
 
 export const config = {
-  matcher: ["/users", "/profile", "/payment"], // Protect these routes
-  // matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"], /// protect all routes except the favicon or static images.
+  matcher: ["/users/:path*"] // Protect users route and its subroutes
 };
 
 
