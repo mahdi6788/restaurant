@@ -15,7 +15,7 @@ export default async function middleware(req:NextRequest) {
     let callbackUrl = req.nextUrl.pathname
     if(req.nextUrl.search) callbackUrl += req.nextUrl.search
     const encodedCallbackUrl = encodeURIComponent(callbackUrl)
-    const loginUrl = new URL(`/login?${encodedCallbackUrl}`, req.nextUrl.origin)
+    const loginUrl = new URL(`/login?callback=${encodedCallbackUrl}`, req.nextUrl.origin)
     return (NextResponse.redirect(loginUrl))
   }
   // Allow the request to proceed if token exists or on login page
