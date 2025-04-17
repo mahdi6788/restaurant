@@ -14,7 +14,7 @@ export default function LoginForm() {
 
   const router = useRouter();
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl") || "/";
+  const callbackUrl = searchParams.get("encodedCallbackUrl") || "/";
   const message = searchParams.get("message") || "";
 
   const { data: session } = useSession();
@@ -28,7 +28,7 @@ export default function LoginForm() {
   const handleGoogleSignIn = async () => {
     try {
       const result = await signIn("google", {
-        callbackUrl: "/",
+        callbackUrl,
         redirect: false,
       });
       if (result?.error) {
