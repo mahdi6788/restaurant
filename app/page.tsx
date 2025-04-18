@@ -94,7 +94,7 @@ export default function TodayFood() {
         </div>
       </div>
       {/* Menu */}
-      <div className="sm:absolute top-3 right-0 w-1/12 z-30">
+      <div className="hidden sm:block absolute top-3 right-0 w-1/12 z-30">
         <Link href="/menu">
           <div className=" flex items-center justify-center">
             <Image
