@@ -24,7 +24,7 @@ export default function Dropdown({
       onMouseLeave={() => setIsOpen(false)}
     >
       <span className="flex items-center justify-center gap-1 text-xl font-bold hover:text-stone-100 text-yellow-300">
-        <Image alt='' src={session?.user.image ?? "/images/elements/user.png"} width={30} height={30} className="rounded-full"/>
+        <Image priority alt='' src={session?.user.image ?? "/images/elements/user.png"} width={30} height={30} className="rounded-full"/>
         Welcome, {session?.user.name || session?.user.email}
       </span>
       {isOpen && (
