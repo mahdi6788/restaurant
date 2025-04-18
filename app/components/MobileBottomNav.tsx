@@ -12,7 +12,7 @@ const MobileBottomNav: React.FC = () => {
 
   return (
     <>
-      <nav className="sm:hidden fixed bottom-8 left-0 right-0 bg-blue-600 text-white flex justify-around items-center py-2 shadow-lg rounded-t-xl z-50">
+      <nav className="sm:hidden fixed bottom-0 left-0 right-0 bg-blue-600 text-white flex justify-around items-center py-2 shadow-lg rounded-t-xl z-50">
         {/* Home */}
         <Link href="/">
           <FaHome size={30}/>
