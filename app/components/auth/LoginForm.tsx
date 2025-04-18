@@ -14,7 +14,7 @@ export default function LoginForm() {
 
   const router = useRouter();
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("encodedCallbackUrl") || "/";
+  const callbackUrl = searchParams.get("callbackUrl") || "/";
   const message = searchParams.get("message") || "";
 
   const { data: session } = useSession();
@@ -33,6 +33,9 @@ export default function LoginForm() {
       });
       if (result?.error) {
         toast.error(result.error + urlError);
+      }else{
+        toast.success("Signed in successfully");
+        router.push(callbackUrl);
       }
     } catch (error) {
       console.error("Sign-in error:", error);

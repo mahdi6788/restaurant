@@ -12,10 +12,10 @@ export default async function middleware(req:NextRequest) {
   })
   // If no token and not on login page, redirect to login
   if (!token && req.nextUrl.pathname !== "/login") {
-    // let callbackUrl = req.nextUrl.pathname
-    // if(req.nextUrl.search) callbackUrl += req.nextUrl.search
-    // const encodedCallbackUrl = encodeURIComponent(callbackUrl)
-    const loginUrl = new URL('/login', req.nextUrl.origin)   ////   `/login?callback=${encodedCallbackUrl}`
+    let callbackUrl = req.nextUrl.pathname
+    if(req.nextUrl.search) callbackUrl += req.nextUrl.search
+    const encodedCallbackUrl = encodeURIComponent(callbackUrl)
+    const loginUrl = new URL(`/login?callback=${encodedCallbackUrl}`, req.nextUrl.origin)   ////   `/login?callback=${encodedCallbackUrl}`
     return (NextResponse.redirect(loginUrl))
   }
   // Allow the request to proceed if token exists or on login page
