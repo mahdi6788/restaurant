@@ -57,6 +57,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
             }
             cookies().delete("guestCartId");
           }
+          return true
         }
       /// 1. OAuth provider:
       if (account?.provider !== "credentials") {
