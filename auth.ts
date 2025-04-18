@@ -66,7 +66,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         await prisma.user.upsert({
           where: { email: profile.email },
           update: { name: profile.name },
-          create: { email: profile.email, name: profile.name, role: "CUSTOMER" },  /// default role for customers that come from google
+          create: { email: profile.email, name: profile.name, image:profile.picture, role: "CUSTOMER" },  /// default role for customers that come from google
         });
         /// Allow OAuth without email verification
         return true;
