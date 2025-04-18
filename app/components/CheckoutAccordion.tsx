@@ -6,7 +6,7 @@ import { CartItems } from "@/hooks/useCart";
 import { useSession } from "next-auth/react";
 
 interface CheckoutProps {
-  handleCheckout: () => void;
+  handleCheckout: (event:React.FormEvent<HTMLFormElement>) => void;
   name: string;
   email: string;
   address: string;
@@ -272,15 +272,17 @@ export default function CheckoutAccordion({
                 .toFixed(2)}
             </p>
           </div>
-          <button
-            onClick={() => handleCheckout()}
-            className="w-full text-xl font-bold bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 transition-colors"
-          >
-            {session 
-            ?("Checkout")
-            :("Sign in to checkout")
-            }
-          </button>
+          <form onSubmit={(event) => handleCheckout(event)} className="w-full">
+            <button
+              type="submit"
+              className="w-full text-xl font-bold bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 transition-colors"
+            >
+              {session 
+              ?("Checkout")
+              :("Sign in to checkout")
+              }
+            </button>
+          </form>
         </div>
       </div>
     </div>
