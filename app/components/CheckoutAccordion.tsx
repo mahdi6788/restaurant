@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { CheckoutCard } from "./CheckoutCard";
 import { CartItems } from "@/hooks/useCart";
+import { useSession } from "next-auth/react";
 
 interface CheckoutProps {
   handleCheckout: () => void;
@@ -21,6 +22,7 @@ export default function CheckoutAccordion({
   phone,
   cartItems,
 }: CheckoutProps) {
+  const {data:session} = useSession()
   const [infoIsOpen, setInfoIsOpen] = useState(false);
   const [orderIsOpen, setOrderIsOpen] = useState(false);
   const [totalIsOpen, setTotalIsOpen] = useState(false);
@@ -274,7 +276,10 @@ export default function CheckoutAccordion({
             onClick={() => handleCheckout()}
             className="w-full text-xl font-bold bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 transition-colors"
           >
-            Checkout
+            {session 
+            ?("Checkout")
+            :("Sign in to checkout")
+            }
           </button>
         </div>
       </div>
