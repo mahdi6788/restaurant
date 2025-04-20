@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import MobileBottomNav from "./components/MobileBottomNav";
 import { useState } from "react";
 import MobileNavbar from "./components/MobileNavbar";
+import OrderProvider from "./context/OrderContext";
 
 const queryClient = new QueryClient();
 
@@ -18,7 +19,7 @@ export default function ClientProviders({
     <QueryClientProvider client={queryClient}>
       <Toaster />
       <MobileNavbar isOpen={isOpen} setIsOpen={setIsOpen} />
-      {children}
+      <OrderProvider>{children}</OrderProvider>
       <MobileBottomNav />
     </QueryClientProvider>
   );
