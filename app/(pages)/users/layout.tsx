@@ -9,7 +9,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const { data: session, status } = useSession();
   
-  if (!session?.user) {
+  if (!session) {
     router.push("/login");
     return null;
   }
