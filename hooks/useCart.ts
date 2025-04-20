@@ -81,6 +81,7 @@ export function useCart() {
     mutationFn: addToCartFn,
     onSuccess: () => {
       // invalidate cart query to refetch
+      toast.success("Item add to cart successfully");
       queryClient.invalidateQueries({ queryKey: ["cart"] });
     },
     onError: (error) => {
