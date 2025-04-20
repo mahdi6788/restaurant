@@ -67,7 +67,7 @@ export default function Profile() {
 
   return (
     <div className="min-h-screen p-8">
-      <div className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md mt-40 sm:mt-14">
+      <div className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md ">
         <h1 className="text-2xl font-bold mb-6 text-center">Your Profile</h1>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
