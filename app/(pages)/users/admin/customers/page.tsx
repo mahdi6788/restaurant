@@ -8,12 +8,27 @@ export default async function CustomersList() {
   const allOrders = await prisma.order.findMany({
     where: { items: { some: {} } },
     orderBy: { createdAt: "desc" },
-    include: { items: { include: { menuItem: true } } },
+    include: {user: true, items: { include: { menuItem: true } } },
   });
   return (
     <div className="mt-1 flow-root">
       <div className="inline-block min-w-full align-middle">
-        <div className="rounded-lg bg-gray-50 p-2 sm:pt-0">
+        {allOrders?.map((order) => (
+        <div key={order.id} className="mb-2 rounded-lg bg-gray-50 p-1 sm:p-4">
+          <div className="mb-4">
+          <h2 className="text-lg font-semibold">
+                Customer name: {order.user.name}
+              </h2>
+              <h2 className="text-lg font-semibold">
+                Order #{order.id.slice(0, 8)} -{" "}
+                {new Date(order.createdAt).toLocaleDateString()}
+              </h2>
+              <p className="text-sm text-gray-600">
+                Total: AED {order.total.toFixed(2)} | Status: {order.status} |
+                Address: {order.address} | 
+                Phone: {order.user.phone}
+              </p>
+            </div>
           {/* Desktop Version */}
           <table className="hidden sm:table min-w-full text-gray-900">
             <thead className="rounded-lg text-left text-sm">
@@ -25,12 +40,11 @@ export default async function CustomersList() {
                 <th className="pl-6 py-5 font-medium">Order Date</th>
                 <th className="pl-6 py-5 font-medium">Payment Method</th>
                 <th className="pl-6 py-5 font-medium">Payment Status</th>
-                <th className="pl-6 py-5 font-medium">Customer</th>
               </tr>
             </thead>
             <tbody className="bg-white">
-              {allOrders?.map((order) =>
-                order.items?.map((orderItem) => (
+              
+                {order.items?.map((orderItem) => (
                   <tr
                     key={orderItem.id}
                     className="w-full border-b py-3 text-sm last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
@@ -64,14 +78,12 @@ export default async function CustomersList() {
                     <td className="whitespace-nowrap py-3 px-3">Cash</td>
                     <td className="whitespace-nowrap py-3 px-3">Paid</td>
                   </tr>
-                ))
-              )}
+                  ))}
             </tbody>
           </table>
         </div>
+        ))}
       </div>
     </div>
   );
 }
-
-///table : which menu? name, address, phone? status of payment?

@@ -27,7 +27,7 @@ export default function OrderHistory({
     <div className="mt-1 flow-root">
       <div className="inline-block sm:min-w-full align-middle">
         {orders.map((order: Order & { items: OrderItemWithmenuItem[] }) => (
-          <div key={order.id} className="mb-8 rounded-lg bg-gray-50 p-1 sm:p-4">
+          <div key={order.id} className="mb-2 rounded-lg bg-gray-50 p-1 sm:p-4">
             {/* Order Header */}
             <div className="mb-4">
               <h2 className="text-lg font-semibold">
