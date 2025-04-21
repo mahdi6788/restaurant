@@ -15,6 +15,7 @@ import toast from "react-hot-toast";
 import { CheckoutInput } from "@/app/lib/zod";
 import { CheckoutCard } from "@/app/components/CheckoutCard";
 import CheckoutAccordion from "@/app/components/CheckoutAccordion";
+import { User } from "@prisma/client";
 
 export default function Checkout() {
   const router = useRouter();
@@ -22,23 +23,39 @@ export default function Checkout() {
   const queryClient = useQueryClient();
   const [total, setTotal] = useState(0);
 
-  const { data: session, status } = useSession();
+  const { data: session, status, update } = useSession();
   const userId = session?.user.id;
   const name = session?.user?.name;
-  const address = session?.user?.address;
-  const phone = session?.user?.phone;
   const email = session?.user?.email;
+  const [address, setAddress] = useState("");
+  const [phone, setPhone] = useState("");
 
   const { cartItems } = useCart();
+  const fetchCustomer = async () => {
+    const res = await fetch("/api/users/single-user", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email }),
+    });
+    if (!res.ok) throw new Error("Something went wrong");
+    const customer = await res.json();
+    return customer as User;
+  };
 
   useEffect(() => {
+    fetchCustomer().then((customer) => {
+      setAddress(customer.address ?? "")
+      setPhone(customer.phone ?? "");
+    }).catch((error) => {
+      console.error("Failed to fetch customer: ", error);
+    });
     setTotal(
       cartItems.reduce(
         (sum, item) => sum + item?.quantity * item?.menuItem.price,
         0
       ) ?? 0
     );
-  }, [cartItems]);
+  }, [cartItems, session, email]);
 
   /// PAYMENT ///
   //   const paymentRes = await fetch("/api/payment", {
@@ -50,12 +67,17 @@ export default function Checkout() {
   //   setClientSecret(paymentData.clientSecret);
   // }
 
-  const makeOrderFn = async ({ address, total, userId }: CheckoutInput) => {
+  const makeOrderFn = async ({
+    phone,
+    address,
+    total,
+    userId,
+  }: CheckoutInput) => {
     try {
       const res = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ address, total, userId }),
+        body: JSON.stringify({ phone, address, total, userId }),
       });
       if (!res.ok) throw new Error("Failed to make the order");
       return res.json();
@@ -70,6 +92,7 @@ export default function Checkout() {
       queryClient.invalidateQueries({ queryKey: ["checkout"] });
       toast.success("Order was made successfully");
       router.push("/users/customers/orders");
+      router.refresh();
     },
     onError: (error) => {
       console.log(error);
@@ -89,14 +112,44 @@ export default function Checkout() {
     if (status === "authenticated") {
       if (!address || !phone) {
         router.push(
-          "/users/customers/profile?message=Please complete your profile before ordering"
+          "/users/customers/profile?callbackUrl=/checkout&message=Please complete your profile before ordering"
         );
         return null;
       }
-      if (userId) {
-        makeOrder({ address, total, userId });
+      if (userId && total !== 0) {
+        /// update the customer info if there is change
+        try {
+          const res = await fetch("/api/users", {
+            method: "PATCH",
+            body: JSON.stringify({ userId, address, phone }),
+            headers: { "Content-Type": "application/json" },
+          });
+          const response = await res.json();
+          /// object (res) contains the HTTP status code
+          /// response variable contains parsed JSON body error or message
+          switch (res.status) {
+            case 404:
+              toast.error(response.error);
+              break;
+            case 200:
+              toast.success(response.message);
+              /// Only trigger on a successful update to avoid redirecting on errors.
+              update(session);
+              break;
+            case 500:
+              toast.error(response.error);
+              break;
+            default:
+              break;
+          }
+        } catch (error) {
+          console.error(error);
+          toast.error("Failed to update profile");
+        }
+
+        makeOrder({ phone, address, total, userId });
       } else {
-        toast.error("Please try again.");
+        toast.error("Cart is empty.");
       }
     }
   };
@@ -154,22 +207,8 @@ export default function Checkout() {
                 type="text"
                 id="address"
                 name="address"
-                defaultValue={address || ""}
-                disabled
-                className="mt-1 pl-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-              />
-            </div>
-            <div className="mb-4">
-              <label
-                htmlFor="area"
-                className="block text-sm font-medium text-orange-700"
-              >
-                Area (Deira, Business Bay, Down Town, Marina, ...)
-              </label>
-              <input
-                type="text"
-                id="area"
-                name="area"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
                 className="mt-1 pl-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
               />
             </div>
@@ -184,8 +223,8 @@ export default function Checkout() {
                 type="text"
                 id="phone"
                 name="phone"
-                defaultValue={phone || ""}
-                disabled
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
                 className="mt-1 pl-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
               />
             </div>
@@ -193,7 +232,7 @@ export default function Checkout() {
               type="submit"
               className="w-full bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 transition-colors"
             >
-              Checkout
+              {session ? "Checkout" : "Sign in to checkout"}
             </button>
           </form>
         </div>
@@ -249,6 +288,8 @@ export default function Checkout() {
           name={name as string}
           email={email as string}
           address={address as string}
+          setAddress={setAddress}
+          setPhone={setPhone}
           phone={phone as string}
           cartItems={cartItems}
           handleCheckout={handleCheckout}

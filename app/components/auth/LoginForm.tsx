@@ -147,7 +147,7 @@ export default function LoginForm() {
             Login to Your Account
           </h1>
           {message && (
-            <p className="text-blue-500 mb-4 text-center">{message}</p>
+            <p className="text-red-500 mb-4 text-center font-extrabold animate-bounce">{message}</p>
           )}
           <button
             onClick={handleGoogleSignIn}

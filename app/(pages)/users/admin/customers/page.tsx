@@ -1,89 +1,54 @@
 /// TODO: grouped table displaying name of customer
 /// TODO: search and filter options
+'use client'
+import { useOrders } from "@/app/context/OrderContext";
+import { lusitana } from "@/app/lib/fonts";
+import CustomersOrders from "@/app/components/admin/CustomersOrders";
 
-import { prisma } from "@/app/lib/prisma";
-import Image from "next/image";
 
-export default async function CustomersList() {
-  const allOrders = await prisma.order.findMany({
-    where: { items: { some: {} } },
-    orderBy: { createdAt: "desc" },
-    include: {user: true, items: { include: { menuItem: true } } },
-  });
+export default function CustomersOrdersPage() {
+  const {
+      search,
+      setSearch,
+      sortby,
+      setSortby,
+      selectedOrders,
+      selectedOrdersLoading,
+    } = useOrders();
+
   return (
-    <div className="mt-1 flow-root">
-      <div className="inline-block min-w-full align-middle">
-        {allOrders?.map((order) => (
-        <div key={order.id} className="mb-2 rounded-lg bg-gray-50 p-1 sm:p-4">
-          <div className="mb-4">
-          <h2 className="text-lg font-semibold">
-                Customer name: {order.user.name}
-              </h2>
-              <h2 className="text-lg font-semibold">
-                Order #{order.id.slice(0, 8)} -{" "}
-                {new Date(order.createdAt).toLocaleDateString()}
-              </h2>
-              <p className="text-sm text-gray-600">
-                Total: AED {order.total.toFixed(2)} | Status: {order.status} |
-                Address: {order.address} | 
-                Phone: {order.user.phone}
-              </p>
-            </div>
-          {/* Desktop Version */}
-          <table className="hidden sm:table min-w-full text-gray-900">
-            <thead className="rounded-lg text-left text-sm">
-              <tr>
-                <th className="pl-6 py-5 font-medium">Image</th>
-                <th className="pl-6 py-5 font-medium">Name</th>
-                <th className="pl-6 py-5 font-medium">Price</th>
-                <th className="pl-6 py-5 font-medium">Quantity</th>
-                <th className="pl-6 py-5 font-medium">Order Date</th>
-                <th className="pl-6 py-5 font-medium">Payment Method</th>
-                <th className="pl-6 py-5 font-medium">Payment Status</th>
-              </tr>
-            </thead>
-            <tbody className="bg-white">
-              
-                {order.items?.map((orderItem) => (
-                  <tr
-                    key={orderItem.id}
-                    className="w-full border-b py-3 text-sm last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
-                  >
-                    <td>
-                      <Image
-                        alt={orderItem.menuItem?.name ?? "Menu Image"}
-                        src={
-                          orderItem.menuItem?.imageUrl ??
-                          "/images/logo/LOGO.jpg"
-                        }
-                        width={60}
-                        height={60}
-                        className="rounded-full object-cover"
-                      />
-                    </td>
-                    <td className="whitespace-nowrap py-3 px-3">
-                      {orderItem.menuItem?.name}
-                    </td>
-                    <td className="whitespace-nowrap py-3 px-3">
-                      {orderItem?.price}
-                    </td>
-                    <td className="whitespace-nowrap py-3 px-3">
-                      {orderItem?.quantity}
-                    </td>
-                    <td className="whitespace-nowrap py-3 px-3">
-                      {new Date(
-                        orderItem.menuItem.updatedAt
-                      ).toLocaleDateString()}
-                    </td>
-                    <td className="whitespace-nowrap py-3 px-3">Cash</td>
-                    <td className="whitespace-nowrap py-3 px-3">Paid</td>
-                  </tr>
-                  ))}
-            </tbody>
-          </table>
+    <div className="container mx-auto ">
+      <div className="flex flex-col sm:flex-row gap-4 mb-6">
+        <h1
+          className={`${lusitana.className} text-2xl font-bold text-orange-950`}
+        >
+          Order History
+        </h1>
+        {/* Search */}
+        <input
+          type="text"
+          placeholder="Search by menu item name or customer's name or order ID"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="w-full sm:w-1/2 p-2 rounded-lg "
+        />
+        {/* Sort */}
+        <div>
+          Sort by
+          <select
+            className="rounded-lg p-2 ml-2 w-full sm:w-fit"
+            name="sortby"
+            id="sortby"
+            value={sortby}
+            onChange={(e) => setSortby(e.target.value)}
+          >
+            <option value="createdAt-desc">Order Date: Newest First</option>
+            <option value="createdAt-asc">Order Date: Oldest First</option>
+          </select>
         </div>
-        ))}
       </div>
+
+      <CustomersOrders orders={selectedOrders} selectedOrdersLoading={selectedOrdersLoading}/>
     </div>
   );
 }

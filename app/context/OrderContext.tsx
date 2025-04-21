@@ -51,7 +51,7 @@ export default function OrderProvider({
       queryFn: fetchOrderFn,
     });
   
-
+/// DELETE
   const deleteOrderFn = async (orderItemId: string) => {
     await fetch("/api/order", {
       method: "DELETE",

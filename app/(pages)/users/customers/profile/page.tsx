@@ -1,8 +1,8 @@
 "use client";
 
-import {ProfileSkeleton} from "@/app/components/skeleton";
+import { ProfileSkeleton } from "@/app/components/skeleton";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
@@ -13,6 +13,10 @@ export default function Profile() {
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(true);
+
+  const searchParams = useSearchParams();
+  const callback = searchParams.get("callback") ?? "/checkout";
+  const message = searchParams.get("message") ?? "";
 
   const router = useRouter();
 
@@ -51,7 +55,11 @@ export default function Profile() {
           /// Only trigger on a successful update to avoid redirecting on errors.
           update(session);
           router.refresh();
-          router.push("/");
+          if (message) {
+            router.push(callback);
+          } else {
+            router.push("/");
+          }
           break;
         case 500:
           toast.error(response.error);
@@ -69,6 +77,11 @@ export default function Profile() {
     <div className="min-h-screen p-8">
       <div className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md ">
         <h1 className="text-2xl font-bold mb-6 text-center">Your Profile</h1>
+        {message && (
+          <p className="text-red-500 mb-4 text-center font-extrabold animate-bounce">
+            {message}
+          </p>
+        )}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700">

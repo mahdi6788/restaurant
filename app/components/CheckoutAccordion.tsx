@@ -10,6 +10,8 @@ interface CheckoutProps {
   name: string;
   email: string;
   address: string;
+  setAddress: (value: string) => void,
+  setPhone: (value: string) => void,
   phone: string;
   cartItems: CartItems;
 }
@@ -19,13 +21,16 @@ export default function CheckoutAccordion({
   name,
   email,
   address,
+  setAddress,
   phone,
+  setPhone,
   cartItems,
 }: CheckoutProps) {
   const {data:session} = useSession()
   const [infoIsOpen, setInfoIsOpen] = useState(false);
   const [orderIsOpen, setOrderIsOpen] = useState(false);
   const [totalIsOpen, setTotalIsOpen] = useState(false);
+  
 
   const handleInfo = () => {
     setInfoIsOpen(!infoIsOpen);
@@ -122,23 +127,8 @@ export default function CheckoutAccordion({
                 type="text"
                 id="address"
                 name="address"
-                defaultValue={address || ""}
-                disabled
-                className="mt-1 pl-2 block text-lg w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-              />
-            </div>
-            <div className="mb-4">
-              <label
-                htmlFor="area"
-                className="block text-lg font-medium text-orange-700"
-              >
-                Area
-              </label>
-              <input
-                type="text"
-                id="area"
-                name="area"
-                disabled
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
                 className="mt-1 pl-2 block text-lg w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
               />
             </div>
@@ -153,8 +143,8 @@ export default function CheckoutAccordion({
                 type="text"
                 id="phone"
                 name="phone"
-                defaultValue={phone || ""}
-                disabled
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
                 className="mt-1 pl-2 block text-lg w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
               />
             </div>

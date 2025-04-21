@@ -5,19 +5,23 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
   const session = await auth();
-  const userId = session?.user?.id;
-  if (!userId)
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-
+  let userId = session?.user?.id;
+  if (session?.user.role === "ADMIN") {
+    userId = undefined;
+  } else {
+    if (!userId)
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
   const { searchParams } = new URL(req.nextUrl);
   const search = searchParams.get("search");
   const sortby = searchParams.get("sortby");
 
   try {
     let where: {
-      userId: string;
+      userId: string | undefined;
       OR?: Array<
         | { id: { contains: string; mode: "insensitive" } }
+        | { user: { name: { contains: string; mode: "insensitive" } } }
         | {
             items?: {
               some: {
@@ -33,6 +37,7 @@ export async function GET(req: NextRequest) {
         ...where,
         OR: [
           { id: { contains: search, mode: "insensitive" } },
+          { user: { name: { contains: search, mode: "insensitive" } } },
           {
             items: {
               some: {
@@ -56,7 +61,7 @@ export async function GET(req: NextRequest) {
       where,
       //  take: 1, // Limit to one result
       orderBy,
-      include: { items: { include: { menuItem: true } } },
+      include: { user: true, items: { include: { menuItem: true } } },
     });
 
     if (!orders) throw new Error("Not found any order");

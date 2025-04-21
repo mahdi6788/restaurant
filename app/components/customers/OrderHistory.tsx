@@ -3,13 +3,11 @@ import { useCart } from "@/hooks/useCart";
 import { Order } from "@prisma/client";
 import Image from "next/image";
 import { OrdersSkeleton } from "../skeleton";
-import { OrderItemWithmenuItem, OrderWithItems } from "@/app/types/types";
+import {
+  OrderHistoryPropsType,
+  OrderItemWithmenuItem,
+} from "@/app/types/types";
 import { CiCirclePlus } from "react-icons/ci";
-
-interface OrderHistoryPropsType {
-  orders: OrderWithItems;
-  selectedOrdersLoading: boolean;
-}
 
 export default function OrderHistory({
   orders,
@@ -36,7 +34,7 @@ export default function OrderHistory({
               </h2>
               <p className="text-sm text-gray-600">
                 Total: AED {order.total.toFixed(2)} | Status: {order.status} |
-                Address: {order.address}
+                Address: {order.address} | Phone: {order.phone}
               </p>
             </div>
 
@@ -92,7 +90,8 @@ export default function OrderHistory({
                     </td>
                     <td className="whitespace-nowrap py-3 px-3">
                       <button
-                        className="p-2 bg-blue-300 rounded-md border border-b-blue-950 shadow-lg"
+                        disabled={!orderItem.menuItem.isAvailable}
+                        className={`${!orderItem.menuItem.isAvailable ? "bg-red-300" : " bg-blue-300 "} p-2 rounded-md border border-b-blue-950 shadow-lg `}
                         onClick={() =>
                           addToCart({
                             menuItemId: orderItem.menuItemId,
@@ -100,7 +99,7 @@ export default function OrderHistory({
                           })
                         }
                       >
-                        Re-order
+                        {!orderItem.menuItem.isAvailable ? "Not Now" :"Re-order"}
                       </button>
                     </td>
                   </tr>
@@ -127,6 +126,7 @@ export default function OrderHistory({
                   >
                     <td className="flex items-center gap-1 whitespace-nowrap py-1 px-1">
                       <button
+                        disabled={!orderItem.menuItem.isAvailable}
                         className=""
                         onClick={() =>
                           addToCart({
@@ -135,7 +135,7 @@ export default function OrderHistory({
                           })
                         }
                       >
-                        <CiCirclePlus size={20} />
+                        <CiCirclePlus size={20} color= {`${!orderItem.menuItem.isAvailable && "red"}`}/>
                       </button>
                       {orderItem.menuItem?.name}
                     </td>
