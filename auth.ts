@@ -102,8 +102,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       token.address = existingUser.address;
       token.phone = existingUser.phone;
       token.role = existingUser?.role;
+      token.picture = existingUser.image
 
-      // console.log("JWT callback - Token:", token);
       return token;
     },
 
@@ -115,7 +115,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         session.user.role = token.role as "ADMIN" | "CUSTOMER";
         session.user.address = token.address as string;
         session.user.phone = token.phone as string;
-        // console.log("Session callback - Session:", session);
+        session.user.image = token.picture as string
         return session;
       } catch (error) {
         console.error("Error is session callback: ", error);
