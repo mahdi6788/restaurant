@@ -15,6 +15,19 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   session: {
     strategy: "jwt", ///when using prisma, we cannot use the database session, because prisma does not work in the edge.
   },
+  cookies: {
+    sessionToken: {
+      name: process.env.VERCEL_ENV === "production"
+        ? "__Secure-next-auth.session-token"
+        : "next-auth.session-token",
+      options: {
+        httpOnly: true,
+        sameSite: "lax",
+        path: "/",
+        secure: process.env.VERCEL_ENV === "production",
+      },
+    },
+  },
   events: {
     async linkAccount({ user }) {
       await prisma.user.update({
