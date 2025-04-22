@@ -15,8 +15,6 @@ export default async function middleware(req:NextRequest) {
       : "authjs.session-token",
   });
 
-  // Log token for debugging (remove in final production)
-  console.log("Middleware Token:", token);
 
   // If no token and not on login page, redirect to login
   if (!token && req.nextUrl.pathname !== "/login") {
