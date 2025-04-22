@@ -48,7 +48,7 @@ export default function TodayFood() {
                 </Link>
                 <Link
                   href="/register"
-                  className="flex items-center gap-1 border-l-2 pl-2 hover:text-green-300"
+                  className="flex items-center pl-2 hover:text-green-300"
                 >
                   Register
                 </Link>
