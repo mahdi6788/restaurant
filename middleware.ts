@@ -8,8 +8,16 @@ export default async function middleware(req:NextRequest) {
   // Get the token
   const token = await getToken({
     req,
-    secret: process.env.NEXTAUTH_SECRET
-  })
+    secret: process.env.NEXTAUTH_SECRET,
+    // specify the cookie name based on the environment
+    cookieName: process.env.VERCEL_ENV === "production"
+      ? "__Secure-authjs.session-token"
+      : "authjs.session-token",
+  });
+
+  // Log token for debugging (remove in final production)
+  console.log("Middleware Token:", token);
+
   // If no token and not on login page, redirect to login
   if (!token && req.nextUrl.pathname !== "/login") {
     let callbackUrl = req.nextUrl.pathname
