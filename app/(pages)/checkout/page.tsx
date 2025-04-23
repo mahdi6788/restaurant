@@ -80,18 +80,20 @@ export default function Checkout() {
         body: JSON.stringify({ phone, address, total, userId }),
       });
       if (!res.ok) throw new Error("Failed to make the order");
-      return res.json();
+      const response = await res.json()
+      console.log(response.error)
+      return response;
     } catch (error) {
       console.log(error);
     }
   };
 
-  const { mutate: makeOrder } = useMutation({
+  const { mutate: makeOrder, isPending:orderLoading } = useMutation({
     mutationFn: makeOrderFn,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["checkout"] });
-      toast.success("Order was made successfully");
-      router.push("/users/customers/orders");
+      toast.success("Order made successfully");
+      router.push("/users");
       router.refresh();
     },
     onError: (error) => {
@@ -230,9 +232,11 @@ export default function Checkout() {
             </div>
             <button
               type="submit"
-              className="w-full bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 transition-colors"
+              className={`w-full bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 transition-colors ${orderLoading && "animate-pulse"}`}
             >
-              {session ? "Checkout" : "Sign in to checkout"}
+              {session 
+              ? "Checkout"
+              : "Sign in to checkout"}
             </button>
           </form>
         </div>
@@ -293,6 +297,7 @@ export default function Checkout() {
           phone={phone as string}
           cartItems={cartItems}
           handleCheckout={handleCheckout}
+          orderLoading = {orderLoading}
         />
       </div>
     </div>

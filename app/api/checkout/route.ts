@@ -7,7 +7,7 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
 
-    const {phone, address, total, userId } = checkoutSchema.parse(body);
+    const { phone, address, total, userId } = checkoutSchema.parse(body);
 
     const cart = await prisma.cart.findUnique({
       where: { userId },
