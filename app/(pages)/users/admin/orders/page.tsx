@@ -1,11 +1,10 @@
 "use client";
-import OrderHistory from "@/app/components/customers/OrderHistory";
 import { useOrders } from "@/app/context/OrderContext";
 import { lusitana } from "@/app/lib/fonts";
-import { useSession } from "next-auth/react";
+import CustomersOrders from "@/app/components/admin/CustomersOrders";
 import { useEffect } from "react";
 
-export default function OrderPage() {
+export default function CustomersOrdersPage() {
   const {
     search,
     setSearch,
@@ -16,16 +15,9 @@ export default function OrderPage() {
     selectedOrdersLoading,
   } = useOrders();
 
-  const { data: session } = useSession();
-
-   useEffect(()=>{
-      setCreatedAt("All")
-    })
-
-
-  if (!session?.user?.id) {
-    return <div>Please log in to view your order history.</div>;
-  }
+  useEffect(() => {
+    setCreatedAt("All");
+  });
 
   return (
     <div className="container mx-auto ">
@@ -38,10 +30,10 @@ export default function OrderPage() {
         {/* Search */}
         <input
           type="text"
-          placeholder="Search by menu item name or order ID"
+          placeholder="Search by menu item name or customer's name or order ID"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full sm:w-1/3 p-2 rounded-lg "
+          className="w-full sm:w-1/2 p-2 rounded-lg "
         />
         {/* Sort */}
         <div>
@@ -51,14 +43,15 @@ export default function OrderPage() {
             name="sortby"
             id="sortby"
             value={sortby}
-            onChange={(e) => setSortby(e?.target?.value)}
+            onChange={(e) => setSortby(e.target.value)}
           >
             <option value="createdAt-desc">Order Date: Newest First</option>
             <option value="createdAt-asc">Order Date: Oldest First</option>
           </select>
         </div>
       </div>
-      <OrderHistory
+
+      <CustomersOrders
         orders={selectedOrders}
         selectedOrdersLoading={selectedOrdersLoading}
       />
