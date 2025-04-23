@@ -4,19 +4,21 @@ import { auth } from "@/auth";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
-  const session = await auth();
-  let userId = session?.user?.id;
-  if (session?.user.role === "ADMIN") {
-    userId = undefined;
-  } else {
-    if (!userId)
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
-  const { searchParams } = new URL(req.nextUrl);
-  const search = searchParams.get("search");
-  const sortby = searchParams.get("sortby");
-
   try {
+    const session = await auth();
+    if (!session || !session.user) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+    const { searchParams } = new URL(req.nextUrl);
+    const search = searchParams.get("search") ?? "";
+    const sortby = searchParams.get("sortby") ?? "createdAt-desc";
+    const createdAt = searchParams.get("createdAt") ?? "All";
+
+    let userId: string | undefined = session?.user?.id;
+    if (session?.user.role === "ADMIN") {
+      userId = undefined; // Admins can see all orders
+    }
+
     let where: {
       userId: string | undefined;
       OR?: Array<
@@ -30,7 +32,8 @@ export async function GET(req: NextRequest) {
             };
           }
       >;
-    } = { userId };
+      createdAt: { gte: Date; lte: Date };
+    } = { userId, createdAt: { gte: new Date(0), lte: new Date() } };
 
     if (search && search.length > 2) {
       where = {
@@ -49,6 +52,12 @@ export async function GET(req: NextRequest) {
           },
         ],
       };
+    }
+
+    if (createdAt === "today") {
+      const today = new Date(new Date().setHours(0, 0, 0, 0));
+      const tomarrow = new Date(new Date(today).setDate(today.getDate() + 1));
+      where = { ...where, createdAt: { gte: today, lte: tomarrow } };
     }
 
     const orderBy: { createdAt?: "asc" | "desc" } = {};
