@@ -1,4 +1,7 @@
-import { OrderHistoryPropsType } from "@/app/types/types";
+import {
+  OrderHistoryPropsType,
+  OrderItemWithmenuItem,
+} from "@/app/types/types";
 import { OrdersSkeleton } from "../skeleton";
 import Image from "next/image";
 
@@ -6,8 +9,9 @@ export default function CustomersOrders({
   orders: selectedOrders,
   selectedOrdersLoading,
 }: OrderHistoryPropsType) {
+
   if (selectedOrdersLoading) return <OrdersSkeleton />;
-  
+
   if (!selectedOrders || selectedOrders.length === 0) {
     return <div>No orders found.</div>;
   }
@@ -77,6 +81,43 @@ export default function CustomersOrders({
                     </td>
                     <td className="whitespace-nowrap py-3 px-3">Cash</td>
                     <td className="whitespace-nowrap py-3 px-3">Paid</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+
+            {/* Mobile Table */}
+            <table className="table sm:hidden min-w-full text-gray-900">
+              <thead className="rounded-lg text-left text-sm">
+                <tr>
+                  <th className="pl-1 py-1 border-2 font-medium">Name</th>
+                  <th className="pl-1 py-1 border-2 font-medium">Price</th>
+                  <th className="pl-1 py-1 border-2 font-medium">Qty</th>
+                  <th className="pl-1 py-1 border-2 font-medium">Date</th>
+                  <th className="pl-1 py-1 border-2 font-medium">Payment</th>
+                </tr>
+              </thead>
+              <tbody className="bg-white">
+                {order.items.map((orderItem: OrderItemWithmenuItem) => (
+                  <tr
+                    key={orderItem.id}
+                    className="w-full border-b py-3 text-sm last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
+                  >
+                    <td className="flex items-center gap-1 whitespace-nowrap py-1 px-1">
+                      {orderItem.menuItem?.name}
+                    </td>
+                    <td className="whitespace-nowrap py-1 px-1">
+                      AED {orderItem.price.toFixed(2)}
+                    </td>
+                    <td className="whitespace-nowrap py-1 px-1">
+                      {orderItem.quantity}
+                    </td>
+                    <td className="whitespace-nowrap py-1 px-1">
+                      {new Date(order.createdAt).toLocaleDateString()}
+                    </td>
+                    <td className="whitespace-nowrap py-1 px-1">
+                      {order.status === "COMPLETED" ? "Paid" : "Pending"}
+                    </td>
                   </tr>
                 ))}
               </tbody>
