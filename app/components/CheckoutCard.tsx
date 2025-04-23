@@ -1,7 +1,11 @@
+"use client";
 import { useCart } from "@/hooks/useCart";
 import { useOrderButton } from "@/hooks/useOrderButton";
 import { CartItem, MenuItem } from "@prisma/client";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import toast from "react-hot-toast";
 import { CiCircleChevDown, CiCircleChevUp } from "react-icons/ci";
 import { IoIosCloseCircle } from "react-icons/io";
 
@@ -12,8 +16,25 @@ export function CheckoutCard({
   item: CartItem & { menuItem: MenuItem };
   isMobile: boolean;
 }) {
+  const router = useRouter();
   const { quantity, handleAdd, handleDec } = useOrderButton(item.menuItem);
-  const { removeFromCart } = useCart();
+  const { removeFromCart, cartItems } = useCart();
+
+  useEffect(() => {
+    cartItems.map((item) => {
+      if (!item.menuItem.isAvailable) {
+        toast.error(`{${item.menuItem.name} is not available now}`);
+        fetch("/api/cart", {
+          method: "DELETE",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ cartItemId: item.id }),
+        });
+        router.push("/");
+        router.refresh()
+        return null;
+      }
+    });
+  }, [cartItems, router]);
 
   return (
     <>
@@ -28,7 +49,9 @@ export function CheckoutCard({
       </td>
       <td className="px-1 py-1 border">{item.menuItem.name}</td>
       <td className="px-1 py-1 border text-center">{item.quantity}</td>
-      <td className="px-3 py-3 border flex items-center gap-1"><span className="text-sm">AED</span> {item.menuItem.price}</td>
+      <td className="px-3 py-3 border flex items-center gap-1">
+        <span className="text-sm">AED</span> {item.menuItem.price}
+      </td>
       <td className="px-5 py-1 border">
         <div className="flex items-center justify-center ">
           <CiCircleChevDown

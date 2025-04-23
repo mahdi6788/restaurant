@@ -14,6 +14,7 @@ interface CheckoutProps {
   setPhone: (value: string) => void,
   phone: string;
   cartItems: CartItems;
+  orderLoading: boolean
 }
 
 export default function CheckoutAccordion({
@@ -25,6 +26,7 @@ export default function CheckoutAccordion({
   phone,
   setPhone,
   cartItems,
+  orderLoading
 }: CheckoutProps) {
   const {data:session} = useSession()
   const [infoIsOpen, setInfoIsOpen] = useState(false);
@@ -265,7 +267,7 @@ export default function CheckoutAccordion({
           <form onSubmit={(event) => handleCheckout(event)} className="w-full">
             <button
               type="submit"
-              className="w-full text-xl font-bold bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 transition-colors"
+              className={`w-full text-xl font-bold bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 transition-colors ${orderLoading && "animate-pulse"}`}
             >
               {session 
               ?("Checkout")
