@@ -2,7 +2,7 @@ import { useCart } from "@/hooks/useCart";
 import { useOrderButton } from "@/hooks/useOrderButton";
 import { CartItem, MenuItem } from "@prisma/client";
 import Image from "next/image";
-import { FaCaretUp, FaCaretDown } from "react-icons/fa";
+import { CiCircleChevDown, CiCircleChevUp } from "react-icons/ci";
 
 export function CartCard({
   item,
@@ -41,14 +41,14 @@ export function CartCard({
           </button>
         </div>
       </div>
-      <div className="absolute bottom-4 right-1 ">
-        <div className="flex flex-col items-center justify-between ">
-          <FaCaretDown
+      <div className="absolute bottom-8 right-4 ">
+        <div className="flex items-center justify-between px-1 w-full ">
+          <CiCircleChevDown
             onClick={handleDec}
             className="w-6 h-6 hover:cursor-pointer text-orange-600"
           />
-          <div className="-my-1.5 text-blue-900 text-sm">{quantity}</div>
-          <FaCaretUp
+          <div className=" px-2">{quantity}</div>
+          <CiCircleChevUp
             onClick={handleAdd}
             className="w-6 h-6 hover:cursor-pointer text-emerald-500 "
           />
