@@ -18,7 +18,7 @@ export default function Header() {
     <header className="hidden sm:flex fixed top-0 left-28 rounded-b-lg shadow-lg text-white bg-emerald-600 border border-emerald-300 z-50 pl-2 py-2 w-[calc(100vw-10rem)]">
       <div className="container max-w-screen-2xl mx-auto px-1">
         {/* Desktop */}
-        <nav className="hidden md:flex items-center justify-between space-x-4 ">
+        <nav className="hidden sm:flex items-center justify-between space-x-4 ">
           {/* Left: signIn / signOut / register / Welcome */}
           <ul className="flex items-center space-x-4">
             {session ? (
