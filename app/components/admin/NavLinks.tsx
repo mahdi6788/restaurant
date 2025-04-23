@@ -16,18 +16,18 @@ export default function NavLinks() {
     userRole === "ADMIN"
       ? [
           { name: "Home", href: "/users", icon: CiHome },
+          { name: "Orders History", href: "/users/admin/orders", icon: FaUsers },
           {
-            name: "Foods",
+            name: "Menu",
             href: "/users/admin/foods",
             icon: FaBowlFood,
           },
-          { name: "Customers", href: "/users/admin/customers", icon: FaUsers },
           { name: "Profile", href: "/users/admin/profile", icon: CgProfile },
         ]
       : [
           { name: "Home", href: "/users", icon: CiHome },
           {
-            name: "Orders",
+            name: "Orders History",
             href: "/users/customers/orders",
             icon: FaOpencart,
           },
