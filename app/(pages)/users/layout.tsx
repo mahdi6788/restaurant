@@ -27,7 +27,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       {/* dynamic part of the layout 
       children are all the pages inside all folders into users directory */}
 
-      <div className="flex-grow p-6 sm:overflow-y-auto sm:p-12 mt-1 sm:mt-14">
+      <div className="flex-grow p-6 sm:overflow-y-auto sm:p-12 mt-1 sm:mt-14 mb-7">
         {(pathname === "/users" ||
           pathname === "/users/customers/orders" ||
           pathname === "/users/admin/orders") && <SearchFilterSort />}

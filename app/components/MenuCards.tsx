@@ -9,7 +9,7 @@ const MenuCards = ({ food }: { food: MenuItem }) => {
 
   return (
     <div className="relative bg-stone-100 opacity-85 flex flex-col items-center p-2 rounded-2xl shadow-lg text-center h-96">
-      <div
+      {/* <div
         className={
           food.isAvailable
             ? "bg-green-400 text-yellow-300 rounded-lg mb-1 font-bold"
@@ -17,8 +17,8 @@ const MenuCards = ({ food }: { food: MenuItem }) => {
         }
       >
         <p>Today Special</p>
-      </div>
-      <div className="w-40 h-40 md:w-44 md:h-44 relative rounded-full overflow-hidden">
+      </div> */}
+      <div className="h-60 w-full relative rounded-xl overflow-hidden">
         <Image
           src={food.imageUrl as string}
           alt={food.name ?? ""}
