@@ -160,7 +160,7 @@ export function FoodsListSkeleton() {
 
 export function HomeSkeleton() {
   return (
-    <div className=" flex items-center justify-center bg-cover bg-center md:min-h-screen w-full max-w-screen-2xl mx-auto bg-[url('/images/BG/bg2.jpg')]">
+    <div className=" flex items-center justify-center bg-cover bg-center min-h-screen w-full max-w-screen-2xl mx-auto bg-[url('/images/BG/bgHome.jpg')] sm:bg-[url('/images/BG/bg2.jpg')]">
       <div className=" w-3/4 pb-10 bg-emerald-600 opacity-75 rounded-xl animate-pulse">
         <div className="flex items-center justify-between">
           <div className=" flex items-center justify-between gap-2 text-stone-100 font-bold w-fit h-fit p-2 rounded-br-lg rounded-tl-xl shadow-xl"></div>
@@ -170,7 +170,6 @@ export function HomeSkeleton() {
               <p>Today’s Menu</p>
             </div>
           </div>
-          {/* register / Cart: when loged in cart is shown and register is hidden  */}
           <div className="flex gap-2 items-center justify-between text-stone-100 font-bold w-fit h-fit p-2 rounded-bl-lg rounded-tr-xl shadow-xl"></div>
         </div>
         <div className=" mt-10 ">
