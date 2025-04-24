@@ -53,7 +53,7 @@ export default function FoodsList() {
                 {/* Category / Name / Description */}
                 <div className="space-y-1 flex flex-col items-start text-sm rounded-lg border border-gray-800 shadow-md shadow-gray-600 text-white bg-gray-800 p-1 mt-1 w-full">
                   <div
-                    className={`${food.category === "MainCourse" ? "text-green-500" : "text-yellow-500"}`}
+                    className={`${food.category === "MainCourse" ? "text-green-500" : "text-sky-600"}`}
                   >
                     {food.category}
                   </div>
@@ -154,7 +154,7 @@ export default function FoodsList() {
                   {/* Category */}
                   <td className="whitespace-nowrap py-3 px-3">
                     <div
-                      className={`${food.category === "MainCourse" ? "text-green-500" : "text-yellow-500"}`}
+                      className={`${food.category === "MainCourse" ? "text-green-500" : "text-sky-600"}`}
                     >
                       {food.category}
                     </div>
