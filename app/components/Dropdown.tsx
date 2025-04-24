@@ -4,9 +4,11 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { FaSignOutAlt } from "react-icons/fa";
-import { MdDashboardCustomize } from "react-icons/md"
+import { MdDashboardCustomize } from "react-icons/md";
 import LogoutModal from "./LogoutModal";
 import { useState } from "react";
+import { IoBagCheckOutline } from "react-icons/io5";
+
 
 export default function Dropdown({
   isOpen,
@@ -15,8 +17,8 @@ export default function Dropdown({
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-      const { data: session } = useSession();
-      const [isModalOpen, setIsModalOpen] = useState(false)
+  const { data: session } = useSession();
+  const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <div
       className="relative inline-block"
@@ -24,7 +26,13 @@ export default function Dropdown({
       onMouseLeave={() => setIsOpen(false)}
     >
       <span className="flex items-center justify-center gap-1 text-xl font-bold hover:text-stone-100 text-yellow-300">
-        <Image alt='' src={session?.user.image ?? "/images/elements/user.png"} width={30} height={30} className="rounded-full"/>
+        <Image
+          alt=""
+          src={session?.user.image ?? "/images/elements/user.png"}
+          width={30}
+          height={30}
+          className="rounded-full"
+        />
         Welcome, {session?.user.name || session?.user.email}
       </span>
       {isOpen && (
@@ -44,6 +52,15 @@ export default function Dropdown({
               </Link>
             </li>
             <li>
+              <Link
+                href="/checkout"
+                className=" flex items-center w-full gap-2 px-4 py-2 hover:bg-emerald-50"
+              >
+                <IoBagCheckOutline />
+                Checkout
+              </Link>
+            </li>
+            <li>
               <button
                 onClick={() => setIsModalOpen(true)}
                 className="flex items-center w-full gap-2 px-4 py-2 hover:bg-emerald-50"
@@ -55,7 +72,7 @@ export default function Dropdown({
           </ul>
         </div>
       )}
-      <LogoutModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}/>
+      <LogoutModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
   );
 }
