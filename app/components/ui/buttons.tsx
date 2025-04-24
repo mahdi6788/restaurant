@@ -28,10 +28,10 @@ export function UpdateFood({ id }: { id: string }) {
   return (
     <Link
       href={`/users/admin/foods/${id}/edit`}
-      className="rounded-md border p-2 hover:bg-gray-100"
+      className="rounded-md border p-2 hover:bg-green-100"
     >
       <span className="sr-only">Edit</span>
-      <PencilIcon className="w-5" />
+      <PencilIcon className="w-5" color="green"/>
     </Link>
   );
 }
@@ -62,10 +62,10 @@ export function DeleteFood({ id }: { id: string }) {
   return (
     <button
       onClick={handleDelete}
-      className="rounded-md border p-2 hover:bg-gray-100"
+      className="rounded-md border p-2 hover:bg-red-100"
     >
       <span className="sr-only">Delete</span>
-      <TrashIcon className="w-5" />
+      <TrashIcon className="w-5" color="red"/>
     </button>
   );
 }
