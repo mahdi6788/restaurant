@@ -8,6 +8,8 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { useMenu } from "@/hooks/useMenu";
 
+
+
 //// CREATE /////
 /// transfering to the create page
 export function CreateFood() {
@@ -69,3 +71,4 @@ export function DeleteFood({ id }: { id: string }) {
     </button>
   );
 }
+

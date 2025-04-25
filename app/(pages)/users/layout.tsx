@@ -30,7 +30,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <div className="flex-grow p-6 sm:overflow-y-auto sm:p-12 mt-1 sm:mt-14 mb-7">
         {(pathname === "/users" ||
           pathname === "/users/customers/orders" ||
-          pathname === "/users/admin/orders") && <SearchFilterSort />}
+          pathname === "/users/admin/orders"
+        ) && <SearchFilterSort />}
         {children}
       </div>
     </div>
