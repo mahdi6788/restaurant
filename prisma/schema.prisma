@@ -19,7 +19,8 @@ model User {
   email                     String?                  @unique    
   name                      String?     
   password                  String?      
-  address                   String?      
+  address                   String? 
+  area                      String?     
   phone                     String? 
   image                     String?
   emailVerified             DateTime?
@@ -29,7 +30,8 @@ model User {
   sessions                  Session[]     
   role                      Role                      @default(CUSTOMER)
   orders                    Order[]     
-  cart                      Cart?     
+  cart                      Cart?
+  balance                   Float?    
   createdAt                 DateTime                  @default(now())
   updatedAt                 DateTime                  @updatedAt
 }
@@ -73,6 +75,7 @@ model MenuItem {
   category                  Category    @default(MainCourse)
   imageUrl                  String?
   isAvailable               Boolean?     @default(true)
+  capacity                  Int?
   cartItems                 CartItem[]                    // Relation to cart items
   orderItems                OrderItem[]                   // Relation to order items
   createdAt                 DateTime    @default(now())
@@ -91,6 +94,7 @@ model Order {
   userId                  String
   items                   OrderItem[]
   total                   Float
+  paid                    Boolean?
   status                  OrderStatus @default(PENDING)
   createdAt               DateTime    @default(now())
   updatedAt               DateTime    @updatedAt
