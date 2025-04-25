@@ -4,17 +4,18 @@ import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import Link from "next/link";
 
-export const fetchUsersFn = async () => {
-  const res = await fetch("/api/users", {
-    method: "GET",
-    headers: { "Content-Type": "application/json" },
-  });
-  if (!res) return null;
-  const users = await res.json();
-  return users as User[];
-};
 
 export default function CustomersPage() {
+  const fetchUsersFn = async () => {
+    const res = await fetch("/api/users", {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    });
+    if (!res) return null;
+    const users = await res.json();
+    return users as User[];
+  };
+  
   const { data: allUsers = [] } = useQuery({
     queryKey: ["users"],
     queryFn: fetchUsersFn,
