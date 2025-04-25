@@ -79,7 +79,8 @@ export default function Details({ params }: ParamsType) {
         <div className="inline-block min-w-full align-middle">
           {/* Customer Info Table */}
           <div>
-            <table className="table min-w-full text-gray-900">
+            {/* Desktop */}
+            <table className="hidden sm:table min-w-full text-gray-900">
               <thead className="text-left text-sm">
                 <tr>
                   <th className="p-1" scope="col"></th>
@@ -88,6 +89,9 @@ export default function Details({ params }: ParamsType) {
                   </th>
                   <th className="p-1" scope="col">
                     Address
+                  </th>
+                  <th className="p-1" scope="col">
+                    Area
                   </th>
                   <th className="p-1" scope="col">
                     Balance
@@ -107,10 +111,43 @@ export default function Details({ params }: ParamsType) {
                   </td>
                   <td className="px-1 py-1 border">{onlyOne?.user?.name}</td>
                   <td className="px-1 py-1 border">{onlyOne?.user?.address}</td>
+                  <td className="px-1 py-1 border">
+                    {onlyOne?.user.area ?? ""}
+                  </td>
                   <td className="px-1 py-1 border">{onlyOne?.user?.balance}</td>
                 </tr>
               </tbody>
             </table>
+            {/* Mobile */}
+            <div className="sm:hidden min-w-full text-gray-900">
+              <Image
+                alt={onlyOne?.user.name ?? "User picture"}
+                src={onlyOne?.user.image ?? "/images/elements/user.png"}
+                width={50}
+                height={50}
+                className="rounded-full"
+              />
+
+              <div className="flex items-center gap-2 px-1 py-1 border mt-1">
+                <p className="font-bold">Name: </p>
+                <p>{onlyOne?.user?.name}</p>
+              </div>
+
+              <div className="flex gap-2 px-1 py-1 border">
+                <p className="font-bold">Address: </p>
+                <p>{onlyOne?.user?.address}</p>
+              </div>
+
+              <div className="flex gap-2 px-1 py-1 border">
+                <p className="font-bold">Area: </p>
+                <p>{onlyOne?.user.area ?? ""}</p>
+              </div>
+
+              <div className="flex gap-2 px-1 py-1 border">
+                <p className="font-bold">Balance: </p>
+                <p>{onlyOne?.user?.balance}</p>
+              </div>
+            </div>
           </div>
           {/* Custoner orders Table */}
           {selectedOrders?.map((order) => (

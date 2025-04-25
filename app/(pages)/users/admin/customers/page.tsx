@@ -24,8 +24,8 @@ export default function CustomersPage() {
     <div className="space-y-4 -ml-2">
       {/* TODO: search(name, id) */}
 
-      {/* Table */}
-      <table className="table min-w-full text-gray-900">
+      {/* Desktop */}
+      <table className="hidden sm:table min-w-full text-gray-900">
         <thead className="text-left text-sm">
           <tr>
             <th className="p-1" scope="col"></th>
@@ -70,6 +70,38 @@ export default function CustomersPage() {
               <td className="px-1 py-1 border">{user.phone ?? ""}</td>
               <td className="px-1 py-1 border">{user?.area ?? ""}</td>
               <td className="px-1 py-1 border">{user?.balance ?? 0}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      {/* Mobile */}
+      <table className="sm:hidden table min-w-full text-gray-900">
+        <thead className="text-left text-sm">
+          <tr>
+            <th className="p-1" scope="col">
+              Name
+            </th>
+            <th className="p-1" scope="col">
+              E-mail
+            </th>
+            <th className="p-1" scope="col">
+              Phone
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {allUsers?.map((user: User) => (
+            <tr key={user.id ?? ""} className="w-full py-3 text-sm">
+              <td className="px-1 py-1 border">
+                <Link
+                  href={`/users/admin/customers/${user.id}/details`}
+                  className=" p-1 hover:bg-green-100 hover:rounded-md"
+                >
+                  <span>{user.name ?? ""}</span>
+                </Link>
+              </td>
+              <td className="px-1 py-1 border">{user?.email ?? ""}</td>
+              <td className="px-1 py-1 border">{user.phone ?? ""}</td>
             </tr>
           ))}
         </tbody>
