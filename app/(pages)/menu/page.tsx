@@ -24,7 +24,7 @@ export default function Menu() {
       <div className="fixed z-0 inset-0 backdrop-blur-sm bg-black/20"></div>
       <div className="relative pb-10 px-1">
         {/* Menu */}
-        <div className="border-b-2 p-2 text-lg font-bold text-white bg-slate-900 my-3 shadow-2xl rounded-xl">
+        <div className="border-b-2 p-2 text-lg font-bold text-white bg-slate-900 my-3 shadow-2xl shadow-sky-200 rounded-xl">
           Main Course
         </div>
         <section>
@@ -35,11 +35,11 @@ export default function Menu() {
           </div>
         </section>
         {/* Appetizers */}
-        <div className="border-b-2 p-2 text-lg font-bold text-white bg-slate-900 my-3 shadow-2xl rounded-xl">
+        <div className="border-b-2 p-2 text-lg font-bold text-white bg-slate-900 my-3 shadow-2xl shadow-sky-200 rounded-xl">
           Appetizers
         </div>
         <section>
-          <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-3 mb-5">
             {appetizers.map((item: MenuItem) => (
               <MenuCards key={item.id} food={item} />
             ))}
