@@ -13,10 +13,16 @@ export async function GET(req: NextRequest) {
     const search = searchParams.get("search") ?? "";
     const sortby = searchParams.get("sortby") ?? "createdAt-desc";
     const createdAt = searchParams.get("createdAt") ?? "All";
+    const id = searchParams.get("id") ?? "";
 
     let userId: string | undefined = session?.user?.id;
+
     if (session?.user.role === "ADMIN") {
-      userId = undefined; // Admins can see all orders
+      if (id) {
+        userId = id;
+      } else {
+        userId = undefined; // Admins can see all orders
+      }
     }
 
     let where: {

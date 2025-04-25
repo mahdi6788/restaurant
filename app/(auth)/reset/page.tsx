@@ -11,9 +11,13 @@ export default function ResetPasswordPage() {
   const handleEmail = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const res = await fetch("/api/users/single-user",{
-      method: "POST",
-      body: JSON.stringify({email}),
+    const query = new URLSearchParams({
+      email,
+      id: ""
+    }).toString()
+
+    const res = await fetch(`api/users/single-user?${query}`,{
+      method: "GET",
       headers:{"Content-Type" : "application/json"}
     })
     const existingUser = await res.json()

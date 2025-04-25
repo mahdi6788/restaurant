@@ -1,14 +1,13 @@
 import EditForm from "@/app/components/admin/EditForm";
 import Breadcrumbs from "@/app/components/Breadcrumbs";
 import { getFoods } from "@/app/lib/foodActions";
+import { ParamsType } from "@/app/types/types";
 import { MenuItem } from "@prisma/client";
 import { notFound } from "next/navigation";
 
-type Props = {
-  params: { id: string };
-};
 
-export default async function editFoodsForm({ params }: Props) {
+
+export default async function editFoodsForm({ params }: ParamsType) {
   /// await the dynamic API (params) to access its properties
   const { id } = params;
 

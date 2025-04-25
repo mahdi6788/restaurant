@@ -33,7 +33,7 @@ export default function LoginForm() {
       });
       if (result?.error) {
         toast.error(result.error + urlError);
-      }else{
+      } else {
         toast.success("Signed in successfully");
         router.push(callbackUrl);
       }
@@ -47,9 +47,13 @@ export default function LoginForm() {
   const handleEmailSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const existingUser = await fetch("/api/users/single-user", {
-      method: "POST",
-      body: JSON.stringify({ email }),
+    const query = new URLSearchParams({
+      email,
+      id: "",
+    }).toString();
+
+    const existingUser = await fetch(`api/users/single-user?${query}`, {
+      method: "GET",
       headers: { "Content-Type": "application/json" },
     });
 
@@ -91,13 +95,11 @@ export default function LoginForm() {
             headers: { "Content-Type": "application/json" },
           });
 
-
-          await fetch('/api/auth/twoFactorConfirmation',{
+          await fetch("/api/auth/twoFactorConfirmation", {
             method: "POST",
-            body: JSON.stringify({userId: existingUserResponse.id}),
-            headers:{"Content-Type" : "application/json"}
-          })
-
+            body: JSON.stringify({ userId: existingUserResponse.id }),
+            headers: { "Content-Type": "application/json" },
+          });
         }
         const twoFactorToken = await fetch("/api/auth/generateTwoFactorToken", {
           method: "POST",
@@ -147,7 +149,9 @@ export default function LoginForm() {
             Login to Your Account
           </h1>
           {message && (
-            <p className="text-red-500 mb-4 text-center font-extrabold animate-bounce">{message}</p>
+            <p className="text-red-500 mb-4 text-center font-extrabold animate-bounce">
+              {message}
+            </p>
           )}
           <button
             onClick={handleGoogleSignIn}

@@ -31,11 +31,16 @@ export default function Checkout() {
   const [phone, setPhone] = useState("");
 
   const { cartItems } = useCart();
+
+  const query = new URLSearchParams({
+    email: email || "",
+    id: "",
+  }).toString();
+
   const fetchCustomer = async () => {
-    const res = await fetch("/api/users/single-user", {
-      method: "POST",
+    const res = await fetch(`api/users/single-user?${query}`, {
+      method: "GET",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email }),
     });
     if (!res.ok) throw new Error("Something went wrong");
     const customer = await res.json();
@@ -43,12 +48,14 @@ export default function Checkout() {
   };
 
   useEffect(() => {
-    fetchCustomer().then((customer) => {
-      setAddress(customer.address ?? "")
-      setPhone(customer.phone ?? "");
-    }).catch((error) => {
-      console.error("Failed to fetch customer: ", error);
-    });
+    fetchCustomer()
+      .then((customer) => {
+        setAddress(customer.address ?? "");
+        setPhone(customer.phone ?? "");
+      })
+      .catch((error) => {
+        console.error("Failed to fetch customer: ", error);
+      });
     setTotal(
       cartItems.reduce(
         (sum, item) => sum + item?.quantity * item?.menuItem.price,
@@ -80,15 +87,15 @@ export default function Checkout() {
         body: JSON.stringify({ phone, address, total, userId }),
       });
       if (!res.ok) throw new Error("Failed to make the order");
-      const response = await res.json()
-      console.log(response.error)
+      const response = await res.json();
+      console.log(response.error);
       return response;
     } catch (error) {
       console.log(error);
     }
   };
 
-  const { mutate: makeOrder, isPending:orderLoading } = useMutation({
+  const { mutate: makeOrder, isPending: orderLoading } = useMutation({
     mutationFn: makeOrderFn,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["checkout"] });
@@ -234,9 +241,7 @@ export default function Checkout() {
               type="submit"
               className={`w-full bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 transition-colors ${orderLoading && "animate-pulse"}`}
             >
-              {session 
-              ? "Checkout"
-              : "Sign in to checkout"}
+              {session ? "Checkout" : "Sign in to checkout"}
             </button>
           </form>
         </div>
@@ -297,7 +302,7 @@ export default function Checkout() {
           phone={phone as string}
           cartItems={cartItems}
           handleCheckout={handleCheckout}
-          orderLoading = {orderLoading}
+          orderLoading={orderLoading}
         />
       </div>
     </div>

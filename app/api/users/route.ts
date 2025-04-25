@@ -1,14 +1,19 @@
-'use server'
+"use server";
 
 import { prisma } from "@/app/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
-
+import { auth } from "@/auth";
 
 /// Get all users
-export async function GET(): Promise<NextResponse> {
+export async function GET() {
+  const session = await auth();
+  if (!session || session.user.role !== "ADMIN") {
+    return NextResponse.json({ error: "You are not Admin!" }, { status: 400 });
+  }
   try {
     const users = await prisma.user.findMany();
+
     return NextResponse.json(users);
   } catch (error) {
     console.error(error);
@@ -18,7 +23,6 @@ export async function GET(): Promise<NextResponse> {
     );
   }
 }
-
 
 /// Create user
 export async function POST(req: NextRequest): Promise<NextResponse> {
@@ -60,7 +64,6 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   }
 }
 
-
 /// Update user
 export async function PATCH(req: NextRequest): Promise<NextResponse> {
   try {
@@ -89,7 +92,6 @@ export async function PATCH(req: NextRequest): Promise<NextResponse> {
     );
   }
 }
-
 
 /// Delete user
 export async function DELETE(req: NextRequest): Promise<NextResponse> {
