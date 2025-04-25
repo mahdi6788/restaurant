@@ -16,7 +16,8 @@ export default function NavLinks() {
     userRole === "ADMIN"
       ? [
           { name: "Home", href: "/users", icon: CiHome },
-          { name: "Orders History", href: "/users/admin/orders", icon: FaUsers },
+          { name: "Orders History", href: "/users/admin/orders", icon: FaOpencart },
+          {name: "Customers", href: "/users/admin/customers", icon: FaUsers},
           {
             name: "Menu",
             href: "/users/admin/foods",
