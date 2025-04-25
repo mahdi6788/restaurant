@@ -70,13 +70,19 @@ export default function TodayFood() {
               </button>
             </div>
             {/* Today's Menu Title */}
-            <div className="absolute top-0 right-1/3 text-stone-800 font-bold bg-slate-100 rounded-b-lg p-2 px-16">
+            <div className="absolute top-0 right-1/3 text-stone-800 font-bold bg-slate-100 rounded-b-lg p-2 px-16 shadow-2xl shadow-sky-200">
               {todayFoods.length === 0
                 ? "No food available"
                 : "Today’s Specials"}
             </div>
           </div>
         </div>
+
+        {/* mobile header */}
+        <div className="sm:hidden absolute top-0 left-1/4 text-stone-800 font-bold bg-slate-100 rounded-b-lg p-2 px-10 shadow-2xl shadow-sky-200">
+          {todayFoods.length === 0 ? "No food available" : "Today’s Specials"}
+        </div>
+
         {/* Products */}
         <div className="mt-20 relative w-full max-w-7xl px-4 sm:px-6 lg:px-8 pb-20 sm:pb-20">
           <div
