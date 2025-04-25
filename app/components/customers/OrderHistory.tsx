@@ -20,10 +20,15 @@ export default function OrderHistory({
   if (!orders || orders.length === 0) {
     return <div>No orders found.</div>;
   }
+  
+  const total = orders.reduce((sum,item) => sum + item.total, 0)
 
   return (
     <div className="mt-1 flow-root">
       <div className="inline-block sm:min-w-full align-middle">
+        <div className="text-lg font-semibold">
+        Total: <span>AED {total}</span>
+        </div>
         {orders.map((order: Order & { items: OrderItemWithmenuItem[] }) => (
           <div key={order.id} className="mb-2 rounded-lg bg-gray-50 p-1 sm:p-4">
             {/* Order Header */}
