@@ -2,10 +2,10 @@ import "../app/styles/globals.css";
 import { Inter } from "next/font/google";
 import ClientProviders from "./ClientProviders";
 import { SessionProvider } from "next-auth/react";
-import Logo from "./[locale]/components/Logo";
+import Logo from "./components/Logo";
 import { auth } from "@/auth";
-import { NextIntlClientProvider } from 'next-intl';
-import { notFound } from 'next/navigation';
+import { NextIntlClientProvider } from "next-intl";
+import { notFound } from "next/navigation";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,24 +17,28 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: { locale: string };
 }>) {
-/// multilingual
-let messages;
-try {
-  messages = (await import(`../../messages/${locale}.json`)).default;
-} catch (error) {
-  console.log(error)
-  notFound();
-}
+  /// multilingual
+  let messages;
+  try {
+    messages = (await import(`../../messages/${locale}.json`)).default;
+  } catch (error) {
+    console.log(error);
+    notFound();
+  }
 
   const session = await auth();
   return (
-    <html  lang={locale} dir={locale === 'en' ? 'ltr' : 'rtl'} className={`${inter.className}`}>
+    <html
+      lang={locale}
+      dir={locale === "en" ? "ltr" : "rtl"}
+      className={`${inter.className}`}
+    >
       <body>
         <SessionProvider session={session}>
           <ClientProviders>
             <Logo />
             <NextIntlClientProvider locale={locale} messages={messages}>
-            {children}
+              {children}
             </NextIntlClientProvider>
           </ClientProviders>
         </SessionProvider>
