@@ -13,7 +13,7 @@ import { useState } from "react";
 import Dropdown from "./components/Dropdown";
 import { FaShoppingCart } from "react-icons/fa";
 
-export default function TodayFood() {
+export default function HomePage() {
   const { data: session } = useSession();
   const { menu, menuLoading } = useMenu();
   const { cartItems, cartItemsLoading } = useCart();
