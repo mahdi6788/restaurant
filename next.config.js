@@ -22,6 +22,14 @@ const nextConfig = {
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     unoptimized: process.env.NODE_ENV === "development",
   },
+  async rewrites() {
+    return [
+      {
+        source: '/:locale(en|fa|ar)/:path*',
+        destination: '/:path*'
+      }
+    ];
+  }
 };
 
 module.exports = nextConfig;
