@@ -29,3 +29,11 @@
   );
   background-size: 200px 100%;
 }
+
+html[dir="rtl"] {
+  @apply text-right;
+}
+
+html[dir="rtl"] .flex {
+  @apply flex-row-reverse;
+}
