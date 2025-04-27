@@ -13,5 +13,12 @@ module.exports = {
     },
   },
   plugins: [],
+  variants: {
+    extend: {
+      padding: ['direction'],
+      margin: ['direction'],
+      textAlign: ['direction']
+    }
+  }
 }
 

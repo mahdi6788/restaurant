@@ -18,4 +18,11 @@ export default {
     },
   },
   plugins: [],
+  variants: {
+    extend: {
+      padding: ['direction'],
+      margin: ['direction'],
+      textAlign: ['direction']
+    }
+  }
 } satisfies Config;
