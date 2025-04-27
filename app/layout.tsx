@@ -2,27 +2,41 @@ import "../app/styles/globals.css";
 import { Inter } from "next/font/google";
 import ClientProviders from "./ClientProviders";
 import { SessionProvider } from "next-auth/react";
-import Logo from "./components/Logo";
+import Logo from "./[locale]/components/Logo";
 import { auth } from "@/auth";
+import { NextIntlClientProvider } from 'next-intl';
+import { notFound } from 'next/navigation';
 
 const inter = Inter({ subsets: ["latin"] });
 
 /// Readonly: to ensure type safety and immutability.
 export default async function RootLayout({
   children,
+  params: { locale },
 }: Readonly<{
   children: React.ReactNode;
+  params: { locale: string };
 }>) {
+/// multilingual
+let messages;
+try {
+  messages = (await import(`../../messages/${locale}.json`)).default;
+} catch (error) {
+  console.log(error)
+  notFound();
+}
 
-  const session = await auth()
+  const session = await auth();
   return (
-    <html lang="en" className={`${inter.className}`}>
+    <html  lang={locale} dir={locale === 'en' ? 'ltr' : 'rtl'} className={`${inter.className}`}>
       <body>
         <SessionProvider session={session}>
-        <ClientProviders>
-          <Logo />
-          {children}
-        </ClientProviders>
+          <ClientProviders>
+            <Logo />
+            <NextIntlClientProvider locale={locale} messages={messages}>
+            {children}
+            </NextIntlClientProvider>
+          </ClientProviders>
         </SessionProvider>
       </body>
     </html>
