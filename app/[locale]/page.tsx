@@ -3,17 +3,20 @@
 import Link from "next/link";
 import { MenuItem } from "@prisma/client";
 import { useSession } from "next-auth/react";
-import FoodCard from "./components/FoodCard";
+import FoodCard from "../components/FoodCard";
 import { useMenu } from "@/hooks/useMenu";
-import { HomeSkeleton } from "./components/skeleton";
+import { HomeSkeleton } from "../components/skeleton";
 import { useCart } from "@/hooks/useCart";
 import Image from "next/image";
-import CartModal from "./components/CartModal";
+import CartModal from "../components/CartModal";
 import { useState } from "react";
-import Dropdown from "./components/Dropdown";
+import Dropdown from "../components/Dropdown";
 import { FaShoppingCart } from "react-icons/fa";
+import { useTranslations } from "next-intl";
+import LanguageSwitcher from "../components/LanguageSwitcher";
 
 export default function HomePage() {
+  const translate = useTranslations("HomePage");
   const { data: session } = useSession();
   const { menu, menuLoading } = useMenu();
   const { cartItems, cartItemsLoading } = useCart();
@@ -45,13 +48,13 @@ export default function HomePage() {
                     href="/login"
                     className="flex items-center gap-1 hover:text-green-300"
                   >
-                    LogIn
+                    {translate("LogIn")}
                   </Link>
                   <Link
                     href="/register"
                     className="flex items-center pl-2 hover:text-green-300"
                   >
-                    Register
+                    {translate("Register")}
                   </Link>
                 </div>
               )}
@@ -68,19 +71,22 @@ export default function HomePage() {
                       0}
                 </span>
               </button>
+              <LanguageSwitcher />
             </div>
             {/* Today's Menu Title */}
             <div className="absolute top-0 right-1/3 text-stone-800 font-bold bg-slate-100 rounded-b-lg p-2 px-16 shadow-2xl shadow-sky-200">
               {todayFoods.length === 0
-                ? "No food available"
-                : "Today’s Specials"}
+                ? `${translate("No food available")}`
+                : `${translate("Today’s Specials")}`}
             </div>
           </div>
         </div>
 
         {/* mobile header */}
         <div className="sm:hidden absolute top-0 left-1/4 text-stone-800 font-bold bg-slate-100 rounded-b-lg p-2 px-10 shadow-2xl shadow-sky-200">
-          {todayFoods.length === 0 ? "No food available" : "Today’s Specials"}
+          {todayFoods.length === 0
+            ? `${translate("No food available")}`
+            : `${translate("Today’s Specials")}`}
         </div>
 
         {/* Products */}

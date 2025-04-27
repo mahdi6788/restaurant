@@ -1,6 +1,6 @@
 "use client";
 
-import { ProfileSkeleton } from "@/app/[locale]/components/skeleton";
+import { ProfileSkeleton } from "@/app/components/skeleton";
 import { useSession } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";

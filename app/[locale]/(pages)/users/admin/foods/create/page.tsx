@@ -1,5 +1,5 @@
-import Form from "@/app/[locale]/components/admin/CreateForm";
-import Breadcrumbs from "@/app/[locale]/components/Breadcrumbs";
+import Form from "@/app/components/admin/CreateForm";
+import Breadcrumbs from "@/app/components/Breadcrumbs";
 
 export default function FoodsForm() {
   const breadcrumbs = [

@@ -2,10 +2,10 @@
 
 import { Toaster } from "react-hot-toast";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import MobileBottomNav from "./[locale]/components/MobileBottomNav";
 import { useState } from "react";
-import MobileNavbar from "./[locale]/components/MobileNavbar";
-import OrderProvider from "./context/OrderContext";
+import MobileNavbar from "../components/MobileNavbar";
+import OrderProvider from "../context/OrderContext";
+import MobileBottomNav from "../components/MobileBottomNav";
 
 const queryClient = new QueryClient();
 

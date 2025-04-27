@@ -1,5 +1,5 @@
 "use client";
-import OrderHistory from "@/app/[locale]/components/customers/OrderHistory";
+import OrderHistory from "@/app/components/customers/OrderHistory";
 import { useOrders } from "@/app/context/OrderContext";
 import { lusitana } from "@/app/lib/fonts";
 import { useSession } from "next-auth/react";

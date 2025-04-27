@@ -1,5 +1,5 @@
-import EditForm from "@/app/[locale]/components/admin/EditForm";
-import Breadcrumbs from "@/app/[locale]/components/Breadcrumbs";
+import EditForm from "@/app/components/admin/EditForm";
+import Breadcrumbs from "@/app/components/Breadcrumbs";
 import { getFoods } from "@/app/lib/foodActions";
 import { ParamsType } from "@/app/types/types";
 import { MenuItem } from "@prisma/client";

@@ -2,9 +2,9 @@
 
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
-import Sidebar from "../../components/Sidebar";
-import Loading from "@/app/[locale]/components/loading";
-import SearchFilterSort from "@/app/[locale]/components/SearchFilterSort";
+import Sidebar from "../../../components/Sidebar";
+import Loading from "@/app/components/loading";
+import SearchFilterSort from "@/app/components/SearchFilterSort";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const router = useRouter();

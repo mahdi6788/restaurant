@@ -1,6 +1,6 @@
 "use client";
 import { useOrders } from "@/app/context/OrderContext";
-import CustomersOrders from "@/app/[locale]/components/admin/CustomersOrders";
+import CustomersOrders from "@/app/components/admin/CustomersOrders";
 import { useEffect } from "react";
 import { lusitana } from "@/app/lib/fonts";
 

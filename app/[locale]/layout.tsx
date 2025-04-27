@@ -1,8 +1,8 @@
-import "../app/styles/globals.css";
+import "@/app/styles/globals.css";
 import { Inter } from "next/font/google";
 import ClientProviders from "./ClientProviders";
 import { SessionProvider } from "next-auth/react";
-import Logo from "./components/Logo";
+import Logo from "../components/Logo";
 import { auth } from "@/auth";
 import { NextIntlClientProvider } from "next-intl";
 import { notFound } from "next/navigation";

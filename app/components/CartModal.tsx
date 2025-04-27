@@ -5,6 +5,7 @@ import { CartItem, MenuItem } from "@prisma/client";
 import Link from "next/link";
 import { CartCard } from "./CartCard";
 import { IoIosCloseCircle } from "react-icons/io";
+import { useTranslations } from "next-intl";
 
 interface CartModalProps {
   isOpen: boolean;
@@ -12,6 +13,7 @@ interface CartModalProps {
 }
 
 export default function CartModal({ isOpen, onClose }: CartModalProps) {
+  const translate = useTranslations("CartModal")
   const { clearCart, cartItems } = useCart();
 
   const total = cartItems.reduce(
@@ -25,7 +27,7 @@ export default function CartModal({ isOpen, onClose }: CartModalProps) {
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-emerald-500 p-6 rounded-lg max-w-2xl w-full max-h-[80vh] overflow-y-auto">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-2xl font-bold">Your Cart</h2>
+          <h2 className="text-2xl font-bold">{translate("Your Cart")}</h2>
           <button
             onClick={onClose}
           >
@@ -34,7 +36,7 @@ export default function CartModal({ isOpen, onClose }: CartModalProps) {
         </div>
 
         {cartItems.length === 0 ? (
-          <p className="text-center text-gray-600">Your cart is empty</p>
+          <p className="text-center text-gray-600">{translate("Your cart is empty")}</p>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {cartItems.map((item: CartItem & { menuItem: MenuItem }) => (
@@ -53,14 +55,14 @@ export default function CartModal({ isOpen, onClose }: CartModalProps) {
             onClick={() => clearCart()}
             className="px-4 py-3 bg-gray-800 text-orange-500 rounded"
           >
-            Clear Cart
+            {translate("Clear Cart")}
           </button>
           <Link
             href="/checkout"
             className="px-4 py-3 bg-gray-800 text-green-500 rounded"
             onClick={onClose}
           >
-            Total: AED {total.toFixed(2)} - Checkout
+            {translate("Total: AED")} ${total.toFixed(2)} - {translate("Checkout")}
           </Link>
         </div>
       </div>

@@ -1,5 +1,5 @@
-import FoodsList from "@/app/[locale]/components/admin/FoodsList";
-import { CreateFood } from "@/app/[locale]/components/ui/buttons";
+import FoodsList from "@/app/components/admin/FoodsList";
+import { CreateFood } from "@/app/components/ui/buttons";
 import { lusitana } from "@/app/lib/fonts";
 
 export default function page() {

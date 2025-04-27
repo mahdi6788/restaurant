@@ -1,5 +1,5 @@
 "use client";
-import { useOrders } from "../../context/OrderContext";
+import { useOrders } from "../context/OrderContext";
 
 export default function SearchFilterSort() {
   const { search, setSearch, sortby, setSortby } = useOrders();

@@ -1,9 +1,9 @@
 "use client";
 
 import { MenuItem } from "@prisma/client";
-import MenuCards from "../../components/MenuCards";
+import MenuCards from "../../../components/MenuCards";
 import { useMenu } from "@/hooks/useMenu";
-import Loading from "@/app/[locale]/components/loading";
+import Loading from "@/app/components/loading";
 
 export default function Menu() {
   /// fetch foods using hook contaning use query

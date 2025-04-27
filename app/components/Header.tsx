@@ -7,6 +7,7 @@ import { useCart } from "@/hooks/useCart";
 import CartModal from "./CartModal";
 import Dropdown from "./Dropdown";
 import { FaShoppingCart } from "react-icons/fa";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 export default function Header() {
   const { data: session } = useSession();
@@ -65,6 +66,7 @@ export default function Header() {
               </button>
             </li>
           </ul>
+          <LanguageSwitcher />
         </nav>
         <CartModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
       </div>

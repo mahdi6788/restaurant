@@ -1,6 +1,8 @@
+'use client'
 import { useCart } from "@/hooks/useCart";
 import { useOrderButton } from "@/hooks/useOrderButton";
 import { CartItem, MenuItem } from "@prisma/client";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { CiCircleChevDown, CiCircleChevUp } from "react-icons/ci";
 
@@ -9,6 +11,7 @@ export function CartCard({
 }: {
   item: CartItem & { menuItem: MenuItem };
 }) {
+  const translate = useTranslations("CartCard")
   const { quantity, handleAdd, handleDec } = useOrderButton(item.menuItem);
   const { removeFromCart } = useCart();
 
@@ -37,7 +40,7 @@ export function CartCard({
             onClick={() => removeFromCart(item?.id)}
             className="absolute bottom-0 left-0 w-full bg-black text-white hover:bg-gray-800 transition"
           >
-            Remove from cart
+            {translate("Remove from cart")}
           </button>
         </div>
       </div>

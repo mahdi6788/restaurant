@@ -8,6 +8,7 @@ import { MdDashboardCustomize } from "react-icons/md";
 import LogoutModal from "./LogoutModal";
 import { useState } from "react";
 import { IoBagCheckOutline } from "react-icons/io5";
+import { useTranslations } from "next-intl";
 
 
 export default function Dropdown({
@@ -17,6 +18,7 @@ export default function Dropdown({
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
+    const translate = useTranslations("Dropdown");
   const { data: session } = useSession();
   const [isModalOpen, setIsModalOpen] = useState(false);
   return (
@@ -33,7 +35,7 @@ export default function Dropdown({
           height={30}
           className="rounded-full"
         />
-        Welcome, {session?.user.name || session?.user.email}
+        {translate("Welcome")}, {session?.user.name || session?.user.email}
       </span>
       {isOpen && (
         <div
@@ -48,7 +50,7 @@ export default function Dropdown({
                 className="flex items-center w-full gap-2 px-4 py-2 hover:bg-emerald-50"
               >
                 <MdDashboardCustomize />
-                Dashboard
+                {translate("Dashboard")}
               </Link>
             </li>
             <li>
@@ -57,7 +59,7 @@ export default function Dropdown({
                 className=" flex items-center w-full gap-2 px-4 py-2 hover:bg-emerald-50"
               >
                 <IoBagCheckOutline />
-                Checkout
+                {translate("Checkout")}
               </Link>
             </li>
             <li>
@@ -66,7 +68,7 @@ export default function Dropdown({
                 className="flex items-center w-full gap-2 px-4 py-2 hover:bg-emerald-50"
               >
                 <FaSignOutAlt />
-                Logout
+                {translate("Logout")}
               </button>
             </li>
           </ul>

@@ -13,8 +13,8 @@ import { useCart } from "@/hooks/useCart";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { CheckoutInput } from "@/app/lib/zod";
-import { CheckoutCard } from "@/app/[locale]/components/CheckoutCard";
-import CheckoutAccordion from "@/app/[locale]/components/CheckoutAccordion";
+import { CheckoutCard } from "@/app/components/CheckoutCard";
+import CheckoutAccordion from "@/app/components/CheckoutAccordion";
 import { User } from "@prisma/client";
 
 export default function Checkout() {
