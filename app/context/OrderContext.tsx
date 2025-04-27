@@ -2,8 +2,9 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createContext, useContext, useState } from "react";
 import toast from "react-hot-toast";
-import { OrderWithItems } from "../types/types";
 import { useDebounce } from "use-debounce";
+import { OrderWithItems } from "../types/types";
+
 
 interface OrderContextType {
   search: string;
@@ -29,43 +30,43 @@ export default function OrderProvider({
   const [createdAt, setCreatedAt] = useState("All");
 
   const queryClient = useQueryClient();
-  
-    /// Get selected orders
-    const fetchOrderFn = async () => {
-      const query = new URLSearchParams({
-        search: debouncedSearch,
-        sortby,
-        createdAt,
-      }).toString();
-      
-      const res = await fetch(`/api/order?${query}`, {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-        cache: "no-store",
-      });
-      if (!res.ok) throw new Error("There is not any order");
-      const orders = await res.json();
-      return orders;
-    }
-    
-    const { data: selectedOrders = [], isPending: selectedOrdersLoading } =
+
+  /// Get selected orders
+  const fetchOrderFn = async () => {
+    const query = new URLSearchParams({
+      search: debouncedSearch,
+      sortby,
+      createdAt,
+    }).toString();
+
+    const res = await fetch(`/api/order?${query}`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+      cache: "no-store",
+    });
+    if (!res.ok) throw new Error("There is not any order");
+    const orders = await res.json();
+    return orders;
+  };
+
+  const { data: selectedOrders = [], isPending: selectedOrdersLoading } =
     useQuery({
       queryKey: ["orders", debouncedSearch, sortby, createdAt], // these are dependencies just like useEffect dep that update the UI when changing.
       queryFn: fetchOrderFn,
     });
-    
-    /// DELETE
-    const deleteOrderFn = async (orderItemId: string) => {
-      await fetch("/api/order", {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ orderItemId }),
-      });
-    };
-    
-    /// Delete order
-    useMutation({
-      mutationFn: deleteOrderFn,
+
+  /// DELETE
+  const deleteOrderFn = async (orderItemId: string) => {
+    await fetch("/api/order", {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ orderItemId }),
+    });
+  };
+
+  /// Delete order
+  useMutation({
+    mutationFn: deleteOrderFn,
     mutationKey: ["orders"],
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["orders"] });
@@ -76,7 +77,7 @@ export default function OrderProvider({
       toast.error("Failed to remove order");
     },
   });
-  
+
   return (
     <OrderContext.Provider
       value={{

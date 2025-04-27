@@ -3,14 +3,14 @@
 import Link from "next/link";
 import { MenuItem } from "@prisma/client";
 import { useSession } from "next-auth/react";
-import FoodCard from "./components/FoodCard";
+import FoodCard from "./[locale]/components/FoodCard";
 import { useMenu } from "@/hooks/useMenu";
-import { HomeSkeleton } from "./components/skeleton";
+import { HomeSkeleton } from "./[locale]/components/skeleton";
 import { useCart } from "@/hooks/useCart";
 import Image from "next/image";
-import CartModal from "./components/CartModal";
+import CartModal from "./[locale]/components/CartModal";
 import { useState } from "react";
-import Dropdown from "./components/Dropdown";
+import Dropdown from "./[locale]/components/Dropdown";
 import { FaShoppingCart } from "react-icons/fa";
 
 export default function HomePage() {
