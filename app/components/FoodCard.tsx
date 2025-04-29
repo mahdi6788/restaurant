@@ -11,7 +11,7 @@ export default function FoodCard({ food }: { food: MenuItem }) {
   const {quantity, handleAdd, handleDec} = useOrderButton(food)
 
   return (
-    <div className="relative max-w-sm w-2/3 p-5 pb-1 bg-stone-50 rounded-3xl shadow-lg ">
+    <div className="relative max-w-sm w-2/3 p-5 pb-1 bg-stone-50 dark:bg-stone-400 dark:text-stone-100 rounded-3xl shadow-lg ">
       <div className="relative h-60 w-full overflow-hidden rounded-xl">
         <Image
           src={food.imageUrl as string}
@@ -25,7 +25,7 @@ export default function FoodCard({ food }: { food: MenuItem }) {
       <div className="flex items-center justify-between">
         <div>
           <p className="text-sm w-36">{food.description}</p>
-          <p className="text-gray-500 text-sm">AED {food.price?.toFixed(2)}</p>
+          <p className="text-yellow-900 dark:text-yellow-200  text-sm">AED {food.price?.toFixed(2)}</p>
         </div>
         <div className="flex items-center">
           {quantity > 0 ? (

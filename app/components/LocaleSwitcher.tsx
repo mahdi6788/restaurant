@@ -21,12 +21,12 @@ export default function LocaleSwitcher() {
   return (
     <label
       className={clsx(
-        "relative text-green-400",
+        "relative hover:cursor-pointer",
         isPending && "transition-opacity"
       )}
     >
       <select
-        className="inline-flex appearance-none bg-transparent p-1"
+        className="hidden sm:inline-flex appearance-none bg-transparent p-1"
         defaultValue={locale}
         disabled={isPending}
         onChange={onSelectChange}
@@ -45,6 +45,22 @@ export default function LocaleSwitcher() {
           </option>
         ))}
       </select>
+
+      <ul className="sm:hidden flex items-center justify-between">
+        {routing.locales.map((locale: "en" | "fa" | "ar") => (
+          <li key={locale} onClick={() => onSelectChange({ target: { value: locale } } as ChangeEvent<HTMLSelectElement>)}>
+            {locale === "en" ? (
+              <span className="border rounded-md bg-orange-200 p-1 m-1">En</span>
+            ) : locale === "fa" ? (
+              <span className="border rounded-md bg-orange-200 p-1 m-1">Fa</span>
+            ) : (
+              locale === "ar" && (
+                <span className="border rounded-md bg-orange-200 p-1 m-1">Ar</span>
+              )
+            )}
+          </li>
+        ))}
+      </ul>
     </label>
   );
 }

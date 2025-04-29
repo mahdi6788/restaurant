@@ -14,6 +14,8 @@ import { FaShoppingCart } from "react-icons/fa";
 import { useTranslations } from "next-intl";
 import LocaleSwitcher from "../components/LocaleSwitcher";
 import { Link } from "@/i18n/navigation";
+import { useTheme } from "../context/ThemeContext";
+import { MdDarkMode, MdLightMode } from "react-icons/md";
 
 export default function Home() {
   const translate = useTranslations("Home");
@@ -22,6 +24,7 @@ export default function Home() {
   const { cartItems, cartItemsLoading } = useCart();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   if (menuLoading) return <HomeSkeleton />;
 
@@ -58,6 +61,14 @@ export default function Home() {
                   </Link>
                 </div>
               )}
+              <LocaleSwitcher />
+              <button onClick={toggleTheme} className="p-2">
+                {theme === "light" ? (
+                  <MdDarkMode size={30} color="black"/>
+                ) : (
+                  <MdLightMode size={30} color="yellow"/>
+                )}
+              </button>
               {/* cart */}
               <button
                 onClick={() => setIsModalOpen(true)}
@@ -71,7 +82,6 @@ export default function Home() {
                       0}
                 </span>
               </button>
-              <LocaleSwitcher />
             </div>
             {/* Today's Menu Title */}
             <div className="absolute top-0 right-1/3 text-stone-800 font-bold bg-slate-100 rounded-b-lg p-2 px-16 shadow-2xl shadow-sky-200">

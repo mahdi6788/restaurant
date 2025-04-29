@@ -20,7 +20,7 @@ export default function HomePage() {
   return (
     <div className="container mx-auto ">
       <h1
-        className={`${lusitana.className} text-2xl font-bold text-orange-950`}
+        className="text-2xl font-bold text-orange-950"
       >
         {translate("Today Orders")}
       </h1>

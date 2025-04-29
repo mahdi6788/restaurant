@@ -6,6 +6,7 @@ import { useState } from "react";
 import MobileNavbar from "../components/MobileNavbar";
 import OrderProvider from "../context/OrderContext";
 import MobileBottomNav from "../components/MobileBottomNav";
+import { ThemeProvider } from "../context/ThemeContext";
 
 const queryClient = new QueryClient();
 
@@ -16,11 +17,13 @@ export default function ClientProviders({
 }) {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <QueryClientProvider client={queryClient}>
-      <Toaster />
-      <MobileNavbar isOpen={isOpen} setIsOpen={setIsOpen} />
-      <OrderProvider>{children}</OrderProvider>
-      <MobileBottomNav />
-    </QueryClientProvider>
+    <ThemeProvider>
+      <QueryClientProvider client={queryClient}>
+        <Toaster />
+        <MobileNavbar isOpen={isOpen} setIsOpen={setIsOpen} />
+        <OrderProvider>{children}</OrderProvider>
+        <MobileBottomNav />
+      </QueryClientProvider>
+    </ThemeProvider>
   );
 }

@@ -4,7 +4,12 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import { FaSignOutAlt, FaSignInAlt, FaRegistered } from "react-icons/fa";
-import { MdDashboardCustomize } from "react-icons/md";
+import {
+  MdDarkMode,
+  MdDashboardCustomize,
+  MdLightMode,
+  MdLanguage,
+} from "react-icons/md";
 import { TiThMenu } from "react-icons/ti";
 import { IoBagCheckOutline } from "react-icons/io5";
 import { TiInfoLargeOutline } from "react-icons/ti";
@@ -12,6 +17,8 @@ import AboutUsModal from "./AboutUsModal";
 import { useEffect, useRef, useState } from "react";
 import LogoutModal from "./LogoutModal";
 import { useTranslations } from "next-intl";
+import LocaleSwitcher from "./LocaleSwitcher";
+import { useTheme } from "../context/ThemeContext";
 
 export default function MobileNavbar({
   isOpen,
@@ -20,10 +27,11 @@ export default function MobileNavbar({
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-  const translate = useTranslations("MobileNavbar")
+  const translate = useTranslations("MobileNavbar");
   const { data: session } = useSession();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   const navRef = useRef<HTMLDivElement>(null);
 
@@ -68,6 +76,18 @@ export default function MobileNavbar({
                 </span>
 
                 <li>
+                  <button onClick={toggleTheme} className="p-2">
+                    {theme === "light" ? (
+                      <MdDarkMode size={30} color="gray" />
+                    ) : (
+                      <MdLightMode size={30} color="yellow" />
+                    )}
+                  </button>
+                </li>
+                <li>
+                  <LocaleSwitcher />
+                </li>
+                <li>
                   <Link
                     href="/users"
                     className="flex items-center gap-2 px-4 py-2"
@@ -101,6 +121,19 @@ export default function MobileNavbar({
                   {translate("Join us for a delicious experience")} 😊
                 </span>
                 <li>
+                  <button onClick={toggleTheme} className="p-2">
+                    {theme === "light" ? (
+                      <MdDarkMode size={20} color="black" />
+                    ) : (
+                      <MdLightMode size={20} color="orange" />
+                    )}
+                  </button>
+                </li>
+                <li className=" flex items-center gap-2 px-4 py-2">
+                  <MdLanguage />
+                  <LocaleSwitcher />
+                </li>
+                <li>
                   <Link
                     href="/login"
                     className=" flex items-center gap-2 px-4 py-2"
@@ -122,7 +155,9 @@ export default function MobileNavbar({
             )}
             <li className=" flex items-center gap-2 px-2 py-2">
               <TiInfoLargeOutline />
-              <button onClick={() => setIsModalOpen(true)}>{translate("About Us")}</button>
+              <button onClick={() => setIsModalOpen(true)}>
+                {translate("About Us")}
+              </button>
             </li>
           </ul>
         </div>

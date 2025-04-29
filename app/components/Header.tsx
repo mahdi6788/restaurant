@@ -9,6 +9,8 @@ import Dropdown from "./Dropdown";
 import { FaShoppingCart } from "react-icons/fa";
 import LocaleSwitcher from "./LocaleSwitcher";
 import { useTranslations } from "next-intl";
+import { useTheme } from "../context/ThemeContext";
+import { MdDarkMode, MdLightMode } from "react-icons/md";
 
 export default function Header() {
   const translate = useTranslations("Header");
@@ -16,6 +18,7 @@ export default function Header() {
   const { cartItems, cartItemsLoading } = useCart();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <header className="hidden sm:flex fixed top-0 left-28 shadow-lg shadow-green-100 rounded-b-xl text-white z-50 pl-2 py-2 w-[calc(100vw-10rem)]">
@@ -71,6 +74,15 @@ export default function Header() {
             </li>
             <li>
               <LocaleSwitcher />
+            </li>
+            <li>
+              <button onClick={toggleTheme} className="p-2">
+                {theme === "light" ? (
+                  <MdDarkMode size={30} color="gray" />
+                ) : (
+                  <MdLightMode size={30} color="yellow" />
+                )}
+              </button>
             </li>
           </ul>
         </nav>

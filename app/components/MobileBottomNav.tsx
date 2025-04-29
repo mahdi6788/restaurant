@@ -16,17 +16,17 @@ const MobileBottomNav: React.FC = () => {
     <>
       <nav className="sm:hidden fixed bottom-0 left-0 right-0 bg-blue-600 text-white flex justify-around items-center py-2 shadow-lg rounded-t-xl z-50">
         {/* Home */}
-        <Link href="/">
+        <Link href="/" className="flex flex-col items-center justify-center">
           <FaHome size={30} />
           {translate("Home")}
         </Link>
         {/* Menu */}
-        <Link href="/menu">
+        <Link href="/menu" className="flex flex-col items-center justify-center">
           <MdRestaurantMenu size={30} />
           {translate("Menu")}
         </Link>
         {/* cart */}
-        <button onClick={() => setIsModalOpen(true)} className="relative">
+        <button onClick={() => setIsModalOpen(true)} className="relative flex flex-col items-center justify-center">
           <FaShoppingCart size={30} />
           {translate("Cart")}
           <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs px-1.5 py-0.5 rounded-full">

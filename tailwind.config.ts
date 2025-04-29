@@ -14,15 +14,15 @@ export default {
       },
       animation: {
         spin: "spin 1s linear infinite",
-       },
+      },
+    },
+  },
+  variants: {
+    extend: {
+      padding: ["direction"],
+      margin: ["direction"],
+      textAlign: ["direction"],
     },
   },
   plugins: [],
-  variants: {
-    extend: {
-      padding: ['direction'],
-      margin: ['direction'],
-      textAlign: ['direction']
-    }
-  }
 } satisfies Config;

@@ -12,6 +12,7 @@ module.exports = {
       },
     },
   },
+  darkMode: "class", // Use 'class' to toggle dark mode by adding/removing a class
   plugins: [],
   variants: {
     extend: {
