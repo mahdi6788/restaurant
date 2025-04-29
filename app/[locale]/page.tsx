@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { MenuItem } from "@prisma/client";
 import { useSession } from "next-auth/react";
 import FoodCard from "../components/FoodCard";
@@ -13,10 +12,11 @@ import { useState } from "react";
 import Dropdown from "../components/Dropdown";
 import { FaShoppingCart } from "react-icons/fa";
 import { useTranslations } from "next-intl";
-import LanguageSwitcher from "../components/LanguageSwitcher";
+import LocaleSwitcher from "../components/LocaleSwitcher";
+import { Link } from "@/i18n/navigation";
 
-export default function HomePage() {
-  const translate = useTranslations("HomePage");
+export default function Home() {
+  const translate = useTranslations("Home");
   const { data: session } = useSession();
   const { menu, menuLoading } = useMenu();
   const { cartItems, cartItemsLoading } = useCart();
@@ -71,13 +71,13 @@ export default function HomePage() {
                       0}
                 </span>
               </button>
-              <LanguageSwitcher />
+              <LocaleSwitcher />
             </div>
             {/* Today's Menu Title */}
             <div className="absolute top-0 right-1/3 text-stone-800 font-bold bg-slate-100 rounded-b-lg p-2 px-16 shadow-2xl shadow-sky-200">
               {todayFoods.length === 0
-                ? `${translate("No food available")}`
-                : `${translate("Today’s Specials")}`}
+                ? translate("No food available")
+                : translate("Today’s Specials")}
             </div>
           </div>
         </div>
@@ -85,8 +85,8 @@ export default function HomePage() {
         {/* mobile header */}
         <div className="sm:hidden absolute top-0 left-1/4 text-stone-800 font-bold bg-slate-100 rounded-b-lg p-2 px-10 shadow-2xl shadow-sky-200">
           {todayFoods.length === 0
-            ? `${translate("No food available")}`
-            : `${translate("Today’s Specials")}`}
+            ? translate("No food available")
+            : translate("Today’s Specials")}
         </div>
 
         {/* Products */}

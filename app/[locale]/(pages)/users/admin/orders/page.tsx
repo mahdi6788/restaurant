@@ -3,8 +3,10 @@ import { useOrders } from "@/app/context/OrderContext";
 import CustomersOrders from "@/app/components/admin/CustomersOrders";
 import { useEffect } from "react";
 import { lusitana } from "@/app/lib/fonts";
+import { useTranslations } from "next-intl";
 
 export default function CustomersOrdersPage() {
+  const translate = useTranslations("CustomersOrdersPage")
   const { setCreatedAt, selectedOrders, selectedOrdersLoading } = useOrders();
 
   useEffect(() => {
@@ -16,7 +18,7 @@ export default function CustomersOrdersPage() {
       <h1
         className={`${lusitana.className} text-2xl font-bold text-orange-950`}
       >
-        Orders History
+        {translate("Orders History")}
       </h1>
       <CustomersOrders
         orders={selectedOrders}

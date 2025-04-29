@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import toast from "react-hot-toast";
+import { useRouter } from "@/i18n/navigation";
 
 export default function NewPasswordPage() {
   const [password, setPassword] = useState("");

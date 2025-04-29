@@ -2,14 +2,13 @@
 
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { FaSignOutAlt } from "react-icons/fa";
 import { MdDashboardCustomize } from "react-icons/md";
 import LogoutModal from "./LogoutModal";
 import { useState } from "react";
 import { IoBagCheckOutline } from "react-icons/io5";
 import { useTranslations } from "next-intl";
-
 
 export default function Dropdown({
   isOpen,
@@ -18,7 +17,7 @@ export default function Dropdown({
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-    const translate = useTranslations("Dropdown");
+  const translate = useTranslations("Dropdown");
   const { data: session } = useSession();
   const [isModalOpen, setIsModalOpen] = useState(false);
   return (

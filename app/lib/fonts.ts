@@ -1,10 +1,16 @@
-// use the font.ts file to keep the fonts that will be used throughout your application.
+// keep the fonts that will be used throughout your application.
 // add a custom Google font
-// first import the desired font that is Inter here, then specify what subset you like to load, here is latin.
-import { Inter, Lusitana } from "next/font/google";
+import { Inter, Lusitana, Amiri } from "next/font/google";
 
+/// English fonts
 export const inter = Inter({ subsets: ["latin"] });
 export const lusitana = Lusitana({
   weight: ["400", "700"],
   subsets: ["latin"],
 });
+
+/// Farsi and Arabic fonts
+export const amiri = Amiri({
+  weight: ["400", "700"],
+  subsets:["arabic"]
+})

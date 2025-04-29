@@ -4,9 +4,11 @@ import OrderHistory from "@/app/components/customers/OrderHistory";
 import { useOrders } from "@/app/context/OrderContext";
 import { lusitana } from "@/app/lib/fonts";
 import { useSession } from "next-auth/react";
+import { useTranslations } from "next-intl";
 import { useEffect } from "react";
 
 export default function HomePage() {
+  const translate = useTranslations("HomePage");
   const { data: session } = useSession();
 
   const { setCreatedAt, selectedOrders, selectedOrdersLoading } = useOrders();
@@ -20,7 +22,7 @@ export default function HomePage() {
       <h1
         className={`${lusitana.className} text-2xl font-bold text-orange-950`}
       >
-        Today Orders
+        {translate("Today Orders")}
       </h1>
       {session?.user.role === "ADMIN" ? (
         <CustomersOrders

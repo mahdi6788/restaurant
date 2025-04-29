@@ -1,5 +1,296 @@
 {
-    "HomePage": {
-        "welcome": "مرحبًا بك في تطبيقنا!"
-    }   
+  "Home": {
+    "LogIn": "تسجيل الدخول",
+    "Register": "التسجيل",
+    "No food available": "لا يوجد طعام متاح",
+    "Today’s Specials": "عروض اليوم"
+  },
+  "Dropdown": {
+    "Welcome": "مرحباً",
+    "Dashboard": "لوحة التحكم",
+    "Checkout": "الدفع",
+    "Logout": "تسجيل الخروج"
+  },
+  "LogoutModal": {
+    "Sign Out": "تسجيل الخروج",
+    "Are you sure you want to sign out?": "هل أنت متأكد أنك تريد تسجيل الخروج؟"
+  },
+  "CartModal": {
+    "Your Cart": "سلة التسوق الخاصة بك",
+    "Your cart is empty": "سلة التسوق الخاصة بك فارغة",
+    "Clear Cart": "إفراغ السلة",
+    "Total: AED": "الإجمالي: درهم",
+    "Checkout": "الدفع"
+  },
+  "CartCard": {
+    "Remove from cart": "إزالة من السلة"
+  },
+  "LocaleSwitcher": {
+    "label": "التصنيف",
+    "locale": "اللغة"
+  },
+  "Header": {
+    "LogIn": "تسجيل الدخول",
+    "Register": "التسجيل",
+    "Join us for a delicious experience": "انضم إلينا لتجربة لذيذة"
+  },
+  "Footer": {
+    "About Us": "معلومات عنا",
+    "We are a team of food lovers who are passionate about providing the best food to our customers": "نحن فريق من عشاق الطعام الذين يهتمون بتقديم أفضل الطعام لعملائنا",
+    "Contact Us": "اتصل بنا",
+    "Follow Us": "تابعنا"
+  },
+  "AboutUsModal": {
+    "About Us": "معلومات عنا",
+    "We are a team of food lovers who are passionate about providing the best food to our customers": "نحن فريق من عشاق الطعام الذين يهتمون بتقديم أفضل الطعام لعملائنا",
+    "Contact Us": "اتصل بنا",
+    "Follow Us": "تابعنا"
+  },
+  "Checkout": {
+    "Checkout": "الدفع",
+    "Customer Information": "معلومات العميل",
+    "Name": "الاسم",
+    "Email": "البريد الإلكتروني",
+    "Address": "العنوان",
+    "Phone Number": "رقم الهاتف",
+    "Sign in to checkout": "تسجيل الدخول للدفع",
+    "Order Summary": "ملخص الطلب",
+    "No items in the cart": "لا توجد عناصر في السلة",
+    "Image": "الصورة",
+    "Quantity": "الكمية",
+    "Price": "السعر",
+    "Edit": "تعديل",
+    "Remove": "إزالة"
+  },
+  "CheckoutCard": {
+    "Remove": "إزالة"
+  },
+  "CheckoutAccordion": {
+    "Customer Information": "معلومات العميل",
+    "Name": "الاسم",
+    "Email": "البريد الإلكتروني",
+    "Address": "العنوان",
+    "Phone Number": "رقم الهاتف",
+    "Sign in to checkout": "تسجيل الدخول للدفع",
+    "Order Summary": "ملخص الطلب",
+    "No items in the cart": "لا توجد عناصر في السلة",
+    "Image": "الصورة",
+    "Quantity": "الكمية",
+    "Qty":"الكمية",
+    "Price": "السعر",
+    "Edit": "تعديل",
+    "Delivery cost": "تكلفة التوصيل",
+    "Checkout":"الدفع"
+
+  },
+  "Menu": {
+    "Main Course": "الطبق الرئيسي",
+    "Appetizers": "المقبلات"
+  },
+  "Details": {
+    "Search by Menu item name or Order ID": "البحث باسم عنصر القائمة أو رقم الطلب",
+    "Sort by": "الفرز حسب",
+    "Order Date: Newest First": "تاريخ الطلب: الأحدث أولاً",
+    "Order Date: Oldest First": "تاريخ الطلب: الأقدم أولاً",
+    "Name": "الاسم",
+    "Address": "العنوان",
+    "Area": "المنطقة",
+    "Balance": "الرصيد",
+    "Order": "الطلب",
+    "Total": "الإجمالي",
+    "Status": "الحالة",
+    "Phone": "الهاتف",
+    "Image": "الصورة",
+    "Price": "السعر",
+    "Quantity": "الكمية",
+    "Order Date": "تاريخ الطلب",
+    "Payment Method": "طريقة الدفع",
+    "Payment Status": "حالة الدفع",
+    "Qty": "الكمية",
+    "Date": "التاريخ",
+    "Payment": "الدفع"
+  },
+  "CustomersPage": {
+    "Name": "الاسم",
+    "E-mail": "البريد الإلكتروني",
+    "Phone": "الهاتف",
+    "Area": "المنطقة",
+    "Balance": "الرصيد"
+  },
+  "editFoodsForm": {
+    "Foods": "الأطعمة",
+    "Edit food": "تعديل الطعام",
+    "Food not found": "الطعام غير موجود"
+  },
+  "EditForm": {
+    "Choose a Name": "اختر اسمًا",
+    "Description": "الوصف",
+    "Price": "السعر",
+    "Category": "الفئة",
+    "MainCourse": "الطبق الرئيسي",
+    "Appetizers": "المقبلات",
+    "Drinks": "المشروبات",
+    "Cancel": "إلغاء",
+    "Editing": "جارٍ التعديل",
+    "Edit": "تعديل"
+  },
+  "FoodsForm": {
+    "Menu": "القائمة",
+    "Create Menu": "إنشاء قائمة"
+  },
+  "Form": {
+    "Choose a Name": "اختر اسمًا",
+    "Description": "الوصف",
+    "Price": "السعر",
+    "Category": "الفئة",
+    "MainCourse": "الطبق الرئيسي",
+    "Appetizers": "المقبلات",
+    "Drinks": "المشروبات",
+    "Cancel": "إلغاء",
+    "Creating": "جارٍ الإنشاء",
+    "Create": "إنشاء"
+  },
+  "updateMenuPage": {
+    "Menu Items": "عناصر القائمة"
+  },
+  "CreateFood": {
+    "Create Menu": "إنشاء قائمة"
+  },
+  "UpdateFood": {
+    "Edit": "تعديل"
+  },
+  "DeleteFood": {
+    "Delete": "حذف"
+  },
+  "FoodsList": {
+    "Available": "متوفر",
+    "Availibility": "التوفر",
+    "Image": "الصورة",
+    "Category": "الفئة",
+    "Name": "الاسم",
+    "Description": "الوصف",
+    "Price": "السعر",
+    "Edit": "تعديل"
+  },
+  "CustomersOrdersPage": {
+    "Orders History": "سجل الطلبات"
+  },
+  "CustomersOrders": {
+    "No orders found": "لم يتم العثور على طلبات",
+    "Customer name": "اسم العميل",
+    "Order": "الطلب",
+    "Total": "الإجمالي",
+    "Status": "الحالة",
+    "Address": "العنوان",
+    "Phone": "الهاتف",
+    "Image": "الصورة",
+    "Name": "الاسم",
+    "Price": "السعر",
+    "Quantity": "الكمية",
+    "Order Date": "تاريخ الطلب",
+    "Payment Method": "طريقة الدفع",
+    "Payment Status": "حالة الدفع",
+    "Qty": "الكمية",
+    "Date": "التاريخ",
+    "Payment": "الدفع"
+  },
+  "Profile": {
+    "Your Profile": "ملفك الشخصي",
+    "Name": "الاسم",
+    "Delivery Address": "عنوان التوصيل",
+    "Phone Number": "رقم الهاتف",
+    "Save Profile": "حفظ الملف الشخصي"
+  },
+  "OrderPage": {
+    "Please log in to view your order history": "يرجى تسجيل الدخول لعرض سجل طلباتك",
+    "Orders History": "سجل الطلبات"
+  },
+  "OrderHistory": {
+    "No orders found": "لم يتم العثور على طلبات",
+    "Total": "الإجمالي",
+    "Order": "الطلب",
+    "Status": "الحالة",
+    "Address": "العنوان",
+    "Phone": "الهاتف",
+    "Image": "الصورة",
+    "Name": "الاسم",
+    "Price": "السعر",
+    "Quantity": "الكمية",
+    "Order Date": "تاريخ الطلب",
+    "Payment Method": "طريقة الدفع",
+    "Payment Status": "حالة الدفع",
+    "Qty": "الكمية",
+    "Date": "التاريخ",
+    "Payment": "الدفع"
+  },
+  "NavLinks": {
+    "Home": "الرئيسية",
+    "Orders History": "سجل الطلبات",
+    "Customers": "العملاء",
+    "Menu": "القائمة",
+    "Profile": "الملف الشخصي"
+  },
+  "HomePage": {
+    "Today Orders": "طلبات اليوم"
+  },
+  "ImageUploader": {
+    "Click or drag to change image": "انقر أو اسحب لتغيير الصورة"
+  },
+  "FoodCard": {
+    "Order now": "اطلب الآن"
+  },
+  "MenuCards": {
+    "Order": "طلب",
+    "Not Now": "ليس الآن"
+  },
+  "MobileBottomNav": {
+    "Home": "الرئيسية",
+    "Menu": "القائمة",
+    "Cart": "السلة"
+  },
+  "MobileNavbar": {
+    "Dashboard": "لوحة التحكم",
+    "Logout": "تسجيل الخروج",
+    "Checkout": "الدفع",
+    "Join us for a delicious experience": "انضم إلينا لتجربة لذيذة",
+    "Login": "تسجيل الدخول",
+    "Register": "التسجيل",
+    "About Us": "معلومات عنا"
+  },
+  "SearchFilterSort": {
+    "Search by name or order ID": "البحث بالاسم أو رقم الطلب",
+    "Sort by": "الفرز حسب",
+    "Order Date: Newest First": "تاريخ الطلب: الأحدث أولاً",
+    "Order Date: Oldest First": "تاريخ الطلب: الأقدم أولاً"
+  },
+  "ProfileSkeleton": {
+    "Your Profile": "ملفك الشخصي",
+    "Name": "الاسم",
+    "Delivery Address": "عنوان التوصيل",
+    "Phone Number": "رقم الهاتف",
+    "Save Profile": "حفظ الملف الشخصي"
+  },
+  "FoodsListSkeleton": {
+    "Availability": "التوفر",
+    "Image": "الصورة",
+    "Category": "الفئة",
+    "Name": "الاسم",
+    "Description": "الوصف",
+    "Price": "السعر",
+    "Edit": "تعديل",
+    "Total": "الإجمالي",
+    "Delivery cost": "تكلفة التوصيل"
+  },
+  "HomeSkeleton": {
+    "Specials": "قائمة اليوم"
+  },
+  "OrdersSkeleton": {
+    "Image": "الصورة",
+    "Name": "الاسم",
+    "Price": "السعر",
+    "Quantity": "الكمية",
+    "Order Date": "تاريخ الطلب",
+    "Payment Method": "طريقة الدفع",
+    "Payment Status": "حالة الدفع"
+  }
 }

@@ -4,8 +4,10 @@ import { MenuItem } from "@prisma/client";
 import MenuCards from "../../../components/MenuCards";
 import { useMenu } from "@/hooks/useMenu";
 import Loading from "@/app/components/loading";
+import { useTranslations } from "next-intl";
 
 export default function Menu() {
+  const translate = useTranslations("Menu")
   /// fetch foods using hook contaning use query
   const { menu, menuLoading } = useMenu();
 
@@ -25,7 +27,7 @@ export default function Menu() {
       <div className="relative pb-10 px-1">
         {/* Menu */}
         <div className="border-b-2 p-2 text-lg font-bold text-white bg-slate-900 my-3 shadow-2xl shadow-sky-200 rounded-xl">
-          Main Course
+          {translate("Main Course")}
         </div>
         <section>
           <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-3">
@@ -36,7 +38,7 @@ export default function Menu() {
         </section>
         {/* Appetizers */}
         <div className="border-b-2 p-2 text-lg font-bold text-white bg-slate-900 my-3 shadow-2xl shadow-sky-200 rounded-xl">
-          Appetizers
+          {translate("Appetizers")}
         </div>
         <section>
           <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-3 mb-5">

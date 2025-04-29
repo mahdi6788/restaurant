@@ -1,5 +1,294 @@
 {
-    "HomePage": {
-        "welcome":"خوش آمدید"
-    }   
+  "Home": {
+    "LogIn": "ورود",
+    "Register": "ثبت‌ نام",
+    "No food available": "غذایی موجود نیست",
+    "Today’s Specials": "ویژه‌های امروز"
+  },
+  "Dropdown": {
+    "Welcome": "خوش آمدید",
+    "Dashboard": "داشبورد",
+    "Checkout": "تسویه‌حساب",
+    "Logout": "خروج"
+  },
+  "LogoutModal": {
+    "Sign Out": "خروج",
+    "Are you sure you want to sign out?": "آیا مطمئن هستید که می‌خواهید خارج شوید؟"
+  },
+  "CartModal": {
+    "Your Cart": "سبد خرید شما",
+    "Your cart is empty": "سبد خرید شما خالی است",
+    "Clear Cart": "پاک کردن سبد",
+    "Total: AED": "مجموع: درهم",
+    "Checkout": "تسویه‌حساب"
+  },
+  "CartCard": {
+    "Remove from cart": "حذف از سبد خرید"
+  },
+  "LocaleSwitcher": {
+    "label": "برچسب",
+    "locale": "زبان"
+  },
+  "Header": {
+    "LogIn": "ورود",
+    "Register": "ثبت‌نام",
+    "Join us for a delicious experience": "با ما برای تجربه‌ای خوشمزه همراه شوید"
+  },
+  "Footer": {
+    "About Us": "درباره ما",
+    "We are a team of food lovers who are passionate about providing the best food to our customers": "ما تیمی از عاشقان غذا هستیم که با اشتیاق به ارائه بهترین غذا به مشتریان خود متعهدیم",
+    "Contact Us": "تماس با ما",
+    "Follow Us": "ما را دنبال کنید"
+  },
+  "AboutUsModal": {
+    "About Us": "درباره ما",
+    "We are a team of food lovers who are passionate about providing the best food to our customers": "ما تیمی از عاشقان غذا هستیم که با اشتیاق به ارائه بهترین غذا به مشتریان خود متعهدیم",
+    "Contact Us": "تماس با ما",
+    "Follow Us": "ما را دنبال کنید"
+  },
+  "Checkout": {
+    "Checkout": "تسویه‌حساب",
+    "Customer Information": "اطلاعات مشتری",
+    "Name": "نام",
+    "Email": "ایمیل",
+    "Address": "آدرس",
+    "Phone Number": "شماره تلفن",
+    "Sign in to checkout": "برای تسویه‌حساب وارد شوید",
+    "Order Summary": "خلاصه سفارش",
+    "No items in the cart": "هیچ موردی در سبد خرید نیست",
+    "Image": "تصویر",
+    "Quantity": "تعداد",
+    "Price": "قیمت",
+    "Edit": "ویرایش",
+    "Remove": "حذف"
+  },
+  "CheckoutCard": {
+    "Remove": "حذف"
+  },
+  "CheckoutAccordion": {
+    "Customer Information": "اطلاعات مشتری",
+    "Name": "نام",
+    "Email": "ایمیل",
+    "Address": "آدرس",
+    "Phone Number": "شماره تلفن",
+    "Sign in to checkout": "برای تسویه‌حساب وارد شوید",
+    "Order Summary": "خلاصه سفارش",
+    "No items in the cart": "هیچ موردی در سبد خرید نیست",
+    "Image": "تصویر",
+    "Quantity": "تعداد",
+    "Qty":"تعداد",
+    "Price": "قیمت",
+    "Edit": "ویرایش",
+    "Total":"جمع کل",
+    "Delivery cost": "هزینه دلیوری",
+    "Checkout":"تسویه‌حساب"
+  },
+  "Menu": {
+    "Main Course": "غذای اصلی",
+    "Appetizers": "پیش‌غذا"
+  },
+  "Details": {
+    "Search by Menu item name or Order ID": "جستجو بر اساس نام آیتم منو یا شناسه سفارش",
+    "Sort by": "مرتب‌سازی بر اساس",
+    "Order Date: Newest First": "تاریخ سفارش: جدیدترین ابتدا",
+    "Order Date: Oldest First": "تاریخ سفارش: قدیمی‌ترین ابتدا",
+    "Name": "نام",
+    "Address": "آدرس",
+    "Area": "منطقه",
+    "Balance": "موجودی",
+    "Order": "سفارش",
+    "Total": "مجموع",
+    "Status": "وضعیت",
+    "Phone": "تلفن",
+    "Image": "تصویر",
+    "Price": "قیمت",
+    "Quantity": "تعداد",
+    "Order Date": "تاریخ سفارش",
+    "Payment Method": "روش پرداخت",
+    "Payment Status": "وضعیت پرداخت",
+    "Qty": "تعداد",
+    "Date": "تاریخ",
+    "Payment": "پرداخت"
+  },
+  "CustomersPage": {
+    "Name": "نام",
+    "E-mail": "ایمیل",
+    "Phone": "تلفن",
+    "Area": "منطقه",
+    "Balance": "موجودی"
+  },
+  "editFoodsForm": {
+    "Foods": "غذاها",
+    "Edit food": "ویرایش غذا",
+    "Food not found": "غذا یافت نشد"
+  },
+  "EditForm": {
+    "Choose a Name": "انتخاب نام",
+    "Description": "توضیحات",
+    "Price": "قیمت",
+    "Category": "دسته‌بندی",
+    "MainCourse": "غذای اصلی",
+    "Appetizers": "پیش‌غذا",
+    "Drinks": "نوشیدنی",
+    "Cancel": "لغو",
+    "Editing": "در حال ویرایش",
+    "Edit": "ویرایش"
+  },
+  "FoodsForm": {
+    "Menu": "منو",
+    "Create Menu": "ایجاد منو"
+  },
+  "Form": {
+    "Choose a Name": "انتخاب نام",
+    "Description": "توضیحات",
+    "Price": "قیمت",
+    "Category": "دسته‌بندی",
+    "MainCourse": "غذای اصلی",
+    "Appetizers": "پیش‌غذا",
+    "Drinks": "نوشیدنی",
+    "Cancel": "لغو",
+    "Creating": "در حال ایجاد",
+    "Create": "ایجاد"
+  },
+  "updateMenuPage": {
+    "Menu Items": "آیتم‌های منو"
+  },
+  "CreateFood": {
+    "Create Menu": "ایجاد منو"
+  },
+  "UpdateFood": {
+    "Edit": "ویرایش"
+  },
+  "DeleteFood": {
+    "Delete": "حذف"
+  },
+  "FoodsList": {
+    "Available": "موجود",
+    "Availibility": "موجودی",
+    "Image": "تصویر",
+    "Category": "دسته‌بندی",
+    "Name": "نام",
+    "Description": "توضیحات",
+    "Price": "قیمت",
+    "Edit": "ویرایش"
+  },
+  "CustomersOrdersPage": {
+    "Orders History": "تاریخچه سفارشات"
+  },
+  "CustomersOrders": {
+    "No orders found": "هیچ سفارشی یافت نشد",
+    "Customer name": "نام مشتری",
+    "Order": "سفارش",
+    "Total": "مجموع",
+    "Status": "وضعیت",
+    "Address": "آدرس",
+    "Phone": "تلفن",
+    "Image": "تصویر",
+    "Name": "نام",
+    "Price": "قیمت",
+    "Quantity": "تعداد",
+    "Order Date": "تاریخ سفارش",
+    "Payment Method": "روش پرداخت",
+    "Payment Status": "وضعیت پرداخت",
+    "Qty": "تعداد",
+    "Date": "تاریخ",
+    "Payment": "پرداخت"
+  },
+  "Profile": {
+    "Your Profile": "پروفایل شما",
+    "Name": "نام",
+    "Delivery Address": "آدرس تحویل",
+    "Phone Number": "شماره تلفن",
+    "Save Profile": "ذخیره پروفایل"
+  },
+  "OrderPage": {
+    "Please log in to view your order history": "لطفاً برای مشاهده تاریخچه سفارشات خود وارد شوید",
+    "Orders History": "تاریخچه سفارشات"
+  },
+  "OrderHistory": {
+    "No orders found": "هیچ سفارشی یافت نشد",
+    "Total": "مجموع",
+    "Order": "سفارش",
+    "Status": "وضعیت",
+    "Address": "آدرس",
+    "Phone": "تلفن",
+    "Image": "تصویر",
+    "Name": "نام",
+    "Price": "قیمت",
+    "Quantity": "تعداد",
+    "Order Date": "تاریخ سفارش",
+    "Payment Method": "روش پرداخت",
+    "Payment Status": "وضعیت پرداخت",
+    "Qty": "تعداد",
+    "Date": "تاریخ",
+    "Payment": "پرداخت"
+  },
+  "NavLinks": {
+    "Home": "خانه",
+    "Orders History": "تاریخچه سفارشات",
+    "Customers": "مشتریان",
+    "Menu": "منو",
+    "Profile": "پروفایل"
+  },
+  "HomePage": {
+    "Today Orders": "سفارشات امروز"
+  },
+  "ImageUploader": {
+    "Click or drag to change image": "برای تغییر تصویر کلیک کنید یا بکشید"
+  },
+  "FoodCard": {
+    "Order now": "اکنون سفارش دهید"
+  },
+  "MenuCards": {
+    "Order": "سفارش",
+    "Not Now": "اکنون نه"
+  },
+  "MobileBottomNav": {
+    "Home": "خانه",
+    "Menu": "منو",
+    "Cart": "سبد خرید"
+  },
+  "MobileNavbar": {
+    "Dashboard": "داشبورد",
+    "Logout": "خروج",
+    "Checkout": "تسویه‌حساب",
+    "Join us for a delicious experience": "با ما برای تجربه‌ای خوشمزه همراه شوید",
+    "Login": "ورود",
+    "Register": "ثبت‌نام",
+    "About Us": "درباره ما"
+  },
+  "SearchFilterSort": {
+    "Search by name or order ID": "جستجو بر اساس نام یا شناسه سفارش",
+    "Sort by": "مرتب‌سازی بر اساس",
+    "Order Date: Newest First": "تاریخ سفارش: جدیدترین ابتدا",
+    "Order Date: Oldest First": "تاریخ سفارش: قدیمی‌ترین ابتدا"
+  },
+  "ProfileSkeleton": {
+    "Your Profile": "پروفایل شما",
+    "Name": "نام",
+    "Delivery Address": "آدرس تحویل",
+    "Phone Number": "شماره تلفن",
+    "Save Profile": "ذخیره پروفایل"
+  },
+  "FoodsListSkeleton": {
+    "Availability": "موجودی",
+    "Image": "تصویر",
+    "Category": "دسته‌بندی",
+    "Name": "نام",
+    "Description": "توضیحات",
+    "Price": "قیمت",
+    "Edit": "ویرایش"
+  },
+  "HomeSkeleton": {
+    "Specials": "منوی امروز"
+  },
+  "OrdersSkeleton": {
+    "Image": "تصویر",
+    "Name": "نام",
+    "Price": "قیمت",
+    "Quantity": "تعداد",
+    "Order Date": "تاریخ سفارش",
+    "Payment Method": "روش پرداخت",
+    "Payment Status": "وضعیت پرداخت"
+  }
 }

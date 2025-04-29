@@ -1,10 +1,11 @@
 "use client";
 
 import { useSession } from "next-auth/react";
-import { usePathname, useRouter } from "next/navigation";
+
 import Sidebar from "../../../components/Sidebar";
 import Loading from "@/app/components/loading";
 import SearchFilterSort from "@/app/components/SearchFilterSort";
+import { usePathname, useRouter } from "@/i18n/navigation";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const router = useRouter();

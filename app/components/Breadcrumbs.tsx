@@ -1,7 +1,7 @@
 /// breadcrumbs component
 
 import { clsx } from "clsx";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { lusitana } from "@/app/lib/fonts";
 
 interface Breadcrumb {

@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 import toast from "react-hot-toast";
 import { registerFormSchema } from "@/app/lib/zod";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { useSession } from "next-auth/react";
 
 export default function RegisterForm() {
@@ -168,7 +168,12 @@ export default function RegisterForm() {
           <div className="w-full bg-green-500 text-white text-center py-2 rounded-md hover:bg-green-600 mb-4">
             <Link href="/login">Sign in with Google</Link>
           </div>
-          <Link href="/login" className="flex items-center justify-center text-blue-950 hover:text-blue-500 hover:cursor-pointer">I already have an account</Link>
+          <Link
+            href="/login"
+            className="flex items-center justify-center text-blue-950 hover:text-blue-500 hover:cursor-pointer"
+          >
+            I already have an account
+          </Link>
         </div>
       )}
     </div>

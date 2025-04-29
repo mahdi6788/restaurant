@@ -1,19 +1,21 @@
 "use client";
 
 import toast from "react-hot-toast";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import Button from "../ui/Button";
 import { CurrencyDollarIcon } from "@heroicons/react/24/outline";
 import { MdDescription } from "react-icons/md";
 import { BiFoodMenu } from "react-icons/bi";
 import { editFood } from "@/app/lib/foodActions";
 import { ImageUploader } from "./ImageUploader";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 import { useState } from "react";
 import { MenuItem } from "@prisma/client";
 import { useMenu } from "@/hooks/useMenu";
+import { useTranslations } from "next-intl";
 
 export default function EditForm({ food }: { food: MenuItem }) {
+  const translate = useTranslations("EditForm");
   const { menuRefetch } = useMenu();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -68,7 +70,7 @@ export default function EditForm({ food }: { food: MenuItem }) {
             htmlFor="description"
             className="mb-2 block text-sm font-medium"
           >
-            Description
+            {translate("Description")}
           </label>
           <input
             defaultValue={food.description ?? ""}
@@ -83,7 +85,7 @@ export default function EditForm({ food }: { food: MenuItem }) {
         {/* Price */}
         <div className="mb-4 relative">
           <label htmlFor="price" className="mb-2 block text-sm font-medium">
-            Price
+            {translate("Price")}
           </label>
           <input
             defaultValue={food.price}
@@ -98,7 +100,7 @@ export default function EditForm({ food }: { food: MenuItem }) {
         {/* Category */}
         <div className="mb-4 relative">
           <label htmlFor="category" className="mb-2 block text-sm font-medium">
-            Category
+            {translate("Category")}
           </label>
           <select
             defaultValue={food.category}
@@ -106,18 +108,11 @@ export default function EditForm({ food }: { food: MenuItem }) {
             name="category"
             className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
           >
-            <option value="MainCourse">MainCourse</option>
-            <option value="Appetizers">Appetizers</option>
-            <option value="Drinks">Drinks</option>
+            <option value="MainCourse">{translate("MainCourse")}</option>
+            <option value="Appetizers">{translate("Appetizers")}</option>
+            <option value="Drinks">{translate("Drinks")}</option>
           </select>
         </div>
-        {/* Availability */}
-        {/* <div className="mb-4 relative">
-          <div className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500">
-            <label htmlFor="availability">Is Availabile?</label>
-            <input type="checkbox" id="availability" name="availability" defaultChecked/>
-          </div>
-        </div> */}
         {/* Image */}
         <ImageUploader prevImage={food.imageUrl ?? ""} />
       </div>
@@ -126,10 +121,10 @@ export default function EditForm({ food }: { food: MenuItem }) {
           href="/users/admin/foods"
           className="flex h-10 items-center rounded-lg bg-gray-100 px-4 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-200"
         >
-          Cancel
+          {translate("Cancel")}
         </Link>
         <Button type="submit" disabled={isLoading}>
-          {isLoading ? "Editing..." : "Edit"}
+          {isLoading ? translate("Editing") : translate("Edit")}
         </Button>
       </div>
     </form>

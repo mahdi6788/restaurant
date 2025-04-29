@@ -1,18 +1,20 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import toast from "react-hot-toast";
 import Button from "../ui/Button";
 import { CurrencyDollarIcon } from "@heroicons/react/24/outline";
 import { MdDescription } from "react-icons/md";
 import { BiFoodMenu } from "react-icons/bi";
 import { createFood } from "@/app/lib/foodActions";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 import { useState } from "react";
 import { ImageUploader } from "./ImageUploader";
 import { useMenu } from "@/hooks/useMenu";
+import { useTranslations } from "next-intl";
 
 export default function Form() {
+  const translate = useTranslations("Form");
   const router = useRouter();
   const { menuRefetch } = useMenu();
   const [isLoading, setIsLoading] = useState(false);
@@ -45,7 +47,7 @@ export default function Form() {
         {/* Name */}
         <div className="mb-4 relative">
           <label htmlFor="name" className="mb-2 block text-sm font-medium">
-            Choose a Name
+            {translate("Choose a Name")}
           </label>
           <input
             required
@@ -64,7 +66,7 @@ export default function Form() {
             htmlFor="description"
             className="mb-2 block text-sm font-medium"
           >
-            Description
+            {translate("Description")}
           </label>
           <input
             type="text"
@@ -78,7 +80,7 @@ export default function Form() {
         {/* Price */}
         <div className="mb-4 relative">
           <label htmlFor="price" className="mb-2 block text-sm font-medium">
-            Price
+            {translate("Price")}
           </label>
           <input
             required
@@ -93,16 +95,16 @@ export default function Form() {
         {/* Category */}
         <div className="mb-4 relative">
           <label htmlFor="category" className="mb-2 block text-sm font-medium">
-            Category
+            {translate("Category")}
           </label>
           <select
             id="category"
             name="category"
             className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
           >
-            <option value="MainCourse">MainCourse</option>
-            <option value="Appetizers">Appetizers</option>
-            <option value="Drink">Drink</option>
+            <option value="MainCourse">{translate("MainCourse")}</option>
+            <option value="Appetizers">{translate("Appetizers")}</option>
+            <option value="Drink">{translate("Drink")}</option>
           </select>
         </div>
         {/* Availability */}
@@ -121,10 +123,10 @@ export default function Form() {
           href="/users/admin/foods"
           className="flex h-10 items-center rounded-lg bg-gray-100 px-4 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-200"
         >
-          Cancel
+          {translate("Cancel")}
         </Link>
         <Button type="submit" disabled={isLoading}>
-          {isLoading ? "Creating..." : "Create"}
+          {isLoading ? translate("Creating") : translate("Create")}
         </Button>
       </div>
     </form>

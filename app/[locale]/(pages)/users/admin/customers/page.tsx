@@ -1,11 +1,13 @@
 "use client";
+import { Link } from "@/i18n/navigation";
 import { User } from "@prisma/client";
 import { useQuery } from "@tanstack/react-query";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
-import Link from "next/link";
 
 
 export default function CustomersPage() {
+  const translate = useTranslations("CustomersPage")
   const fetchUsersFn = async () => {
     const res = await fetch("/api/users", {
       method: "GET",
@@ -31,19 +33,19 @@ export default function CustomersPage() {
           <tr>
             <th className="p-1" scope="col"></th>
             <th className="p-1" scope="col">
-              Name
+              {translate("Name")}
             </th>
             <th className="p-1" scope="col">
-              E-mail
+              {translate("E-mail")}
             </th>
             <th className="p-1" scope="col">
-              Phone
+              {translate("Phone")}
             </th>
             <th className="p-1" scope="col">
-              Area
+              {translate("Area")}
             </th>
             <th className="p-1" scope="col">
-              Balance
+              {translate("Balance")}
             </th>
           </tr>
         </thead>

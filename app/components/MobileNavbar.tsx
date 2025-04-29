@@ -2,7 +2,7 @@
 
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { FaSignOutAlt, FaSignInAlt, FaRegistered } from "react-icons/fa";
 import { MdDashboardCustomize } from "react-icons/md";
 import { TiThMenu } from "react-icons/ti";
@@ -11,6 +11,7 @@ import { TiInfoLargeOutline } from "react-icons/ti";
 import AboutUsModal from "./AboutUsModal";
 import { useEffect, useRef, useState } from "react";
 import LogoutModal from "./LogoutModal";
+import { useTranslations } from "next-intl";
 
 export default function MobileNavbar({
   isOpen,
@@ -19,6 +20,7 @@ export default function MobileNavbar({
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
+  const translate = useTranslations("MobileNavbar")
   const { data: session } = useSession();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
@@ -71,7 +73,7 @@ export default function MobileNavbar({
                     className="flex items-center gap-2 px-4 py-2"
                   >
                     <MdDashboardCustomize />
-                    Dashboard
+                    {translate("Dashboard")}
                   </Link>
                 </li>
                 <li>
@@ -80,7 +82,7 @@ export default function MobileNavbar({
                     className="flex items-center gap-2 px-4 py-2"
                   >
                     <FaSignOutAlt />
-                    Logout
+                    {translate("Logout")}
                   </button>
                 </li>
                 <li>
@@ -89,14 +91,14 @@ export default function MobileNavbar({
                     className=" flex items-center gap-2 px-4 py-2"
                   >
                     <IoBagCheckOutline />
-                    Checkout
+                    {translate("Checkout")}
                   </Link>
                 </li>
               </div>
             ) : (
               <div className="flex flex-col items-start gap-1">
                 <span className="flex items-start gap-1 text-sm font-light text-lime-500 hover:text-stone-100">
-                  Join us for a delicious experience 😊
+                  {translate("Join us for a delicious experience")} 😊
                 </span>
                 <li>
                   <Link
@@ -104,7 +106,7 @@ export default function MobileNavbar({
                     className=" flex items-center gap-2 px-4 py-2"
                   >
                     <FaSignInAlt />
-                    Login
+                    {translate("Login")}
                   </Link>
                 </li>
                 <li>
@@ -113,14 +115,14 @@ export default function MobileNavbar({
                     className=" flex items-center gap-2 px-4 py-2"
                   >
                     <FaRegistered />
-                    Register
+                    {translate("Register")}
                   </Link>
                 </li>
               </div>
             )}
             <li className=" flex items-center gap-2 px-2 py-2">
               <TiInfoLargeOutline />
-              <button onClick={() => setIsModalOpen(true)}>About Us</button>
+              <button onClick={() => setIsModalOpen(true)}>{translate("About Us")}</button>
             </li>
           </ul>
         </div>

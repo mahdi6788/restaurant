@@ -1,7 +1,7 @@
 "use client";
 
+import { Link } from "@/i18n/navigation";
 import { useState } from "react";
-import Link from "next/link";
 import toast from "react-hot-toast";
 
 export default function ResetPasswordPage() {
@@ -12,11 +12,10 @@ export default function ResetPasswordPage() {
     e.preventDefault();
 
     const query = new URLSearchParams({
-      email,
-      id: ""
+      email
     }).toString()
 
-    const res = await fetch(`api/users/single-user?${query}`,{
+    const res = await fetch(`/api/users/single-user?${query}`,{
       method: "GET",
       headers:{"Content-Type" : "application/json"}
     })

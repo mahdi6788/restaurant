@@ -1,5 +1,290 @@
 {
-    "HomePage": {
-        "welcome":"Welcome"
-    }   
+  "Home": {
+    "LogIn": "LogIn",
+    "Register": "Register",
+    "No food available": "No food available",
+    "Today’s Specials": "Today’s Specials"
+  },
+  "Dropdown": {
+    "Welcome": "Welcome",
+    "Dashboard": "Dashboard",
+    "Checkout": "Checkout",
+    "Logout": "Logout"
+  },
+  "LogoutModal": {
+    "Sign Out": "Sign Out",
+    "Are you sure you want to sign out?": "Are you sure you want to sign out?"
+  },
+  "CartModal": {
+    "Your Cart": "Your Cart",
+    "Your cart is empty": "Your cart is empty",
+    "Clear Cart": "Clear Cart",
+    "Total: AED": "Total: AED",
+    "Checkout": "Checkout"
+  },
+  "CartCard": {
+    "Remove from cart": "Remove from cart"
+  },
+  "Header": {
+    "LogIn": "LogIn",
+    "Register": "Register",
+    "Join us for a delicious experience": "Join us for a delicious experience"
+  },
+  "Footer": {
+    "About Us": "About Us",
+    "We are a team of food lovers who are passionate about providing the best food to our customers": "We are a team of food lovers who are passionate about providing the best food to our customers",
+    "Contact Us": "Contact Us",
+    "Follow Us": "Follow Us"
+  },
+  "AboutUsModal": {
+    "About Us": "About Us",
+    "We are a team of food lovers who are passionate about providing the best food to our customers": "We are a team of food lovers who are passionate about providing the best food to our customers",
+    "Contact Us": "Contact Us",
+    "Follow Us": "Follow Us"
+  },
+  "Checkout": {
+    "Checkout": "Checkout",
+    "Customer Information": "Customer Information",
+    "Name": "Name",
+    "Email": "Email",
+    "Address": "Address",
+    "Phone Number": "Phone Number",
+    "Sign in to checkout": "Sign in to checkout",
+    "Order Summary": "Order Summary",
+    "No items in the cart": "No items in the cart",
+    "Image": "Image",
+    "Quantity": "Quantity",
+    "Price": "Price",
+    "Edit": "Edit",
+    "Remove": "Remove"
+  },
+  "CheckoutCard": {
+    "Remove": "Remove"
+  },
+  "CheckoutAccordion": {
+    "Customer Information": "Customer Information",
+    "Name": "Name",
+    "Email": "Email",
+    "Address": "Address",
+    "Phone Number": "Phone Number",
+    "Sign in to checkout": "Sign in to checkout",
+    "Order Summary": "Order Summary",
+    "No items in the cart": "No items in the cart",
+    "Image": "Image",
+    "Quantity": "Quantity",
+    "Qty":"Qty",
+    "Price": "Price",
+    "Edit": "Edit",
+    "Total":"Total",
+    "Delivery cost": "Delivery cost",
+    "Checkout":"Checkout"
+  },
+  "Menu": {
+    "Main Course": "Main Course",
+    "Appetizers": "Appetizers"
+  },
+  "Details": {
+    "Search by Menu item name or Order ID": "Search by Menu item name or Order ID",
+    "Sort by": "Sort by",
+    "Order Date: Newest First": "Order Date: Newest First",
+    "Order Date: Oldest First": "Order Date: Oldest First",
+    "Name": "Name",
+    "Address": "Address",
+    "Area": "Area",
+    "Balance": "Balance",
+    "Order": "Order",
+    "Total": "Total",
+    "Status": "Status",
+    "Phone": "Phone",
+    "Image": "Image",
+    "Price": "Price",
+    "Quantity": "Quantity",
+    "Order Date": "Order Date",
+    "Payment Method": "Payment Method",
+    "Payment Status": "Payment Status",
+    "Qty": "Qty",
+    "Date": "Date",
+    "Payment": "Payment"
+  },
+  "CustomersPage": {
+    "Name": "Name",
+    "E-mail": "E-mail",
+    "Phone": "Phone",
+    "Area": "Area",
+    "Balance": "Balance"
+  },
+  "editFoodsForm": {
+    "Foods": "Foods",
+    "Edit food": "Edit food",
+    "Food not found": "Food not found"
+  },
+  "EditForm": {
+    "Choose a Name": "Choose a Name",
+    "Description": "Description",
+    "Price": "Price",
+    "Category": "Category",
+    "MainCourse": "MainCourse",
+    "Appetizers": "Appetizers",
+    "Drinks": "Drinks",
+    "Cancel": "Cancel",
+    "Editing": "Editing",
+    "Edit": "Edit"
+  },
+  "FoodsForm": {
+    "Menu": "Menu",
+    "Create Menu": "Create Menu"
+  },
+  "Form": {
+    "Choose a Name": "Choose a Name",
+    "Description": "Description",
+    "Price": "Price",
+    "Category": "Category",
+    "MainCourse": "MainCourse",
+    "Appetizers": "Appetizers",
+    "Drinks": "Drinks",
+    "Cancel": "Cancel",
+    "Creating": "Creating",
+    "Create": "Create"
+  },
+  "updateMenuPage": {
+    "Menu Items": "Menu Items"
+  },
+  "CreateFood": {
+    "Create Menu": "Create Menu"
+  },
+  "UpdateFood": {
+    "Edit": "Edit"
+  },
+  "DeleteFood": {
+    "Delete": "Delete"
+  },
+  "FoodsList": {
+    "Available": "Available",
+    "Availibility": "Availibility",
+    "Image": "Image",
+    "Category": "Category",
+    "Name": "Name",
+    "Description": "Description",
+    "Price": "Price",
+    "Edit": "Edit"
+  },
+  "CustomersOrdersPage": {
+    "Orders History": "Orders History"
+  },
+  "CustomersOrders": {
+    "No orders found": "No orders found",
+    "Customer name": "Customer name",
+    "Order": "Order",
+    "Total": "Total",
+    "Status": "Status",
+    "Address": "Address",
+    "Phone": "Phone",
+    "Image": "Image",
+    "Name": "Name",
+    "Price": "Price",
+    "Quantity": "Quantity",
+    "Order Date": "Order Date",
+    "Payment Method": "Payment Method",
+    "Payment Status": "Payment Status",
+    "Qty": "Qty",
+    "Date": "Date",
+    "Payment": "Payment"
+  },
+  "Profile": {
+    "Your Profile": "Your Profile",
+    "Name": "Name",
+    "Delivery Address": "Delivery Address",
+    "Phone Number": "Phone Number",
+    "Save Profile": "Save Profile"
+  },
+  "OrderPage": {
+    "Please log in to view your order history": "Please log in to view your order history",
+    "Orders History": "Orders History"
+  },
+  "OrderHistory": {
+    "No orders found": "No orders found",
+    "Total": "Total",
+    "Order": "Order",
+    "Status": "Status",
+    "Address": "Address",
+    "Phone": "Phone",
+    "Image": "Image",
+    "Name": "Name",
+    "Price": "Price",
+    "Quantity": "Quantity",
+    "Order Date": "Order Date",
+    "Payment Method": "Payment Method",
+    "Payment Status": "Payment Status",
+    "Qty": "Qty",
+    "Date": "Date",
+    "Payment": "Payment"
+  },
+  "NavLinks": {
+    "Home": "Home",
+    "Orders History": "Orders History",
+    "Customers": "Customers",
+    "Menu": "Menu",
+    "Profile": "Profile"
+  },
+  "HomePage": {
+    "Today Orders": "Today Orders"
+  },
+  "ImageUploader": {
+    "Click or drag to change image": "Click or drag to change image"
+  },
+  "FoodCard": {
+    "Order now": "Order now"
+  },
+  "MenuCards": {
+    "Order": "Order",
+    "Not Now": "Not Now"
+  },
+  "MobileBottomNav": {
+    "Home": "Home",
+    "Menu": "Menu",
+    "Cart": "Cart"
+  },
+  "MobileNavbar": {
+    "Dashboard": "Dashboard",
+    "Logout": "Logout",
+    "Checkout": "Checkout",
+    "Join us for a delicious experience": "Join us for a delicious experience",
+    "Login": "Login",
+    "Register": "Register",
+    "About Us": "About Us"
+  },
+  "SearchFilterSort": {
+    "Search by name or order ID": "Search by name or order ID",
+    "Sort by": "Sort by",
+    "Order Date: Newest First": "Order Date: Newest First",
+    "Order Date: Oldest First": "Order Date: Oldest First"
+  },
+  "ProfileSkeleton": {
+    "Your Profile": "Your Profile",
+    "Name": "Name",
+    "Delivery Address": "Delivery Address",
+    "Phone Number": "Phone Number",
+    "Save Profile": "Save Profile"
+  },
+  "FoodsListSkeleton": {
+    "Availability": "Availability",
+    "Image": "Image",
+    "Category": "Category",
+    "Name": "Name",
+    "Description": "Description",
+    "Price": "Price",
+    "Edit": "Edit"
+  },
+  "HomeSkeleton": {
+    "Specials": "Specials"
+  },
+  "OrdersSkeleton": {
+    "Image": "Image",
+    "Name": "Name",
+    "Price": "Price",
+    "Quantity": "Quantity",
+    "Order Date": "Order Date",
+    "Payment Method": "Payment Method",
+    "Payment Status": "Payment Status"
+  }
 }

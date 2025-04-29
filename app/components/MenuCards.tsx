@@ -3,8 +3,10 @@ import Image from "next/image";
 import { MenuItem } from "@prisma/client";
 import { useOrderButton } from "@/hooks/useOrderButton";
 import { CiCircleChevDown, CiCircleChevUp } from "react-icons/ci";
+import { useTranslations } from "next-intl";
 
 const MenuCards = ({ food }: { food: MenuItem }) => {
+  const translate = useTranslations("MenuCards")
   const { quantity, handleAdd, handleDec } = useOrderButton(food);
 
   return (
@@ -53,9 +55,9 @@ const MenuCards = ({ food }: { food: MenuItem }) => {
             className="absolute right-0 bottom-0 font-semibold text-yellow-300 bg-blue-600 px-2 py-1 rounded-br-2xl rounded-tl-3xl"
           >
             {food.isAvailable ? (
-              <p className="text-green-400">Order</p>
+              <p className="text-green-400">{translate("Order")}</p>
             ) : (
-              <p className="text-orange-400">Not Now</p>
+              <p className="text-orange-400">{translate("Not Now")}</p>
             )}
           </button>
         )}

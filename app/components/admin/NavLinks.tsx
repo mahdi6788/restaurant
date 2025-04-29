@@ -4,36 +4,41 @@ import { FaBowlFood } from "react-icons/fa6";
 import { FaUsers } from "react-icons/fa";
 import { FaOpencart } from "react-icons/fa6";
 import { CgProfile } from "react-icons/cg";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { Link, usePathname } from "@/i18n/navigation";
 import { useSession } from "next-auth/react";
+import { useTranslations } from "next-intl";
 
 export default function NavLinks() {
+  const translate = useTranslations("NavLinks")
   const { data: session } = useSession();
   const userRole = session?.user.role;
   // Map of links to display in the side navigation.
   const links =
     userRole === "ADMIN"
       ? [
-          { name: "Home", href: "/users", icon: CiHome },
-          { name: "Orders History", href: "/users/admin/orders", icon: FaOpencart },
-          {name: "Customers", href: "/users/admin/customers", icon: FaUsers},
+          { name: translate("Home"), href: "/users", icon: CiHome },
           {
-            name: "Menu",
+            name: translate("Orders History"),
+            href: "/users/admin/orders",
+            icon: FaOpencart,
+          },
+          { name: translate("Customers"), href: "/users/admin/customers", icon: FaUsers },
+          {
+            name: translate("Menu"),
             href: "/users/admin/foods",
             icon: FaBowlFood,
           },
-          { name: "Profile", href: "/users/admin/profile", icon: CgProfile },
+          { name: translate("Profile"), href: "/users/admin/profile", icon: CgProfile },
         ]
       : [
-          { name: "Home", href: "/users", icon: CiHome },
+          { name: translate("Home"), href: "/users", icon: CiHome },
           {
-            name: "Orders History",
+            name: translate("Orders History"),
             href: "/users/customers/orders",
             icon: FaOpencart,
           },
           {
-            name: "Profile",
+            name: translate("Profile"),
             href: "/users/customers/profile",
             icon: CgProfile,
           },

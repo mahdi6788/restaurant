@@ -7,10 +7,12 @@ import {
   ParamsType,
 } from "@/app/types/types";
 import { useQuery } from "@tanstack/react-query";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useEffect } from "react";
 
 export default function Details({ params }: ParamsType) {
+  const translate = useTranslations("Details")
   const { search, setSearch, sortby, setSortby, setCreatedAt, createdAt } =
     useOrders();
 
@@ -53,14 +55,14 @@ export default function Details({ params }: ParamsType) {
         {/* Search */}
         <input
           type="text"
-          placeholder="Search by Menu item name or Order ID"
+          placeholder={translate("Search by Menu item name or Order ID")}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="w-full sm:w-1/2 p-2 rounded-lg "
         />
         {/* Sort */}
         <div>
-          Sort by
+          {translate("Sort by")}
           <select
             className="rounded-lg p-2 ml-2 w-full sm:w-fit"
             name="sortby"
@@ -68,8 +70,8 @@ export default function Details({ params }: ParamsType) {
             value={sortby}
             onChange={(e) => setSortby(e.target.value)}
           >
-            <option value="createdAt-desc">Order Date: Newest First</option>
-            <option value="createdAt-asc">Order Date: Oldest First</option>
+            <option value="createdAt-desc">{translate("Order Date: Newest First")}</option>
+            <option value="createdAt-asc">{translate("Order Date: Oldest First")}</option>
           </select>
         </div>
         {/* Filter */}
@@ -85,16 +87,16 @@ export default function Details({ params }: ParamsType) {
                 <tr>
                   <th className="p-1" scope="col"></th>
                   <th className="p-1" scope="col">
-                    Name
+                    {translate("Name")}
                   </th>
                   <th className="p-1" scope="col">
-                    Address
+                    {translate("Address")}
                   </th>
                   <th className="p-1" scope="col">
-                    Area
+                    {translate("Area")}
                   </th>
                   <th className="p-1" scope="col">
-                    Balance
+                    {translate("Balance")}
                   </th>
                 </tr>
               </thead>
@@ -129,22 +131,22 @@ export default function Details({ params }: ParamsType) {
               />
 
               <div className="flex items-center gap-2 px-1 py-1 border mt-1">
-                <p className="font-bold">Name: </p>
+                <p className="font-bold">{translate("Name")}: </p>
                 <p>{onlyOne?.user?.name}</p>
               </div>
 
               <div className="flex gap-2 px-1 py-1 border">
-                <p className="font-bold">Address: </p>
+                <p className="font-bold">{translate("Address")}: </p>
                 <p>{onlyOne?.user?.address}</p>
               </div>
 
               <div className="flex gap-2 px-1 py-1 border">
-                <p className="font-bold">Area: </p>
+                <p className="font-bold">{translate("Area")}: </p>
                 <p>{onlyOne?.user.area ?? ""}</p>
               </div>
 
               <div className="flex gap-2 px-1 py-1 border">
-                <p className="font-bold">Balance: </p>
+                <p className="font-bold">{translate("Balance")}: </p>
                 <p>{onlyOne?.user?.balance}</p>
               </div>
             </div>
@@ -157,32 +159,32 @@ export default function Details({ params }: ParamsType) {
             >
               <div className="mb-4">
                 <h2 className="text-lg font-semibold">
-                  Order #{order.id.slice(0, 8)} -{" "}
+                  {translate("Order")} #{order.id.slice(0, 8)} -{" "}
                   {new Date(order.createdAt).toLocaleDateString()}
                 </h2>
                 <p className="text-sm text-gray-600">
-                  Total: AED {order.total.toFixed(2)} | Status: {order.status} |
-                  Address: {order.address} | Phone: {order.phone}
+                  {translate("Total")}: AED {order.total.toFixed(2)} | {translate("Status")}: {order.status} |
+                  {translate("Address")}: {order.address} | {translate("Phone")}: {order.phone}
                 </p>
               </div>
               {/* Desktop Version */}
               <table className="hidden sm:table min-w-full text-gray-900">
                 <thead className="rounded-lg text-left text-sm">
                   <tr>
-                    <th className="pl-6 py-5 font-medium">Image</th>
-                    <th className="pl-6 py-5 font-medium">Name</th>
-                    <th className="pl-6 py-5 font-medium">Price</th>
-                    <th className="pl-6 py-5 font-medium">Quantity</th>
-                    <th className="pl-6 py-5 font-medium">Order Date</th>
-                    <th className="pl-6 py-5 font-medium">Payment Method</th>
-                    <th className="pl-6 py-5 font-medium">Payment Status</th>
+                    <th className="pl-6 py-5 font-medium">{translate("Image")}</th>
+                    <th className="pl-6 py-5 font-medium">{translate("Name")}</th>
+                    <th className="pl-6 py-5 font-medium">{translate("Price")}</th>
+                    <th className="pl-6 py-5 font-medium">{translate("Quantity")}</th>
+                    <th className="pl-6 py-5 font-medium">{translate("Order Date")}</th>
+                    <th className="pl-6 py-5 font-medium">{translate("Payment Method")}</th>
+                    <th className="pl-6 py-5 font-medium">{translate("Payment Status")}</th>
                   </tr>
                 </thead>
                 <tbody className="bg-white">
                   {order.items?.map((orderItem) => (
                     <tr
                       key={orderItem.id}
-                      className="w-full border-b py-3 text-sm last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
+                      className="w-full border-b py-3 text-sm last-of-type:border-none"
                     >
                       <td>
                         <Image
@@ -221,11 +223,11 @@ export default function Details({ params }: ParamsType) {
               <table className="table sm:hidden min-w-full text-gray-900">
                 <thead className="rounded-lg text-left text-sm">
                   <tr>
-                    <th className="pl-1 py-1 border-2 font-medium">Name</th>
-                    <th className="pl-1 py-1 border-2 font-medium">Price</th>
-                    <th className="pl-1 py-1 border-2 font-medium">Qty</th>
-                    <th className="pl-1 py-1 border-2 font-medium">Date</th>
-                    <th className="pl-1 py-1 border-2 font-medium">Payment</th>
+                    <th className="pl-1 py-1 border-2 font-medium">{translate("Name")}</th>
+                    <th className="pl-1 py-1 border-2 font-medium">{translate("Price")}</th>
+                    <th className="pl-1 py-1 border-2 font-medium">{translate("Qty")}</th>
+                    <th className="pl-1 py-1 border-2 font-medium">{translate("Date")}</th>
+                    <th className="pl-1 py-1 border-2 font-medium">{translate("Payment")}</th>
                   </tr>
                 </thead>
                 <tbody className="bg-white">

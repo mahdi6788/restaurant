@@ -3,11 +3,11 @@
 import { AddToCartInput } from "@/app/lib/zod";
 import { CartItem, MenuItem } from "@prisma/client";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 import toast from "react-hot-toast";
 
 /// Fetch cart function
-export type CartItems = (CartItem & { menuItem: MenuItem })[]
+export type CartItems = (CartItem & { menuItem: MenuItem })[];
 
 const fetchCartFn = async (): Promise<CartItems> => {
   const res = await fetch("/api/cart", {
@@ -54,7 +54,6 @@ const clearCartFn = async () => {
     console.error(error);
   }
 };
-
 
 /// useQuery & useMutation
 

@@ -1,7 +1,9 @@
 "use client";
+import { useTranslations } from "next-intl";
 import { useOrders } from "../context/OrderContext";
 
 export default function SearchFilterSort() {
+  const translate = useTranslations("SearchFilterSort")
   const { search, setSearch, sortby, setSortby } = useOrders();
 
   return (
@@ -9,14 +11,14 @@ export default function SearchFilterSort() {
       {/* Search */}
       <input
         type="text"
-        placeholder="Search by name or order ID"
+        placeholder={translate("Search by name or order ID")}
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         className="w-full sm:w-1/2 p-2 rounded-lg "
       />
       {/* Sort */}
       <div>
-        Sort by
+        {translate("Sort by")}
         <select
           className="rounded-lg p-2 ml-2 w-full sm:w-fit"
           name="sortby"
@@ -24,8 +26,8 @@ export default function SearchFilterSort() {
           value={sortby}
           onChange={(e) => setSortby(e.target.value)}
         >
-          <option value="createdAt-desc">Order Date: Newest First</option>
-          <option value="createdAt-asc">Order Date: Oldest First</option>
+          <option value="createdAt-desc">{translate("Order Date: Newest First")}</option>
+          <option value="createdAt-asc">{translate("Order Date: Oldest First")}</option>
         </select>
       </div>
     </div>

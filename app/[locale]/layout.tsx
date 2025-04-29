@@ -1,47 +1,45 @@
-import "@/app/styles/globals.css";
-import { Inter } from "next/font/google";
+import "../styles/globals.css";
 import ClientProviders from "./ClientProviders";
 import { SessionProvider } from "next-auth/react";
 import Logo from "../components/Logo";
 import { auth } from "@/auth";
-import { NextIntlClientProvider } from "next-intl";
+import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { notFound } from "next/navigation";
-
-const inter = Inter({ subsets: ["latin"] });
+import { routing } from "@/i18n/routing";
+import { getMessages } from "next-intl/server";
+import { inter, amiri } from "../lib/fonts";
 
 /// Readonly: to ensure type safety and immutability.
 export default async function RootLayout({
   children,
-  params: { locale },
+  params,
 }: Readonly<{
   children: React.ReactNode;
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }>) {
   /// multilingual
-  let messages;
-  try {
-    messages = (await import(`../../messages/${locale}.json`)).default;
-  } catch (error) {
-    console.log(error);
+  // Ensure that the incoming `locale` is valid
+  const { locale } = await params;
+  if (!hasLocale(routing.locales, locale)) {
     notFound();
   }
+  const messages = await getMessages({ locale });
 
   const session = await auth();
   return (
     <html
       lang={locale}
-      dir={locale === "en" ? "ltr" : "rtl"}
-      className={`${inter.className}`}
+      className={`${locale === "en" ? inter.className : amiri.className}`}
     >
       <body>
-        <SessionProvider session={session}>
-          <ClientProviders>
-            <Logo />
-            <NextIntlClientProvider locale={locale} messages={messages}>
+        <NextIntlClientProvider messages={messages} locale={locale}>
+          <SessionProvider session={session}>
+            <ClientProviders>
+              <Logo />
               {children}
-            </NextIntlClientProvider>
-          </ClientProviders>
-        </SessionProvider>
+            </ClientProviders>
+          </SessionProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

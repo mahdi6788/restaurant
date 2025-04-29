@@ -6,8 +6,10 @@ import { MenuItem } from "@prisma/client";
 import { DeleteFood, UpdateFood } from "../ui/buttons";
 import { FoodsListSkeleton } from "../skeleton";
 import { useMenu } from "@/hooks/useMenu";
+import { useTranslations } from "next-intl";
 
 export default function FoodsList() {
+  const translate = useTranslations()
   /// fetch foods using hook contaning use query
   const { menu, menuLoading, menuRefetch } = useMenu();
 
@@ -67,7 +69,7 @@ export default function FoodsList() {
                 <div className="flex w-full items-center justify-end gap-2 p-1 ">
                   {/* Availability */}
                   <div className="flex items-center gap-1">
-                    <label htmlFor={`availability-${food.id}`}>Available</label>
+                    <label htmlFor={`availability-${food.id}`}>{translate("Available")}</label>
                     <input
                       checked={food.isAvailable ?? false}
                       onChange={() => handleAvailibility(food)}
@@ -93,23 +95,23 @@ export default function FoodsList() {
             <thead className="rounded-lg text-left text-sm">
               <tr>
                 <th className="pl-6 py-5 font-medium" scope="col">
-                  Availibility
+                  {translate("Availibility")}
                 </th>
-                <th>Image</th>
+                <th>{translate("Image")}</th>
                 <th className="pl-6 py-5 font-medium" scope="col">
-                  Category
+                  {translate("Category")}
                 </th>
                 <th className="pl-3 py-5 font-medium" scope="col">
-                  Name
+                  {translate("Name")}
                 </th>
                 <th className="px-3 py-5 font-medium" scope="col">
-                  Description
+                  {translate("Description")}
                 </th>
                 <th className="px-3 py-5 font-medium" scope="col">
-                  Price
+                  {translate("Price")}
                 </th>
                 <th className="px-3 py-5 font-medium" scope="col">
-                  <span className="sr-only">Edit</span>
+                  <span className="sr-only">{translate("Edit")}</span>
                 </th>
               </tr>
             </thead>
@@ -124,7 +126,7 @@ export default function FoodsList() {
                     <div className="flex items-center gap-6 -ml-6">
                       <div className="flex items-center justify-center gap-1 peer w-full rounded-md py-2 pl-10 text-sm outline-2 placeholder:text-gray-500">
                         <label htmlFor={`availabilityDesktop-${food.id}`}>
-                          Available
+                          {translate("Available")}
                         </label>
                         <input
                           checked={food.isAvailable ?? false}

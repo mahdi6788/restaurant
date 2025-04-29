@@ -1,19 +1,22 @@
+'use server'
 import EditForm from "@/app/components/admin/EditForm";
 import Breadcrumbs from "@/app/components/Breadcrumbs";
 import { getFoods } from "@/app/lib/foodActions";
 import { ParamsType } from "@/app/types/types";
 import { MenuItem } from "@prisma/client";
+import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 
 export default async function editFoodsForm({ params }: ParamsType) {
   /// await the dynamic API (params) to access its properties
+  const translate = await getTranslations("editFoodsForm")
   const { id } = params;
 
   const breadcrumbs = [
-    { href: "/users/admin/foods", label: "Foods" },
+    { href: "/users/admin/foods", label: translate("Foods") },
     {
       href: `/users/admin/foods/${id}/edit`,
-      label: "Edit food",
+      label: translate("Edit food"),
       active: true,
     },
   ];
@@ -28,7 +31,7 @@ export default async function editFoodsForm({ params }: ParamsType) {
   return (
     <main>
       <Breadcrumbs breadcrumbs={breadcrumbs} />
-      {selectedFood ? <EditForm food={selectedFood} /> : <p>Food not found</p>}
+      {selectedFood ? <EditForm food={selectedFood} /> : <p>{translate("Food not found")}</p>}
     </main>
   );
 }

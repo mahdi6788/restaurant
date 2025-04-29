@@ -1,19 +1,22 @@
+'use client'
 import {
   OrderHistoryPropsType,
   OrderItemWithmenuItem,
 } from "@/app/types/types";
 import { OrdersSkeleton } from "../skeleton";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 export default function CustomersOrders({
   orders: selectedOrders,
   selectedOrdersLoading,
 }: OrderHistoryPropsType) {
+  const translate =  useTranslations("CustomersOrders")
 
   if (selectedOrdersLoading) return <OrdersSkeleton />;
 
   if (!selectedOrders || selectedOrders.length === 0) {
-    return <div>No orders found.</div>;
+    return <div>{translate("No orders found")}</div>;
   }
 
   return (
@@ -23,28 +26,28 @@ export default function CustomersOrders({
           <div key={order.id} className="mb-2 rounded-lg bg-gray-50 p-1 sm:p-4">
             <div className="mb-4">
               <h2 className="text-lg font-semibold">
-                Customer name: {order.user.name}
+                {translate("Customer name")}: {order.user.name}
               </h2>
               <h2 className="text-lg font-semibold">
-                Order #{order.id.slice(0, 8)} -{" "}
+                {translate("Order")} #{order.id.slice(0, 8)} -{" "}
                 {new Date(order.createdAt).toLocaleDateString()}
               </h2>
               <p className="text-sm text-gray-600">
-                Total: AED {order.total.toFixed(2)} | Status: {order.status} |
-                Address: {order.address} | Phone: {order.phone}
+                {translate("Total")}: AED {order.total.toFixed(2)} | {translate("Status")}: {order.status} |
+                {translate("Address")}: {order.address} | {translate("Phone")}: {order.phone}
               </p>
             </div>
             {/* Desktop Version */}
             <table className="hidden sm:table min-w-full text-gray-900">
               <thead className="rounded-lg text-left text-sm">
                 <tr>
-                  <th className="pl-6 py-5 font-medium">Image</th>
-                  <th className="pl-6 py-5 font-medium">Name</th>
-                  <th className="pl-6 py-5 font-medium">Price</th>
-                  <th className="pl-6 py-5 font-medium">Quantity</th>
-                  <th className="pl-6 py-5 font-medium">Order Date</th>
-                  <th className="pl-6 py-5 font-medium">Payment Method</th>
-                  <th className="pl-6 py-5 font-medium">Payment Status</th>
+                  <th className="pl-6 py-5 font-medium">{translate("Image")}</th>
+                  <th className="pl-6 py-5 font-medium">{translate("Name")}</th>
+                  <th className="pl-6 py-5 font-medium">{translate("Price")}</th>
+                  <th className="pl-6 py-5 font-medium">{translate("Quantity")}</th>
+                  <th className="pl-6 py-5 font-medium">{translate("Order Date")}</th>
+                  <th className="pl-6 py-5 font-medium">{translate("Payment Method")}</th>
+                  <th className="pl-6 py-5 font-medium">{translate("Payment Status")}</th>
                 </tr>
               </thead>
               <tbody className="bg-white">
@@ -90,11 +93,11 @@ export default function CustomersOrders({
             <table className="table sm:hidden min-w-full text-gray-900">
               <thead className="rounded-lg text-left text-sm">
                 <tr>
-                  <th className="pl-1 py-1 border-2 font-medium">Name</th>
-                  <th className="pl-1 py-1 border-2 font-medium">Price</th>
-                  <th className="pl-1 py-1 border-2 font-medium">Qty</th>
-                  <th className="pl-1 py-1 border-2 font-medium">Date</th>
-                  <th className="pl-1 py-1 border-2 font-medium">Payment</th>
+                  <th className="pl-1 py-1 border-2 font-medium">{translate("Name")}</th>
+                  <th className="pl-1 py-1 border-2 font-medium">{translate("Price")}</th>
+                  <th className="pl-1 py-1 border-2 font-medium">{translate("Qty")}</th>
+                  <th className="pl-1 py-1 border-2 font-medium">{translate("Date")}</th>
+                  <th className="pl-1 py-1 border-2 font-medium">{translate("Payment")}</th>
                 </tr>
               </thead>
               <tbody className="bg-white">

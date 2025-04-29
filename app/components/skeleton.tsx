@@ -1,23 +1,26 @@
+import { useTranslations } from "next-intl";
+
 // Skeleton loader for profile
-export function ProfileSkeleton() {
+export  function ProfileSkeleton() {
+  const translate =  useTranslations("ProfileSkeleton")
   return (
     <div className="min-h-screen p-8">
       <div className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md">
         {/* Title skeleton */}
-        <div className="text-2xl font-bold mb-6 text-center">Your Profile</div>
+        <div className="text-2xl font-bold mb-6 text-center">{translate("Your Profile")}</div>
 
         {/* Form skeleton */}
         <div className="space-y-4">
           {/* Name field */}
           <div>
-            <div className="block text-sm font-medium text-gray-700">Name</div>
+            <div className="block text-sm font-medium text-gray-700">{translate("Name")}</div>
             <div className="h-10 w-full bg-gray-200 rounded-md animate-pulse"></div>
           </div>
 
           {/* Address field */}
           <div>
             <div className="block text-sm font-medium text-gray-700">
-              Delivery Address
+              {translate("Delivery Address")}
             </div>
             <div className="h-10 w-full bg-gray-200 rounded-md animate-pulse"></div>
           </div>
@@ -25,14 +28,14 @@ export function ProfileSkeleton() {
           {/* Phone field */}
           <div>
             <div className="block text-sm font-medium text-gray-700">
-              Phone Number
+              {translate("Phone Number")}
             </div>
             <div className="h-10 w-full bg-gray-200 rounded-md animate-pulse"></div>
           </div>
 
           {/* Button skeleton */}
           <div className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 text-center">
-            Save Profile
+            {translate("Save Profile")}
           </div>
         </div>
       </div>
@@ -41,7 +44,8 @@ export function ProfileSkeleton() {
 }
 
 /// Foods list (Menu)
-export function FoodsListSkeleton() {
+export  function FoodsListSkeleton() {
+  const translate =  useTranslations("FoodsListSkeleton")
   return (
     <div className="mt-1 flow-root">
       <div className="inline-block min-w-full align-middle">
@@ -86,23 +90,23 @@ export function FoodsListSkeleton() {
             <thead className="rounded-lg text-left text-sm">
               <tr>
                 <th className="pl-6 py-5 font-medium" scope="col">
-                  Availability
+                  {translate("Availability")}
                 </th>
-                <th>Image</th>
+                <th>{translate("Image")}</th>
                 <th className="pl-6 py-5 font-medium" scope="col">
-                  Category
+                  {translate("Category")}
                 </th>
                 <th className="pl-3 py-5 font-medium" scope="col">
-                  Name
+                  {translate("Name")}
                 </th>
                 <th className="px-3 py-5 font-medium" scope="col">
-                  Description
+                  {translate("Description")}
                 </th>
                 <th className="px-3 py-5 font-medium" scope="col">
-                  Price
+                  {translate("Price")}
                 </th>
                 <th className="px-3 py-5 font-medium" scope="col">
-                  <span className="sr-only">Edit</span>
+                  <span className="sr-only">{translate("Edit")}</span>
                 </th>
               </tr>
             </thead>
@@ -158,7 +162,8 @@ export function FoodsListSkeleton() {
   );
 }
 
-export function HomeSkeleton() {
+export  function HomeSkeleton() {
+  const translate =  useTranslations("HomeSkeleton")
   return (
     <div className=" flex items-center justify-center bg-cover bg-center min-h-screen w-full max-w-screen-2xl mx-auto bg-[url('/images/BG/bgHome.jpg')] sm:bg-[url('/images/BG/bg2.jpg')]">
       <div className=" w-3/4 pb-10 bg-emerald-600 opacity-75 rounded-xl animate-pulse">
@@ -167,7 +172,7 @@ export function HomeSkeleton() {
           {/* Menu */}
           <div className="text-stone-800 font-bold bg-slate-100 rounded-b-lg w-fitt h-fit p-2 px-10">
             <div>
-              <p>Today’s Menu</p>
+              <p>{translate("Specials")}</p>
             </div>
           </div>
           <div className="flex gap-2 items-center justify-between text-stone-100 font-bold w-fit h-fit p-2 rounded-bl-lg rounded-tr-xl shadow-xl"></div>
@@ -188,7 +193,7 @@ export function HomeSkeleton() {
   );
 }
 
-export function MenuSkeleton() {
+export  function MenuSkeleton() {
   return (
     <div className=" flex items-center justify-center bg-cover bg-center w-full max-w-screen-2xl mx-auto min-h-screen bg-[url('/images/BG/bg3.jpg')] pt-16">
       <div className="relative pb-10 px-1 ">
@@ -214,7 +219,8 @@ export function MenuSkeleton() {
   );
 }
 
-export function OrdersSkeleton() {
+export  function OrdersSkeleton() {
+  const translate =  useTranslations("OrdersSkeleton")
   return (
     <div className="mt-1 flow-root">
       <div className="inline-block min-w-full align-middle">
@@ -223,13 +229,13 @@ export function OrdersSkeleton() {
           <table className="hidden sm:table min-w-full text-gray-900">
             <thead className="rounded-lg text-left text-sm">
               <tr>
-                <th className="pl-6 py-5 font-medium">Image</th>
-                <th className="pl-6 py-5 font-medium">Name</th>
-                <th className="pl-6 py-5 font-medium">Price</th>
-                <th className="pl-6 py-5 font-medium">Quantity</th>
-                <th className="pl-6 py-5 font-medium">Order Date</th>
-                <th className="pl-6 py-5 font-medium">Payment Method</th>
-                <th className="pl-6 py-5 font-medium">Payment Status</th>
+                <th className="pl-6 py-5 font-medium">{translate("Image")}</th>
+                <th className="pl-6 py-5 font-medium">{translate("Name")}</th>
+                <th className="pl-6 py-5 font-medium">{translate("Price")}</th>
+                <th className="pl-6 py-5 font-medium">{translate("Quantity")}</th>
+                <th className="pl-6 py-5 font-medium">{translate("Order Date")}</th>
+                <th className="pl-6 py-5 font-medium">{translate("Payment Method")}</th>
+                <th className="pl-6 py-5 font-medium">{translate("Payment Status")}</th>
                 <th className="pl-6 py-5 font-medium"></th>
               </tr>
             </thead>

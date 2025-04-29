@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
-import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import { Link, useRouter } from "@/i18n/navigation";
 import toast from "react-hot-toast";
 import { signIn, useSession } from "next-auth/react";
 
@@ -49,10 +49,9 @@ export default function LoginForm() {
 
     const query = new URLSearchParams({
       email,
-      id: "",
     }).toString();
 
-    const existingUser = await fetch(`api/users/single-user?${query}`, {
+    const existingUser = await fetch(`/api/users/single-user?${query}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     });

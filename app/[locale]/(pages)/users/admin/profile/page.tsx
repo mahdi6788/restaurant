@@ -2,11 +2,13 @@
 
 import { ProfileSkeleton } from "@/app/components/skeleton";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { useTranslations } from "next-intl";
 
 export default function Profile() {
+  const translate = useTranslations("Profile");
   const { data: session, status, update } = useSession();
 
   const [name, setName] = useState("");
@@ -68,11 +70,11 @@ export default function Profile() {
   return (
     <div className="min-h-screen p-8">
       <div className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md">
-        <h1 className="text-2xl font-bold mb-6 text-center">Your Profile</h1>
+        <h1 className="text-2xl font-bold mb-6 text-center">{translate("Your Profile")}</h1>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700">
-              Name
+              {translate("Name")}
             </label>
             <input
               type="text"
@@ -84,7 +86,7 @@ export default function Profile() {
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700">
-              Delivery Address
+              {translate("Delivery Address")}
             </label>
             <input
               type="text"
@@ -96,7 +98,7 @@ export default function Profile() {
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700">
-              Phone Number
+              {translate("Phone Number")}
             </label>
             <input
               type="tel"
@@ -110,7 +112,7 @@ export default function Profile() {
             type="submit"
             className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600"
           >
-            Save Profile
+            {translate("Save Profile")}
           </button>
         </form>
       </div>

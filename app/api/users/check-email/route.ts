@@ -1,4 +1,3 @@
-// app/api/check-email/route.js
 import { prisma } from '@/app/lib/prisma';
 import { NextRequest, NextResponse } from 'next/server';
 

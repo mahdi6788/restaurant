@@ -1,15 +1,17 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { useCart } from "@/hooks/useCart";
 import CartModal from "./CartModal";
 import Dropdown from "./Dropdown";
 import { FaShoppingCart } from "react-icons/fa";
-import LanguageSwitcher from "./LanguageSwitcher";
+import LocaleSwitcher from "./LocaleSwitcher";
+import { useTranslations } from "next-intl";
 
 export default function Header() {
+  const translate = useTranslations("Header");
   const { data: session } = useSession();
   const { cartItems, cartItemsLoading } = useCart();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -28,14 +30,16 @@ export default function Header() {
               </li>
             ) : (
               <>
-                <span>Join us for a delicious experience 😊</span>
+                <span>
+                  {translate("Join us for a delicious experience")} 😊
+                </span>
                 <li>
                   <Link
                     href="/login"
                     className="hidden md:flex items-center justify-center gap-1"
                   >
                     {/* <FaSignInAlt /> */}
-                    LogIn
+                    {translate("LogIn")}
                   </Link>
                 </li>
                 <li>
@@ -44,7 +48,7 @@ export default function Header() {
                     className="hidden md:flex items-center justify-center gap-1"
                   >
                     {/* <GiArchiveRegister /> */}
-                    Register
+                    {translate("Register")}
                   </Link>
                 </li>
               </>
@@ -65,8 +69,10 @@ export default function Header() {
                 </span>
               </button>
             </li>
+            <li>
+              <LocaleSwitcher />
+            </li>
           </ul>
-          <LanguageSwitcher />
         </nav>
         <CartModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
       </div>

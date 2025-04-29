@@ -3,11 +3,12 @@ import { useCart } from "@/hooks/useCart";
 import { useOrderButton } from "@/hooks/useOrderButton";
 import { CartItem, MenuItem } from "@prisma/client";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 import { CiCircleChevDown, CiCircleChevUp } from "react-icons/ci";
 import { IoIosCloseCircle } from "react-icons/io";
+import { useTranslations } from "next-intl";
 
 export function CheckoutCard({
   item,
@@ -16,6 +17,7 @@ export function CheckoutCard({
   item: CartItem & { menuItem: MenuItem };
   isMobile: boolean;
 }) {
+  const translate = useTranslations("CheckoutCard")
   const router = useRouter();
   const { quantity, handleAdd, handleDec } = useOrderButton(item.menuItem);
   const { removeFromCart, cartItems } = useCart();
@@ -70,7 +72,7 @@ export function CheckoutCard({
           onClick={() => removeFromCart(item.id)}
           className={`${isMobile ? "" : "font-medium text-white bg-red-600 rounded-lg p-1"}`}
         >
-          {isMobile ? <IoIosCloseCircle size={30} color="red" /> : "Remove"}
+          {isMobile ? <IoIosCloseCircle size={30} color="red" /> : translate("Remove")}
         </button>
       </td>
     </>

@@ -6,19 +6,14 @@ export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.nextUrl);
     const email = searchParams.get("email") ?? "";
-    const id = searchParams.get("id") ?? "";
+    console.log(email)
 
-    let user
-    if(email && !id){
-      user = await prisma.user.findUnique({
-        where: {email}
-      });
-    }
-    if(!email && id){
-      user = await prisma.user.findUnique({
-        where: {id}
-      });
-    }
+    if (!email) throw new Error("The E-mail has problem ");
+
+    const user = await prisma.user.findUnique({
+      where: { email },
+    });
+
     return NextResponse.json(user);
   } catch (error) {
     console.error(error);

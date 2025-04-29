@@ -4,6 +4,7 @@ import { useState } from "react";
 import { CheckoutCard } from "./CheckoutCard";
 import { CartItems } from "@/hooks/useCart";
 import { useSession } from "next-auth/react";
+import { useTranslations } from "next-intl";
 
 interface CheckoutProps {
   handleCheckout: (event:React.FormEvent<HTMLFormElement>) => void;
@@ -28,6 +29,7 @@ export default function CheckoutAccordion({
   cartItems,
   orderLoading
 }: CheckoutProps) {
+  const translate = useTranslations("CheckoutAccordion")
   const {data:session} = useSession()
   const [infoIsOpen, setInfoIsOpen] = useState(false);
   const [orderIsOpen, setOrderIsOpen] = useState(false);
@@ -59,7 +61,7 @@ export default function CheckoutAccordion({
           type="button"
           className="flex items-center justify-between w-full p-2 font-medium text-gray-900 border border-b-0 border-gray-200 rounded-t-xl focus:ring-2 focus:ring-gray-200 gap-3"
         >
-          <p className="text-lg font-bold">Customer Information</p>
+          <p className="text-lg font-bold">{translate("Customer Information")}</p>
           <svg
             data-accordion-icon
             className="w-3 h-3 rotate-180 shrink-0"
@@ -91,7 +93,7 @@ export default function CheckoutAccordion({
                 htmlFor="name"
                 className="block text-lg font-medium text-gray-700"
               >
-                Name
+                {translate("Name")}
               </label>
               <input
                 type="text"
@@ -107,7 +109,7 @@ export default function CheckoutAccordion({
                 htmlFor="email"
                 className="block text-lg font-medium text-gray-700"
               >
-                Email
+                {translate("Email")}
               </label>
               <input
                 type="email"
@@ -123,7 +125,7 @@ export default function CheckoutAccordion({
                 htmlFor="address"
                 className="block text-lg font-medium text-gray-700"
               >
-                Address
+                {translate("Address")}
               </label>
               <input
                 type="text"
@@ -139,7 +141,7 @@ export default function CheckoutAccordion({
                 htmlFor="phone"
                 className="block text-lg font-medium text-gray-700"
               >
-                Phone Number
+                {translate("Phone Number")}
               </label>
               <input
                 type="text"
@@ -160,7 +162,7 @@ export default function CheckoutAccordion({
           type="button"
           className="flex items-center justify-between w-full p-2 font-medium border border-b-0 text-gray-900 border-gray-200 focus:ring-2 focus:ring-gray-200 gap-3"
         >
-          <p className="text-lg font-bold">Order Summary</p>
+          <p className="text-lg font-bold">{translate("Order Summary")}</p>
           <svg
             data-accordion-icon
             className="w-3 h-3 rotate-180 shrink-0"
@@ -187,17 +189,17 @@ export default function CheckoutAccordion({
       >
         <div className="">
           {cartItems.length === 0 ? (
-            <p>No items in the cart</p>
+            <p>{translate("No items in the cart")}</p>
           ) : (
             <div className="space-y-4">
               <table className="sm:hidden table min-w-full text-gray-900">
                 <thead className="text-left">
                   <tr className="">
-                    <th className="px-1 py-1 border">Image</th>
-                    <th className="px-1 py-1 border">Name</th>
-                    <th className="px-1 py-1 border">Qty</th>
-                    <th className="px-3 py-1 border">Price</th>
-                    <th className="px-5 py-1 border">Edit</th>
+                    <th className="px-1 py-1 border">{translate("Image")}</th>
+                    <th className="px-1 py-1 border">{translate("Name")}</th>
+                    <th className="px-1 py-1 border">{translate("Qty")}</th>
+                    <th className="px-3 py-1 border">{translate("Price")}</th>
+                    <th className="px-5 py-1 border">{translate("Edit")}</th>
                     <th className="py-1"></th>
                   </tr>
                 </thead>
@@ -220,7 +222,7 @@ export default function CheckoutAccordion({
           type="button"
           className="flex items-center justify-between w-full p-2 font-medium border border-gray-200 text-gray-900 focus:ring-2 focus:ring-gray-200 gap-3"
         >
-          <p className="text-lg font-bold">Total</p>
+          <p className="text-lg font-bold">{translate("Total")}</p>
           <svg
             data-accordion-icon
             className="w-3 h-3 rotate-180 shrink-0"
@@ -247,13 +249,13 @@ export default function CheckoutAccordion({
         <div className="p-5 space-y-5 w-full">
           {/* Total */}
           <div className="flex justify-between items-center gap-3">
-            <p className="text-gray-800 text-lg">Delivery cost: </p>
+            <p className="text-gray-800 text-lg">{translate("Delivery cost")}: </p>
             <p className="text-orange-700">
               AED 0.00 
             </p>
           </div>
           <div className="flex justify-between items-center">
-            <p className="text-gray-800 text-lg">Total</p>
+            <p className="text-gray-800 text-lg">{translate("Total")}</p>
             <p className="text-gray-900 text-xl font-bold">
               AED{" "}
               {cartItems
@@ -270,8 +272,8 @@ export default function CheckoutAccordion({
               className={`w-full text-xl font-bold bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 transition-colors ${orderLoading && "animate-pulse"}`}
             >
               {session 
-              ?("Checkout")
-              :("Sign in to checkout")
+              ?translate("Checkout")
+              :translate("Sign in to checkout")
               }
             </button>
           </form>

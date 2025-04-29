@@ -1,12 +1,6 @@
-/*
-TODO:
-1. summary up with the button of checkout and info down or put a button to ckeck the info as a modal and update
-2. add payment
-*/
-
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useCart } from "@/hooks/useCart";
@@ -16,13 +10,13 @@ import { CheckoutInput } from "@/app/lib/zod";
 import { CheckoutCard } from "@/app/components/CheckoutCard";
 import CheckoutAccordion from "@/app/components/CheckoutAccordion";
 import { User } from "@prisma/client";
+import { useTranslations } from "next-intl";
 
 export default function Checkout() {
+  const translate = useTranslations("Checkout")
   const router = useRouter();
-
   const queryClient = useQueryClient();
   const [total, setTotal] = useState(0);
-
   const { data: session, status, update } = useSession();
   const userId = session?.user.id;
   const name = session?.user?.name;
@@ -33,12 +27,11 @@ export default function Checkout() {
   const { cartItems } = useCart();
 
   const query = new URLSearchParams({
-    email: email || "",
-    id: "",
+    email: email || ""
   }).toString();
 
   const fetchCustomer = async () => {
-    const res = await fetch(`api/users/single-user?${query}`, {
+    const res = await fetch(`/api/users/single-user?${query}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     });
@@ -166,19 +159,19 @@ export default function Checkout() {
   return (
     <div className="container mx-auto px-2 py-8 pt-24 h-screen text-orange-900 bg-emerald-500">
       <h1 className="text-2xl font-bold mb-4 text-center sm:text-start">
-        Checkout
+        {translate("Checkout")}
       </h1>
       <div className="hidden sm:grid grid-cols-2 gap-8">
         {/* Customer Information */}
         <div className=" bg-white p-6 rounded-lg shadow-md">
-          <h2 className="text-lg font-medium mb-4">Customer Information</h2>
+          <h2 className="text-lg font-medium mb-4">{translate("Customer Information")}</h2>
           <form onSubmit={(event) => handleCheckout(event)}>
             <div className="mb-4">
               <label
                 htmlFor="name"
                 className="block text-sm font-medium text-gray-700"
               >
-                Name
+                {translate("Name")}
               </label>
               <input
                 type="text"
@@ -194,7 +187,7 @@ export default function Checkout() {
                 htmlFor="email"
                 className="block text-sm font-medium text-gray-700"
               >
-                Email
+                {translate("Email")}
               </label>
               <input
                 type="email"
@@ -210,7 +203,7 @@ export default function Checkout() {
                 htmlFor="address"
                 className="block text-sm font-medium text-gray-700"
               >
-                Address
+                {translate("Address")}
               </label>
               <input
                 type="text"
@@ -226,7 +219,7 @@ export default function Checkout() {
                 htmlFor="phone"
                 className="block text-sm font-medium text-gray-700"
               >
-                Phone Number
+                {translate("Phone Number")}
               </label>
               <input
                 type="text"
@@ -241,15 +234,18 @@ export default function Checkout() {
               type="submit"
               className={`w-full bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 transition-colors ${orderLoading && "animate-pulse"}`}
             >
-              {session ? "Checkout" : "Sign in to checkout"}
+              {session 
+              ? translate("Checkout")
+              : translate("Sign in to checkout")
+              }
             </button>
           </form>
         </div>
         {/* Order Summary */}
         <div className="bg-white p-6 rounded-lg shadow-md">
-          <h2 className="mb-4">Order Summary</h2>
+          <h2 className="mb-4">{translate("Order Summary")}</h2>
           {cartItems.length === 0 ? (
-            <p>No items in the cart</p>
+            <p>{translate("No items in the cart")}</p>
           ) : (
             <div className="space-y-4">
               {/* Desktop */}
@@ -257,29 +253,29 @@ export default function Checkout() {
                 <thead className="text-left text-sm">
                   <tr>
                     <th className="p-1" scope="col">
-                      Image
+                      {translate("Image")}
                     </th>
                     <th className="p-1" scope="col">
-                      Name
+                      {translate("Name")}
                     </th>
                     <th className="p-1" scope="col">
-                      Quantity
+                      {translate("Quantity")}
                     </th>
                     <th className="p-1" scope="col">
-                      Price
+                      {translate("Price")}
                     </th>
                     <th className="p-1" scope="col">
-                      Edit
+                      {translate("Edit")}
                     </th>
                     <th className="p-1" scope="col">
-                      Remove
+                      {translate("Remove")}
                     </th>
                   </tr>
                 </thead>
                 <tbody>
                   {cartItems.map((item) => (
                     <tr
-                      className="w-full border-b py-3 text-sm last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
+                      className="w-full border-b py-3 text-sm"
                       key={item.id}
                     >
                       <CheckoutCard item={item} isMobile={false} />

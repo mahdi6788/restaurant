@@ -3,8 +3,10 @@
 import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 export function ImageUploader({ prevImage }: { prevImage: string }) {
+  const translate = useTranslations("ImageUploader")
   const [imagePreview, setImagePreview] = useState<string | null>(
     prevImage || null
   );
@@ -61,7 +63,7 @@ export function ImageUploader({ prevImage }: { prevImage: string }) {
             className="max-h-40 mx-auto mb-2 rounded object-contain"
             priority={!!prevImage}
           />
-          <p className="text-sm text-gray-600">Click or drag to change image</p>
+          <p className="text-sm text-gray-600">{translate("Click or drag to change image")}</p>
         </div>
       ) : (
         <div>

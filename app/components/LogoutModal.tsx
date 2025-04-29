@@ -1,8 +1,8 @@
 import { signOut } from "next-auth/react";
-import { redirect } from "next/navigation";
 import { IoIosCloseCircle } from "react-icons/io";
 import Button from "./ui/Button";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { redirect } from "@/i18n/navigation";
 
 interface CartModalProps {
   isOpen: boolean;
@@ -11,12 +11,13 @@ interface CartModalProps {
 
 export default function LogoutModal({ isOpen, onClose }: CartModalProps) {
   const translate = useTranslations("LogoutModal");
+  const locale = useLocale()
 
   if (!isOpen) return null;
 
   const handleSignOut = async () => {
     await signOut({ redirect: false });
-    redirect("/");
+    redirect({ href: "/", locale });
   };
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
