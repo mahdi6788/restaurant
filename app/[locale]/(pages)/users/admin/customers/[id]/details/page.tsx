@@ -77,7 +77,7 @@ export default function Details({ params }: ParamsType) {
         {/* Filter */}
         {/* TODO: filter(payment, address) */}
       </div>
-      <div className="mt-1 flow-root">
+      <div className="mt-1 flow-root ">
         <div className="inline-block min-w-full align-middle">
           {/* Customer Info Table */}
           <div>
@@ -121,7 +121,7 @@ export default function Details({ params }: ParamsType) {
               </tbody>
             </table>
             {/* Mobile */}
-            <div className="sm:hidden min-w-full text-gray-900">
+            <div className="sm:hidden min-w-full text-gray-200 ">
               <Image
                 alt={onlyOne?.user.name ?? "User picture"}
                 src={onlyOne?.user.image ?? "/images/elements/user.png"}
@@ -155,14 +155,15 @@ export default function Details({ params }: ParamsType) {
           {selectedOrders?.map((order) => (
             <div
               key={order.id}
-              className="my-2 rounded-lg bg-gray-50 p-1 sm:p-4"
+              className="my-2 rounded-lg bg-gray-100 dark:dark-mode p-1 sm:p-4"
             >
               <div className="mb-4">
-                <h2 className="text-lg font-semibold">
-                  {translate("Order")} #{order.id.slice(0, 8)} -{" "}
+              <h2 className="flex items-center text-lg font-semibold">
+                <span>{translate("Order")}</span> :
+                <span>{order.id.slice(0, 8)}</span>  -{" "}
                   {new Date(order.createdAt).toLocaleDateString()}
                 </h2>
-                <p className="text-sm text-gray-600">
+                <p className="">
                   {translate("Total")}: AED {order.total.toFixed(2)} | {translate("Status")}: {order.status} |
                   {translate("Address")}: {order.address} | {translate("Phone")}: {order.phone}
                 </p>
@@ -180,7 +181,7 @@ export default function Details({ params }: ParamsType) {
                     <th className="pl-6 py-5 font-medium">{translate("Payment Status")}</th>
                   </tr>
                 </thead>
-                <tbody className="bg-white">
+                <tbody className="">
                   {order.items?.map((orderItem) => (
                     <tr
                       key={orderItem.id}
@@ -230,11 +231,11 @@ export default function Details({ params }: ParamsType) {
                     <th className="pl-1 py-1 border-2 font-medium">{translate("Payment")}</th>
                   </tr>
                 </thead>
-                <tbody className="bg-white">
+                <tbody className="">
                   {order.items.map((orderItem: OrderItemWithmenuItem) => (
                     <tr
                       key={orderItem.id}
-                      className="w-full border-b py-3 text-sm last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
+                      className="w-full border-b py-3 text-sm last-of-type:border-none "
                     >
                       <td className="flex items-center gap-1 whitespace-nowrap py-1 px-1">
                         {orderItem.menuItem?.name}

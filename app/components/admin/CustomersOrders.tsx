@@ -23,16 +23,17 @@ export default function CustomersOrders({
     <div className="mt-1 flow-root">
       <div className="inline-block min-w-full align-middle">
         {selectedOrders?.map((order) => (
-          <div key={order.id} className="mb-2 rounded-lg bg-gray-50 p-1 sm:p-4">
+          <div key={order.id} className="mb-2 rounded-lg bg-gray-50 dark:dark-mode p-1 sm:p-4">
             <div className="mb-4">
               <h2 className="text-lg font-semibold">
                 {translate("Customer name")}: {order.user.name}
               </h2>
-              <h2 className="text-lg font-semibold">
-                {translate("Order")} #{order.id.slice(0, 8)} -{" "}
+              <h2 className="flex items-center text-lg font-semibold">
+                <span>{translate("Order")}</span> :
+                <span>{order.id.slice(0, 8)}</span>  -{" "}
                 {new Date(order.createdAt).toLocaleDateString()}
               </h2>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm ">
                 {translate("Total")}: AED {order.total.toFixed(2)} | {translate("Status")}: {order.status} |
                 {translate("Address")}: {order.address} | {translate("Phone")}: {order.phone}
               </p>

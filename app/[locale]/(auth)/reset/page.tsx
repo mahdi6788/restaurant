@@ -46,7 +46,7 @@ export default function ResetPasswordPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-emerald-500">
+    <div className="min-h-screen flex items-center justify-center bg-emerald-900">
       <div className="bg-white dark:dark-mode p-8 rounded-lg shadow-md w-full max-w-md">
         <h1 className="text-2xl font-bold mb-6 text-center">Reset Password</h1>
         <form onSubmit={handleEmail}>

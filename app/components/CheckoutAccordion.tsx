@@ -87,7 +87,7 @@ export default function CheckoutAccordion({
         aria-labelledby="accordion-collapse-heading-1"
       >
         <div className="p-2">
-          <form className="bg-emerald-500 rounded-md">
+          <form className="bg-emerald-900 rounded-md">
             <div className="mb-4">
               <label
                 htmlFor="name"

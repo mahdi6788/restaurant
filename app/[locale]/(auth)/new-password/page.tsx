@@ -48,7 +48,7 @@ export default function NewPasswordPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-emerald-500">
+    <div className="min-h-screen flex items-center justify-center bg-emerald-900">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
         <form onSubmit={handleSubmit} className="space-y-4">
           <input

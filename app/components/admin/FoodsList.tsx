@@ -31,7 +31,7 @@ export default function FoodsList() {
 
   return (
     <div className="mt-1 flow-root">
-      <div className="inline-block sm:bg-stone-50 min-w-full align-middle">
+      <div className="inline-block min-w-full align-middle">
         <div className="rounded-lg sm:p-2">
           {/* Mobile Version */}
           {/* pointing to hidden in small screen into the parent tag */}
@@ -115,7 +115,7 @@ export default function FoodsList() {
                 </th>
               </tr>
             </thead>
-            <tbody className="bg-white">
+            <tbody className="">
               {menu?.map((food: MenuItem) => (
                 <tr
                   key={food.id}

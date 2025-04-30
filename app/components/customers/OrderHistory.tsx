@@ -32,14 +32,15 @@ export default function OrderHistory({
         {translate("Total")}: <span>AED {total}</span>
         </div>
         {orders.map((order: Order & { items: OrderItemWithmenuItem[] }) => (
-          <div key={order.id} className="mb-2 rounded-lg bg-gray-50 p-1 sm:p-4">
+          <div key={order.id} className="mb-2 rounded-lg bg-gray-50 dark:dark-mode p-1 sm:p-4">
             {/* Order Header */}
             <div className="mb-4">
-              <h2 className="text-lg font-semibold">
-                {translate("Order")} #{order.id.slice(0, 8)} -{" "}
+              <h2 className="flex items-center text-lg font-semibold">
+                <span>{translate("Order")}</span> :
+                <span>{order.id.slice(0, 8)}</span>  -{" "}
                 {new Date(order.createdAt).toLocaleDateString()}
               </h2>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm">
                 {translate("Total")}: AED {order.total.toFixed(2)} | {translate("Status")}: {order.status} |
                 {translate("Address")}: {order.address} | {translate("Phone")}: {order.phone}
               </p>
@@ -59,7 +60,7 @@ export default function OrderHistory({
                   <th className="pl-6 py-5 font-medium"></th>
                 </tr>
               </thead>
-              <tbody className="bg-white">
+              <tbody className="">
                 {order.items.map((orderItem: OrderItemWithmenuItem) => (
                   <tr
                     key={orderItem.id}
@@ -98,7 +99,7 @@ export default function OrderHistory({
                     <td className="whitespace-nowrap py-3 px-3">
                       <button
                         disabled={!orderItem.menuItem.isAvailable}
-                        className={`${!orderItem.menuItem.isAvailable ? "bg-red-300" : " bg-blue-300 "} p-2 rounded-md border border-b-blue-950 shadow-lg `}
+                        className={`${!orderItem.menuItem.isAvailable ? "bg-red-400" : " bg-blue-400 "} p-2 rounded-md border shadow-lg `}
                         onClick={() =>
                           addToCart({
                             menuItemId: orderItem.menuItemId,
@@ -125,7 +126,7 @@ export default function OrderHistory({
                   <th className="pl-1 py-1 border-2 font-medium">{translate("Payment")}</th>
                 </tr>
               </thead>
-              <tbody className="bg-white">
+              <tbody className="">
                 {order.items.map((orderItem: OrderItemWithmenuItem) => (
                   <tr
                     key={orderItem.id}

@@ -20,9 +20,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   if (status !== "authenticated") return <Loading />;
 
   return (
-    <div className="flex flex-col min-h-screen sm:flex-row sm:overflow-hidden bg-emerald-500 text-orange-900 ">
+    <div className="flex flex-col min-h-screen sm:flex-row sm:overflow-hidden bg-emerald-900 text-orange-500 ">
       {/* static part of the layout */}
-      <div className="flex-none w-full sm:w-64">
+      <div className="flex-none w-full sm:w-64 ">
         <Sidebar />
       </div>
       {/* dynamic part of the layout 

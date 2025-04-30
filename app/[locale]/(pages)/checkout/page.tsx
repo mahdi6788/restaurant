@@ -157,7 +157,7 @@ export default function Checkout() {
   };
 
   return (
-    <div className="container mx-auto px-2 py-8 pt-24 min-w-full h-screen text-orange-900 bg-emerald-500">
+    <div className="container mx-auto px-2 py-8 pt-24 min-w-full h-screen text-orange-500 bg-emerald-900">
       <h1 className="text-2xl font-bold mb-4 text-center sm:text-start">
         {translate("Checkout")}
       </h1>
@@ -242,7 +242,7 @@ export default function Checkout() {
           </form>
         </div>
         {/* Order Summary */}
-        <div className="bg-white p-6 rounded-lg shadow-md">
+        <div className="bg-white dark:dark-mode p-6 rounded-lg shadow-md">
           <h2 className="mb-4">{translate("Order Summary")}</h2>
           {cartItems.length === 0 ? (
             <p>{translate("No items in the cart")}</p>

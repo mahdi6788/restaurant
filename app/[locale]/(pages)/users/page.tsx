@@ -19,7 +19,7 @@ export default function HomePage() {
   return (
     <div className="container mx-auto mb-5">
       <h1
-        className="text-2xl font-bold text-orange-950"
+        className="text-2xl font-bold text-orange-500"
       >
         {translate("Today Orders")}
       </h1>
