@@ -9,7 +9,7 @@ import { useMenu } from "@/hooks/useMenu";
 import { useTranslations } from "next-intl";
 
 export default function FoodsList() {
-  const translate = useTranslations()
+  const translate = useTranslations("FoodsList")
   /// fetch foods using hook contaning use query
   const { menu, menuLoading, menuRefetch } = useMenu();
 

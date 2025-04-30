@@ -118,7 +118,7 @@ export default function Form() {
         <ImageUploader prevImage="" />
       </div>
       {/* buttons */}
-      <div className="flex justify-end mt-6 gap-4">
+      <div className="flex justify-end mb-8 mt-4 gap-4">
         <Link
           href="/users/admin/foods"
           className="flex h-10 items-center rounded-lg bg-gray-100 px-4 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-200"

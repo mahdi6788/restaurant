@@ -6,7 +6,7 @@ import { getTranslations } from "next-intl/server";
 export default async function updateMenuPage() {
   const translate = await getTranslations("updateMenuPage")
   return (
-    <div className="w-full mt-1 sm:mt-16 ">
+    <div className="w-full mt-1 pb-5  sm:mt-16 ">
       <div className="flex items-center justify-between gap-2">
         <h1
           className="text-2xl font-bold text-orange-950"

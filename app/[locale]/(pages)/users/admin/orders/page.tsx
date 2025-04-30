@@ -13,7 +13,7 @@ export default function CustomersOrdersPage() {
   });
 
   return (
-    <div className="container mx-auto ">
+    <div className="container mx-auto mb-5">
       <h1
         className="text-2xl font-bold text-orange-950`"
       >
