@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { useCart } from "@/hooks/useCart";
 import { useOrderButton } from "@/hooks/useOrderButton";
 import { CartItem, MenuItem } from "@prisma/client";
@@ -11,12 +11,12 @@ export function CartCard({
 }: {
   item: CartItem & { menuItem: MenuItem };
 }) {
-  const translate = useTranslations("CartCard")
+  const translate = useTranslations("CartCard");
   const { quantity, handleAdd, handleDec } = useOrderButton(item.menuItem);
   const { removeFromCart } = useCart();
 
   return (
-    <>
+    <div className="">
       <div className="relative h-32 w-full overflow-hidden rounded-xl">
         <Image
           src={item?.menuItem.imageUrl as string}
@@ -26,12 +26,12 @@ export function CartCard({
           className="rounded-xl"
         />
       </div>
-      <h2 className="text-sm font-semibold mt-1 text-blue-900 w-36">
+      <h2 className="text-sm font-semibold mt-1  w-36">
         {item.menuItem.name ?? ""}
       </h2>
       <div className="flex items-center justify-between">
         <div>
-          <p className="text-gray-500 text-sm mb-1 ">
+          <p className="text-yellow-900 dark:text-yellow-200 text-sm mb-1 ">
             AED {item?.menuItem.price?.toFixed(2)}
           </p>
         </div>
@@ -57,6 +57,6 @@ export function CartCard({
           />
         </div>
       </div>
-    </>
+    </div>
   );
 }

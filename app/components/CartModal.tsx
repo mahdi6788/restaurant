@@ -42,7 +42,7 @@ export default function CartModal({ isOpen, onClose }: CartModalProps) {
             {cartItems.map((item: CartItem & { menuItem: MenuItem }) => (
               <div
                 key={item?.id}
-                className="relative p-5 bg-gray-300 rounded-3xl shadow-lg"
+                className="relative p-5 bg-gray-300 text-blue-950 dark:dark-mode rounded-3xl shadow-lg"
               >
                 <CartCard item={item} />
               </div>

@@ -29,9 +29,9 @@ const MenuCards = ({ food }: { food: MenuItem }) => {
         />
       </div>
       <h2 className="text-lg font-bold mt-3">{food.name}</h2>
-      <p className="text-gray-500 text-sm">{food.description}</p>
+      <p className=" text-sm">{food.description}</p>
       <div className="flex items-center justify-arround w-full">
-        <p className="absolute left-0 bottom-0 font-semibold text-yellow-300 bg-blue-600 px-2 py-1 rounded-bl-2xl rounded-tr-3xl">
+        <p className="absolute left-0 bottom-0 font-semibold text-yellow-200 bg-blue-600 px-2 py-1 rounded-bl-2xl rounded-tr-3xl">
           AED {food.price}
         </p>
         {quantity > 0 ? (
