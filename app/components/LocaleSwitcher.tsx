@@ -47,15 +47,15 @@ export default function LocaleSwitcher() {
       </select>
 
       <ul className="sm:hidden flex items-center justify-between">
-        {routing.locales.map((locale: "en" | "fa" | "ar") => (
-          <li key={locale} onClick={() => onSelectChange({ target: { value: locale } } as ChangeEvent<HTMLSelectElement>)}>
-            {locale === "en" ? (
-              <span className="border rounded-lg px-1 m-1">En</span>
-            ) : locale === "fa" ? (
-              <span className="border rounded-lg px-1 m-1">Fa</span>
+        {routing.locales.map((lang: "en" | "fa" | "ar") => (
+          <li key={lang} onClick={() => onSelectChange({ target: { value: lang } } as ChangeEvent<HTMLSelectElement>)}>
+            {lang === "en" ? (
+              <span className={`border rounded-lg px-1 m-1 ${locale === lang && "text-sky-700"}`}>En</span>
+            ) : lang === "fa" ? (
+              <span className={`border rounded-lg px-1 m-1 ${locale === lang && "text-sky-700"}`}>Fa</span>
             ) : (
-              locale === "ar" && (
-                <span className="border rounded-lg px-1 m-1">Ar</span>
+              lang === "ar" && (
+                <span className={`border rounded-lg px-1 m-1 ${locale === lang && "text-sky-700"}`}>Ar</span>
               )
             )}
           </li>

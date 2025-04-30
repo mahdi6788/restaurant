@@ -9,6 +9,7 @@ import LogoutModal from "./LogoutModal";
 import { useState } from "react";
 import { IoBagCheckOutline } from "react-icons/io5";
 import { useTranslations } from "next-intl";
+import { usePathname } from "next/navigation";
 
 export default function Dropdown({
   isOpen,
@@ -20,6 +21,7 @@ export default function Dropdown({
   const translate = useTranslations("Dropdown");
   const { data: session } = useSession();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const pathname = usePathname()
   return (
     <div
       className="relative inline-block"
@@ -46,7 +48,7 @@ export default function Dropdown({
             <li>
               <Link
                 href="/users"
-                className="flex items-center w-full gap-2 px-4 py-2 hover:bg-emerald-50"
+                className={`flex items-center w-full gap-2 px-4 py-2 hover:bg-emerald-50 ${pathname.includes("/users") && "bg-sky-200 text-blue-600"}`}
               >
                 <MdDashboardCustomize />
                 {translate("Dashboard")}
@@ -55,7 +57,7 @@ export default function Dropdown({
             <li>
               <Link
                 href="/checkout"
-                className=" flex items-center w-full gap-2 px-4 py-2 hover:bg-emerald-50"
+                className={`flex items-center w-full gap-2 px-4 py-2 hover:bg-emerald-50 ${pathname.includes("/checkout") && "bg-sky-200 text-blue-600"}`}
               >
                 <IoBagCheckOutline />
                 {translate("Checkout")}

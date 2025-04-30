@@ -50,11 +50,11 @@ export default function CustomersOrders({
                   <th className="pl-6 py-5 font-medium">{translate("Payment Status")}</th>
                 </tr>
               </thead>
-              <tbody className="bg-white">
+              <tbody className="">
                 {order.items?.map((orderItem) => (
                   <tr
                     key={orderItem.id}
-                    className="w-full border-b py-3 text-sm last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
+                    className="w-full border-b py-3 text-sm last-of-type:border-none"
                   >
                     <td>
                       <Image
@@ -100,7 +100,7 @@ export default function CustomersOrders({
                   <th className="pl-1 py-1 border-2 font-medium">{translate("Payment")}</th>
                 </tr>
               </thead>
-              <tbody className="bg-white">
+              <tbody className="">
                 {order.items.map((orderItem: OrderItemWithmenuItem) => (
                   <tr
                     key={orderItem.id}

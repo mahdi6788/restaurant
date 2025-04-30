@@ -7,8 +7,7 @@ import { FaSignOutAlt, FaSignInAlt, FaRegistered } from "react-icons/fa";
 import {
   MdDarkMode,
   MdDashboardCustomize,
-  MdLightMode,
-  MdLanguage,
+  MdLightMode
 } from "react-icons/md";
 import { TiThMenu } from "react-icons/ti";
 import { IoBagCheckOutline } from "react-icons/io5";
@@ -19,6 +18,7 @@ import LogoutModal from "./LogoutModal";
 import { useTranslations } from "next-intl";
 import LocaleSwitcher from "./LocaleSwitcher";
 import { useTheme } from "../context/ThemeContext";
+import { usePathname } from "next/navigation";
 
 export default function MobileNavbar({
   isOpen,
@@ -32,6 +32,7 @@ export default function MobileNavbar({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
+  const pathname = usePathname()
 
   const navRef = useRef<HTMLDivElement>(null);
 
@@ -90,7 +91,7 @@ export default function MobileNavbar({
                   <LocaleSwitcher />
                 </li>
                 <li>
-                  <Link href="/users" className="flex items-center gap-1 p-1">
+                  <Link href="/users" className={`flex items-center gap-1 p-1 ${pathname.includes("/users") && "bg-sky-300 w-full rounded-lg" }`}>
                     <MdDashboardCustomize />
                     {translate("Dashboard")}
                   </Link>
@@ -98,7 +99,7 @@ export default function MobileNavbar({
                 <li>
                   <Link
                     href="/checkout"
-                    className=" flex items-center gap-1 p-1"
+                    className={`flex items-center gap-1 p-1 ${pathname.includes("/checkout") && "bg-sky-300 w-full rounded-lg " }`}
                   >
                     <IoBagCheckOutline />
                     {translate("Checkout")}
@@ -116,7 +117,7 @@ export default function MobileNavbar({
               </div>
             ) : (
               <div className="flex flex-col items-start gap-1 p-1">
-                <span className="flex items-start gap-1 text-sm font-light text-lime-500 hover:text-stone-100">
+                <span className="flex items-start gap-1 text-sm font-light text-lime-800 dark:text-lime-400 hover:text-stone-100">
                   {translate("Join us for a delicious experience")} 😊
                 </span>
                 <li>
@@ -128,12 +129,11 @@ export default function MobileNavbar({
                     )}
                   </button>
                 </li>
-                <li className=" flex items-center gap-1 p-1">
-                  <MdLanguage />
+                <li className="flex items-center gap-1 p-1">
                   <LocaleSwitcher />
                 </li>
                 <li>
-                  <Link href="/login" className=" flex items-center gap-1 p-1">
+                  <Link href="/login" className={`flex items-center gap-1 p-1 ${pathname.includes("/login") && "bg-sky-300 w-full rounded-lg " }`}>
                     <FaSignInAlt />
                     {translate("Login")}
                   </Link>
@@ -141,7 +141,7 @@ export default function MobileNavbar({
                 <li>
                   <Link
                     href="/register"
-                    className=" flex items-center gap-1 p-1"
+                    className={`flex items-center gap-1 p-1 ${pathname.includes("/register") && "bg-sky-300 w-full rounded-lg " }`}
                   >
                     <FaRegistered />
                     {translate("Register")}
@@ -149,7 +149,7 @@ export default function MobileNavbar({
                 </li>
               </div>
             )}
-            <li className=" flex items-center gap-1 p-1">
+            <li className="flex items-center gap-1 p-1">
               <TiInfoLargeOutline />
               <button onClick={() => setIsModalOpen(true)}>
                 {translate("About Us")}

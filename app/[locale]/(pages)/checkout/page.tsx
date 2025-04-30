@@ -157,7 +157,7 @@ export default function Checkout() {
   };
 
   return (
-    <div className="container mx-auto px-2 py-8 pt-24 h-screen text-orange-900 bg-emerald-500">
+    <div className="container mx-auto px-2 py-8 pt-24 min-w-full h-screen text-orange-900 bg-emerald-500">
       <h1 className="text-2xl font-bold mb-4 text-center sm:text-start">
         {translate("Checkout")}
       </h1>
