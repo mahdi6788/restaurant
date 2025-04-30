@@ -2,7 +2,6 @@
 import CustomersOrders from "@/app/components/admin/CustomersOrders";
 import OrderHistory from "@/app/components/customers/OrderHistory";
 import { useOrders } from "@/app/context/OrderContext";
-import { lusitana } from "@/app/lib/fonts";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import { useEffect } from "react";
