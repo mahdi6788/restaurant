@@ -61,10 +61,10 @@ export default function MobileNavbar({
       <TiThMenu size={30} color="white" />
       {isOpen && (
         <div className="absolute top-10 right-0 bg-transparent font-bold text-black z-40">
-          <ul className="flex flex-col items-start gap-1 p-4 rounded-lg shadow-lg bg-white">
+          <ul className="flex flex-col items-start gap-1 p-5 rounded-lg shadow-lg bg-sky-100 dark:dark-mode">
             {session ? (
-              <div className="flex flex-col items-start gap-1">
-                <span className="flex items-center gap-1 text-sm font-light text-lime-500 hover:text-stone-100">
+              <div className="flex flex-col items-start space-y-3">
+                <div className="flex items-center gap-1 text-lime-800 dark:text-lime-400">
                   <Image
                     alt=""
                     src={session?.user.image ?? "/images/elements/user.png"}
@@ -72,8 +72,10 @@ export default function MobileNavbar({
                     height={20}
                     className="rounded-full"
                   />
-                  {session?.user.name || session?.user.email}
-                </span>
+                  <span className="text-lg">
+                    {session?.user.name || session?.user.email}
+                  </span>
+                </div>
 
                 <li>
                   <button onClick={toggleTheme} className="p-2">
@@ -88,35 +90,32 @@ export default function MobileNavbar({
                   <LocaleSwitcher />
                 </li>
                 <li>
-                  <Link
-                    href="/users"
-                    className="flex items-center gap-2 px-4 py-2"
-                  >
+                  <Link href="/users" className="flex items-center gap-1 p-1">
                     <MdDashboardCustomize />
                     {translate("Dashboard")}
                   </Link>
                 </li>
                 <li>
-                  <button
-                    onClick={() => setIsLogoutModalOpen(true)}
-                    className="flex items-center gap-2 px-4 py-2"
-                  >
-                    <FaSignOutAlt />
-                    {translate("Logout")}
-                  </button>
-                </li>
-                <li>
                   <Link
                     href="/checkout"
-                    className=" flex items-center gap-2 px-4 py-2"
+                    className=" flex items-center gap-1 p-1"
                   >
                     <IoBagCheckOutline />
                     {translate("Checkout")}
                   </Link>
                 </li>
+                <li>
+                  <button
+                    onClick={() => setIsLogoutModalOpen(true)}
+                    className="flex items-center gap-1 p-1"
+                  >
+                    <FaSignOutAlt />
+                    {translate("Logout")}
+                  </button>
+                </li>
               </div>
             ) : (
-              <div className="flex flex-col items-start gap-1">
+              <div className="flex flex-col items-start gap-1 p-1">
                 <span className="flex items-start gap-1 text-sm font-light text-lime-500 hover:text-stone-100">
                   {translate("Join us for a delicious experience")} 😊
                 </span>
@@ -129,15 +128,12 @@ export default function MobileNavbar({
                     )}
                   </button>
                 </li>
-                <li className=" flex items-center gap-2 px-4 py-2">
+                <li className=" flex items-center gap-1 p-1">
                   <MdLanguage />
                   <LocaleSwitcher />
                 </li>
                 <li>
-                  <Link
-                    href="/login"
-                    className=" flex items-center gap-2 px-4 py-2"
-                  >
+                  <Link href="/login" className=" flex items-center gap-1 p-1">
                     <FaSignInAlt />
                     {translate("Login")}
                   </Link>
@@ -145,7 +141,7 @@ export default function MobileNavbar({
                 <li>
                   <Link
                     href="/register"
-                    className=" flex items-center gap-2 px-4 py-2"
+                    className=" flex items-center gap-1 p-1"
                   >
                     <FaRegistered />
                     {translate("Register")}
@@ -153,7 +149,7 @@ export default function MobileNavbar({
                 </li>
               </div>
             )}
-            <li className=" flex items-center gap-2 px-2 py-2">
+            <li className=" flex items-center gap-1 p-1">
               <TiInfoLargeOutline />
               <button onClick={() => setIsModalOpen(true)}>
                 {translate("About Us")}

@@ -165,10 +165,10 @@ export  function FoodsListSkeleton() {
 export  function HomeSkeleton() {
   const translate =  useTranslations("HomeSkeleton")
   return (
-    <div className=" flex items-center justify-center bg-cover bg-center min-h-screen w-full max-w-screen-2xl mx-auto bg-[url('/images/BG/bgHome.jpg')] sm:bg-[url('/images/BG/bg2.jpg')]">
-      <div className=" w-3/4 pb-10 bg-emerald-600 opacity-75 rounded-xl animate-pulse">
+    <div className="flex items-center justify-center bg-cover bg-center min-h-screen w-full max-w-screen-2xl mx-auto bg-[url('/images/BG/bgHomeNightMobile.jpg')] sm:bg-[url('/images/BG/bgHomeMorning.jpg')] sm:dark:bg-[url('/images/BG/bgHomeNight.jpg')]">
+      <div className="w-3/4 pb-10 bg-emerald-600 opacity-75 rounded-xl animate-pulse">
         <div className="flex items-center justify-between">
-          <div className=" flex items-center justify-between gap-2 text-stone-100 font-bold w-fit h-fit p-2 rounded-br-lg rounded-tl-xl shadow-xl"></div>
+          <div className="flex items-center justify-between gap-2 text-stone-100 font-bold w-fit h-fit p-2 rounded-br-lg rounded-tl-xl shadow-xl"></div>
           {/* Menu */}
           <div className="text-stone-800 font-bold bg-slate-100 rounded-b-lg w-fitt h-fit p-2 px-10">
             <div>

@@ -50,12 +50,12 @@ export default function LocaleSwitcher() {
         {routing.locales.map((locale: "en" | "fa" | "ar") => (
           <li key={locale} onClick={() => onSelectChange({ target: { value: locale } } as ChangeEvent<HTMLSelectElement>)}>
             {locale === "en" ? (
-              <span className="border rounded-md bg-orange-200 p-1 m-1">En</span>
+              <span className="border rounded-lg px-1 m-1">En</span>
             ) : locale === "fa" ? (
-              <span className="border rounded-md bg-orange-200 p-1 m-1">Fa</span>
+              <span className="border rounded-lg px-1 m-1">Fa</span>
             ) : (
               locale === "ar" && (
-                <span className="border rounded-md bg-orange-200 p-1 m-1">Ar</span>
+                <span className="border rounded-lg px-1 m-1">Ar</span>
               )
             )}
           </li>

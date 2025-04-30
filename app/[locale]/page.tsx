@@ -31,7 +31,7 @@ export default function Home() {
   const todayFoods = menu.filter((food: MenuItem) => food.isAvailable);
 
   return (
-    <div className="relative flex flex-col items-center justify-center bg-cover bg-center min-h-screen w-full mx-auto bg-[url('/images/BG/bgHome.jpg')] sm:bg-[url('/images/BG/bg2.jpg')] ">
+    <div className="relative flex flex-col items-center justify-center bg-cover bg-center min-h-screen w-full mx-auto bg-[url('/images/BG/bgHomeNightMobile.jpg')] sm:bg-[url('/images/BG/bgHomeMorning.jpg')] sm:dark:bg-[url('/images/BG/bgHomeNight.jpg')] ">
       <div className="fixed inset-0 z-0 bg-black/20 backdrop-blur-[2px] sm:backdrop-blur-sm supports-[backdrop-filter]:bg-black/10"></div>
       {/* Body */}
       <div className="relative z-10 w-full max-w-7xl sm:px-6 lg:px-8">
