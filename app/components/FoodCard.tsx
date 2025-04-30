@@ -11,7 +11,7 @@ export default function FoodCard({ food }: { food: MenuItem }) {
   const {quantity, handleAdd, handleDec} = useOrderButton(food)
 
   return (
-    <div className="relative max-w-sm w-2/3 p-5 pb-1 bg-stone-50 dark:bg-stone-400 dark:text-stone-100 rounded-3xl shadow-lg ">
+    <div className="relative max-w-sm w-2/3 p-5 pb-1 bg-stone-50 dark:dark-mode rounded-3xl shadow-lg ">
       <div className="relative h-60 w-full overflow-hidden rounded-xl">
         <Image
           src={food.imageUrl as string}
