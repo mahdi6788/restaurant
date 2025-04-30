@@ -103,13 +103,13 @@ export default function RegisterForm() {
   return (
     <div className="min-h-screen flex items-center justify-center">
       {session ? (
-        <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+        <div className="bg-white dark:dark-mode p-8 rounded-lg shadow-md w-full max-w-md">
           <h1 className="text-2xl font-bold mb-6 text-center">
             You registered
           </h1>
         </div>
       ) : (
-        <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+        <div className="bg-white dark:dark-mode p-8 rounded-lg shadow-md w-full max-w-md">
           <h1 className="text-2xl font-bold mb-6 text-center">
             Please sign up to continue
           </h1>

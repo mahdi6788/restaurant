@@ -82,7 +82,7 @@ export default function Details({ params }: ParamsType) {
           {/* Customer Info Table */}
           <div>
             {/* Desktop */}
-            <table className="hidden sm:table min-w-full text-gray-900">
+            <table className="hidden sm:table ">
               <thead className="text-left text-sm">
                 <tr>
                   <th className="p-1" scope="col"></th>
@@ -168,7 +168,7 @@ export default function Details({ params }: ParamsType) {
                 </p>
               </div>
               {/* Desktop Version */}
-              <table className="hidden sm:table min-w-full text-gray-900">
+              <table className="hidden sm:table ">
                 <thead className="rounded-lg text-left text-sm">
                   <tr>
                     <th className="pl-6 py-5 font-medium">{translate("Image")}</th>
@@ -220,7 +220,7 @@ export default function Details({ params }: ParamsType) {
               </table>
 
               {/* Mobile Table */}
-              <table className="table sm:hidden min-w-full text-gray-900">
+              <table className="table sm:hidden">
                 <thead className="rounded-lg text-left text-sm">
                   <tr>
                     <th className="pl-1 py-1 border-2 font-medium">{translate("Name")}</th>

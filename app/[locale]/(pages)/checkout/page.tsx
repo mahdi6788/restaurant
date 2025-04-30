@@ -163,13 +163,13 @@ export default function Checkout() {
       </h1>
       <div className="hidden sm:grid grid-cols-2 gap-8">
         {/* Customer Information */}
-        <div className=" bg-white p-6 rounded-lg shadow-md">
+        <div className=" bg-white dark:dark-mode p-2 rounded-lg shadow-md">
           <h2 className="text-lg font-medium mb-4">{translate("Customer Information")}</h2>
-          <form onSubmit={(event) => handleCheckout(event)}>
+          <form onSubmit={(event) => handleCheckout(event)} className="rounded-lg p-1">
             <div className="mb-4">
               <label
                 htmlFor="name"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium "
               >
                 {translate("Name")}
               </label>
@@ -177,15 +177,15 @@ export default function Checkout() {
                 type="text"
                 id="name"
                 name="name"
-                defaultValue={name || "Not set"}
+                defaultValue={name || "Guest"}
                 disabled
-                className="mt-1 pl-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                className="mt-1 p-1 text-blue-950 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
               />
             </div>
             <div className="mb-4">
               <label
                 htmlFor="email"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium "
               >
                 {translate("Email")}
               </label>
@@ -195,13 +195,13 @@ export default function Checkout() {
                 name="email"
                 defaultValue={email || ""}
                 disabled
-                className="mt-1 pl-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                className="mt-1 p-1 text-blue-950 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
               />
             </div>
             <div className="mb-4">
               <label
                 htmlFor="address"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium "
               >
                 {translate("Address")}
               </label>
@@ -211,13 +211,13 @@ export default function Checkout() {
                 name="address"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
-                className="mt-1 pl-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                className="mt-1 p-1 text-blue-950 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
               />
             </div>
             <div className="mb-4">
               <label
                 htmlFor="phone"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium "
               >
                 {translate("Phone Number")}
               </label>
@@ -227,7 +227,7 @@ export default function Checkout() {
                 name="phone"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                className="mt-1 pl-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                className="mt-1 p-1 text-blue-950 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
               />
             </div>
             <button
@@ -249,7 +249,7 @@ export default function Checkout() {
           ) : (
             <div className="space-y-4">
               {/* Desktop */}
-              <table className="table min-w-full text-gray-900">
+              <table className="table">
                 <thead className="text-left text-sm">
                   <tr>
                     <th className="p-1" scope="col">

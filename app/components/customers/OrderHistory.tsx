@@ -46,7 +46,7 @@ export default function OrderHistory({
             </div>
 
             {/* Desktop Table */}
-            <table className="hidden sm:table min-w-full text-gray-900">
+            <table className="hidden sm:table">
               <thead className="rounded-lg text-left text-sm">
                 <tr>
                   <th className="pl-6 py-5 font-medium">{translate("Image")}</th>
@@ -115,7 +115,7 @@ export default function OrderHistory({
             </table>
 
             {/* Mobile Table */}
-            <table className="table sm:hidden min-w-full text-gray-900">
+            <table className="table sm:hidden">
               <thead className="rounded-lg text-left text-sm">
                 <tr>
                   <th className="pl-1 py-1 border-2 font-medium">{translate("Name")}</th>

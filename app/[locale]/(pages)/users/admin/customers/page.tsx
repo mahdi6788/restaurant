@@ -28,7 +28,7 @@ export default function CustomersPage() {
       {/* TODO: search(name, id) */}
 
       {/* Desktop */}
-      <table className="hidden sm:table min-w-full text-gray-900">
+      <table className="hidden sm:table">
         <thead className="text-left text-sm">
           <tr>
             <th className="p-1" scope="col"></th>
@@ -78,7 +78,7 @@ export default function CustomersPage() {
         </tbody>
       </table>
       {/* Mobile */}
-      <table className="sm:hidden table min-w-full text-gray-900">
+      <table className="sm:hidden table ">
         <thead className="text-left text-sm">
           <tr>
             <th className="p-1" scope="col">

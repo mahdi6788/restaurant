@@ -86,7 +86,7 @@ export  function FoodsListSkeleton() {
           </div>
 
           {/* Desktop Version */}
-          <table className="hidden sm:table min-w-full text-gray-900 ">
+          <table className="hidden sm:table ">
             <thead className="rounded-lg text-left text-sm">
               <tr>
                 <th className="pl-6 py-5 font-medium" scope="col">
@@ -226,7 +226,7 @@ export  function OrdersSkeleton() {
       <div className="inline-block min-w-full align-middle">
         <div className="rounded-lg bg-gray-50 p-2 sm:pt-0">
           {/* Desktop Version */}
-          <table className="hidden sm:table min-w-full text-gray-900">
+          <table className="hidden sm:table">
             <thead className="rounded-lg text-left text-sm">
               <tr>
                 <th className="pl-6 py-5 font-medium">{translate("Image")}</th>

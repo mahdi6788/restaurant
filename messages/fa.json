@@ -3,7 +3,7 @@
     "LogIn": "ورود",
     "Register": "ثبت‌ نام",
     "No food available": "غذایی موجود نیست",
-    "Today’s Specials": "ویژه‌های امروز"
+    "Today’s Specials": "منوی امروز"
   },
   "Dropdown": {
     "Welcome": "خوش آمدید",
@@ -80,7 +80,7 @@
     "Price": "قیمت",
     "Edit": "ویرایش",
     "Total":"جمع کل",
-    "Delivery cost": "هزینه دلیوری",
+    "Delivery cost": "هزینه ارسال",
     "Checkout":"تسویه‌حساب"
   },
   "Menu": {

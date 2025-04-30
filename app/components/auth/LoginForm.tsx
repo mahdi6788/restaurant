@@ -137,13 +137,13 @@ export default function LoginForm() {
   return (
     <div className="min-h-screen flex items-center justify-center">
       {session ? (
-        <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+        <div className="bg-white dark:dark-mode p-8 rounded-lg shadow-md w-full max-w-md">
           <h1 className="text-2xl font-bold mb-6 text-center">
             You are logged in
           </h1>
         </div>
       ) : (
-        <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+        <div className="bg-white dark:dark-mode p-8 rounded-lg shadow-md w-full max-w-md">
           <h1 className="text-2xl font-bold mb-6 text-center">
             Login to Your Account
           </h1>
@@ -166,7 +166,7 @@ export default function LoginForm() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Email"
-                  className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-2 text-blue-950 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   required
                 />
                 <input
@@ -174,12 +174,12 @@ export default function LoginForm() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Password"
-                  className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-2 text-blue-950 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   required
                 />
                 <Link
                   href="/reset"
-                  className="text-blue-950 text-sm w-32 hover:text-blue-600 hover:border-b-2 hover:border-b-blue-800 hover:cursor-pointer pt-2"
+                  className=" text-sm w-32 hover:text-blue-600 hover:border-b-2 hover:border-b-blue-800 hover:cursor-pointer pt-2"
                 >
                   Forgot password?
                 </Link>

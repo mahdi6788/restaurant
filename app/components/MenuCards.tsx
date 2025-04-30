@@ -10,7 +10,7 @@ const MenuCards = ({ food }: { food: MenuItem }) => {
   const { quantity, handleAdd, handleDec } = useOrderButton(food);
 
   return (
-    <div className="relative bg-stone-100 opacity-85 flex flex-col items-center p-2 rounded-2xl shadow-lg text-center h-96">
+    <div className="relative bg-stone-100 dark:dark-mode opacity-85 flex flex-col items-center p-2 rounded-2xl shadow-lg text-center h-96">
       {/* <div
         className={
           food.isAvailable

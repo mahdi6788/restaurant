@@ -43,7 +43,7 @@ export default function Form() {
 
   return (
     <form onSubmit={handleCreate}>
-      <div className="rounded-md bg-gray-50 p-4 md:p-6">
+      <div className="mb-6 p-4 sm:p-6 sm:mb-1">
         {/* Name */}
         <div className="mb-4 relative">
           <label htmlFor="name" className="mb-2 block text-sm font-medium">
@@ -116,18 +116,19 @@ export default function Form() {
         </div> */}
         {/* Image */}
         <ImageUploader prevImage="" />
-      </div>
-      {/* buttons */}
-      <div className="flex justify-end mb-8 mt-4 gap-4">
-        <Link
-          href="/users/admin/foods"
-          className="flex h-10 items-center rounded-lg bg-gray-100 px-4 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-200"
-        >
-          {translate("Cancel")}
-        </Link>
-        <Button type="submit" disabled={isLoading}>
-          {isLoading ? translate("Creating") : translate("Create")}
-        </Button>
+
+        {/* buttons */}
+        <div className="flex items-center justify-end gap-4">
+          <Link
+            href="/users/admin/foods"
+            className="flex h-10 items-center rounded-lg bg-gray-100 px-4 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-200"
+          >
+            {translate("Cancel")}
+          </Link>
+          <Button type="submit" disabled={isLoading}>
+            {isLoading ? translate("Creating") : translate("Create")}
+          </Button>
+        </div>
       </div>
     </form>
   );

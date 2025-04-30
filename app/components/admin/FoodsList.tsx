@@ -91,7 +91,7 @@ export default function FoodsList() {
 
           {/* Desktop Version */}
           {/* when pointing to hidden and sm:table in advance, no need to point the screen size for other tags  */}
-          <table className="hidden min-w-full text-gray-900 sm:table">
+          <table className="hidden sm:table">
             <thead className="rounded-lg text-left text-sm">
               <tr>
                 <th className="pl-6 py-5 font-medium" scope="col">

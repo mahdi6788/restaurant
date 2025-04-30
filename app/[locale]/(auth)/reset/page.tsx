@@ -47,7 +47,7 @@ export default function ResetPasswordPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-emerald-500">
-      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+      <div className="bg-white dark:dark-mode p-8 rounded-lg shadow-md w-full max-w-md">
         <h1 className="text-2xl font-bold mb-6 text-center">Reset Password</h1>
         <form onSubmit={handleEmail}>
             <label htmlFor="email">Email:</label>
@@ -69,7 +69,7 @@ export default function ResetPasswordPage() {
             </button>
             <Link
               href="/login"
-              className="text-blue-950 text-sm hover:text-blue-700 hover:cursor-pointer mt-5"
+              className="text-sm hover:text-blue-700 hover:cursor-pointer mt-5"
             >
               Back to login
             </Link>

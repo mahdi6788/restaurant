@@ -53,13 +53,13 @@ export default function CheckoutAccordion({
   };
 
   return (
-    <div id="accordion-collapse" data-accordion="collapse">
+    <div id="accordion-collapse" data-accordion="collapse" className="text-gray-900 dark:dark-mode">
       {/* title: Customer Information */}
       <h2 id="accordion-collapse-heading-1">
         <button
           onClick={handleInfo}
           type="button"
-          className="flex items-center justify-between w-full p-2 font-medium text-gray-900 border border-b-0 border-gray-200 rounded-t-xl focus:ring-2 focus:ring-gray-200 gap-3"
+          className="flex items-center justify-between w-full p-2 font-medium border border-b-0 border-gray-200 rounded-t-xl focus:ring-2 focus:ring-gray-200 gap-3"
         >
           <p className="text-lg font-bold">{translate("Customer Information")}</p>
           <svg
@@ -86,12 +86,12 @@ export default function CheckoutAccordion({
         className={`${infoIsOpen ? "flex border" : "hidden"} mb-1`}
         aria-labelledby="accordion-collapse-heading-1"
       >
-        <div className="p-5">
-          <form>
+        <div className="p-2">
+          <form className="bg-emerald-500 rounded-md">
             <div className="mb-4">
               <label
                 htmlFor="name"
-                className="block text-lg font-medium text-gray-700"
+                className="block text-lg font-medium "
               >
                 {translate("Name")}
               </label>
@@ -107,7 +107,7 @@ export default function CheckoutAccordion({
             <div className="mb-4">
               <label
                 htmlFor="email"
-                className="block text-lg font-medium text-gray-700"
+                className="block text-lg font-medium "
               >
                 {translate("Email")}
               </label>
@@ -123,7 +123,7 @@ export default function CheckoutAccordion({
             <div className="mb-4">
               <label
                 htmlFor="address"
-                className="block text-lg font-medium text-gray-700"
+                className="block text-lg font-medium "
               >
                 {translate("Address")}
               </label>
@@ -133,13 +133,13 @@ export default function CheckoutAccordion({
                 name="address"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
-                className="mt-1 pl-2 block text-lg w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                className="mt-1 pl-2 text-blue-900 block text-lg w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
               />
             </div>
             <div className="mb-4">
               <label
                 htmlFor="phone"
-                className="block text-lg font-medium text-gray-700"
+                className="block text-lg font-medium "
               >
                 {translate("Phone Number")}
               </label>
@@ -149,7 +149,7 @@ export default function CheckoutAccordion({
                 name="phone"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                className="mt-1 pl-2 block text-lg w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                className="mt-1 pl-2 text-blue-900 block text-lg w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
               />
             </div>
           </form>
@@ -160,7 +160,7 @@ export default function CheckoutAccordion({
         <button
           onClick={handleOrder}
           type="button"
-          className="flex items-center justify-between w-full p-2 font-medium border border-b-0 text-gray-900 border-gray-200 focus:ring-2 focus:ring-gray-200 gap-3"
+          className="flex items-center justify-between w-full p-2 font-medium border border-b-0 border-gray-200 focus:ring-2 focus:ring-gray-200 gap-3"
         >
           <p className="text-lg font-bold">{translate("Order Summary")}</p>
           <svg
@@ -192,7 +192,7 @@ export default function CheckoutAccordion({
             <p>{translate("No items in the cart")}</p>
           ) : (
             <div className="space-y-4">
-              <table className="sm:hidden table min-w-full text-gray-900">
+              <table className="sm:hidden table">
                 <thead className="text-left">
                   <tr className="">
                     <th className="px-1 py-1 border">{translate("Image")}</th>
@@ -220,7 +220,7 @@ export default function CheckoutAccordion({
         <button
           onClick={handleTotal}
           type="button"
-          className="flex items-center justify-between w-full p-2 font-medium border border-gray-200 text-gray-900 focus:ring-2 focus:ring-gray-200 gap-3"
+          className="flex items-center justify-between w-full p-2 font-medium border border-gray-200 focus:ring-2 focus:ring-gray-200 gap-3"
         >
           <p className="text-lg font-bold">{translate("Total")}</p>
           <svg
@@ -249,14 +249,14 @@ export default function CheckoutAccordion({
         <div className="p-5 space-y-5 w-full">
           {/* Total */}
           <div className="flex justify-between items-center gap-3">
-            <p className="text-gray-800 text-lg">{translate("Delivery cost")}: </p>
-            <p className="text-orange-700">
+            <p className=" text-lg">{translate("Delivery cost")}: </p>
+            <p className="">
               AED 0.00 
             </p>
           </div>
           <div className="flex justify-between items-center">
-            <p className="text-gray-800 text-lg">{translate("Total")}</p>
-            <p className="text-gray-900 text-xl font-bold">
+            <p className=" text-lg">{translate("Total")}</p>
+            <p className=" text-xl font-bold">
               AED{" "}
               {cartItems
                 .reduce(
