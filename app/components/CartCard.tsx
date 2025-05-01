@@ -2,7 +2,7 @@
 import { useCart } from "@/hooks/useCart";
 import { useOrderButton } from "@/hooks/useOrderButton";
 import { CartItem, MenuItem } from "@prisma/client";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import { CiCircleChevDown, CiCircleChevUp } from "react-icons/ci";
 
@@ -12,6 +12,7 @@ export function CartCard({
   item: CartItem & { menuItem: MenuItem };
 }) {
   const translate = useTranslations("CartCard");
+  const locale = useLocale()
   const { quantity, handleAdd, handleDec } = useOrderButton(item.menuItem);
   const { removeFromCart } = useCart();
 
@@ -20,14 +21,14 @@ export function CartCard({
       <div className="relative h-32 w-full overflow-hidden rounded-xl">
         <Image
           src={item?.menuItem.imageUrl as string}
-          alt={item.menuItem.name || ""}
+          alt={item.menuItem.englishName || ""}
           layout="fill"
           objectFit="cover"
           className="rounded-xl"
         />
       </div>
       <h2 className="text-sm font-semibold mt-1  w-36">
-        {item.menuItem.name ?? ""}
+        {locale === "fa" ? item.menuItem?.farsiName : item.menuItem?.englishName ?? ""}
       </h2>
       <div className="flex items-center justify-between">
         <div>

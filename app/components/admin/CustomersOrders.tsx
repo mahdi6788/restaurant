@@ -5,13 +5,14 @@ import {
 } from "@/app/types/types";
 import { OrdersSkeleton } from "../skeleton";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 export default function CustomersOrders({
   orders: selectedOrders,
   selectedOrdersLoading,
 }: OrderHistoryPropsType) {
   const translate =  useTranslations("CustomersOrders")
+  const locale = useLocale()
 
   if (selectedOrdersLoading) return <OrdersSkeleton />;
 
@@ -59,7 +60,7 @@ export default function CustomersOrders({
                   >
                     <td>
                       <Image
-                        alt={orderItem.menuItem?.name ?? "Menu Image"}
+                        alt={orderItem.menuItem?.englishName ?? "Menu Image"}
                         src={
                           orderItem.menuItem?.imageUrl ??
                           "/images/logo/LOGO.jpg"
@@ -70,7 +71,7 @@ export default function CustomersOrders({
                       />
                     </td>
                     <td className="whitespace-nowrap py-3 px-3">
-                      {orderItem.menuItem?.name}
+                      {locale === "fa" ? orderItem.menuItem?.farsiName : orderItem.menuItem?.englishName}
                     </td>
                     <td className="whitespace-nowrap py-3 px-3">
                       {orderItem?.price}
@@ -108,7 +109,7 @@ export default function CustomersOrders({
                     className="w-full border-b py-3 text-sm last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
                   >
                     <td className="flex items-center gap-1 whitespace-nowrap py-1 px-1">
-                      {orderItem.menuItem?.name}
+                      {locale === "fa" ? orderItem.menuItem?.farsiName : orderItem.menuItem?.englishName}
                     </td>
                     <td className="whitespace-nowrap py-1 px-1">
                       AED {orderItem.price.toFixed(2)}

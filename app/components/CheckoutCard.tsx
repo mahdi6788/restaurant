@@ -8,7 +8,7 @@ import { useEffect } from "react";
 import toast from "react-hot-toast";
 import { CiCircleChevDown, CiCircleChevUp } from "react-icons/ci";
 import { IoIosCloseCircle } from "react-icons/io";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 export function CheckoutCard({
   item,
@@ -18,6 +18,7 @@ export function CheckoutCard({
   isMobile: boolean;
 }) {
   const translate = useTranslations("CheckoutCard")
+  const locale = useLocale()
   const router = useRouter();
   const { quantity, handleAdd, handleDec } = useOrderButton(item.menuItem);
   const { removeFromCart, cartItems } = useCart();
@@ -25,7 +26,7 @@ export function CheckoutCard({
   useEffect(() => {
     cartItems.map((item) => {
       if (!item.menuItem.isAvailable) {
-        toast.error(`{${item.menuItem.name} is not available now}`);
+        toast.error(`{${locale === "fa" ? item.menuItem?.farsiName : item.menuItem?.englishName} is not available now}`);
         fetch("/api/cart", {
           method: "DELETE",
           headers: { "Content-Type": "application/json" },
@@ -49,7 +50,7 @@ export function CheckoutCard({
           className="w-10 h-10 rounded-md"
         />
       </td>
-      <td className="px-1 py-1 border">{item.menuItem.name}</td>
+      <td className="px-1 py-1 border">{locale === "fa" ? item.menuItem?.farsiName : item.menuItem?.englishName}</td>
       <td className="px-1 py-1 border text-center">{item.quantity}</td>
       <td className="px-3 py-3 border flex items-center gap-1">
         <span className="text-sm">AED</span> {item.menuItem.price}

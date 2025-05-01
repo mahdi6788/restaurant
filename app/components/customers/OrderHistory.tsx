@@ -8,13 +8,14 @@ import {
   OrderItemWithmenuItem,
 } from "@/app/types/types";
 import { CiCirclePlus } from "react-icons/ci";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 export default function OrderHistory({
   orders,
   selectedOrdersLoading,
 }: OrderHistoryPropsType) {
   const translate = useTranslations("OrderHistory")
+  const locale = useLocale()
   const { addToCart } = useCart();
 
   if (selectedOrdersLoading) return <OrdersSkeleton />;
@@ -68,7 +69,7 @@ export default function OrderHistory({
                   >
                     <td>
                       <Image
-                        alt={orderItem.menuItem?.name ?? "Menu Image"}
+                        alt={orderItem.menuItem?.englishName ?? "Menu Image"}
                         src={
                           orderItem.menuItem?.imageUrl ??
                           "/images/logo/LOGO.jpg"
@@ -79,7 +80,7 @@ export default function OrderHistory({
                       />
                     </td>
                     <td className="whitespace-nowrap py-3 px-3">
-                      {orderItem.menuItem?.name}
+                      {locale === "fa" ? orderItem.menuItem?.farsiName : orderItem.menuItem?.englishName}
                     </td>
                     <td className="whitespace-nowrap py-3 px-3">
                       AED {orderItem.price.toFixed(2)}
@@ -145,7 +146,7 @@ export default function OrderHistory({
                       >
                         <CiCirclePlus size={20} color= {`${!orderItem.menuItem.isAvailable && "red"}`}/>
                       </button>
-                      {orderItem.menuItem?.name}
+                      {locale === "fa" ? orderItem.menuItem?.farsiName : orderItem.menuItem?.englishName}
                     </td>
                     <td className="whitespace-nowrap py-1 px-1">
                       AED {orderItem.price.toFixed(2)}
