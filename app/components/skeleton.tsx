@@ -195,7 +195,7 @@ export  function HomeSkeleton() {
 
 export  function MenuSkeleton() {
   return (
-    <div className=" flex items-center justify-center bg-cover bg-center w-full max-w-screen-2xl mx-auto min-h-screen bg-[url('/images/BG/bg3.jpg')] pt-16">
+    <div className=" flex items-center justify-center bg-cover bg-center w-full max-w-screen-2xl mx-auto min-h-screen bg-[url('/images/BG/bgMenuMorning.jpg')] dark:bg-[url('/images/BG/bgMenuNight.jpg')] pt-16">
       <div className="relative pb-10 px-1 ">
         {/* Menu */}
         <section>

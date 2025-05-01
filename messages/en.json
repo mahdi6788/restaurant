@@ -72,12 +72,12 @@
     "No items in the cart": "No items in the cart",
     "Image": "Image",
     "Quantity": "Quantity",
-    "Qty":"Qty",
+    "Qty": "Qty",
     "Price": "Price",
     "Edit": "Edit",
-    "Total":"Total",
+    "Total": "Total",
     "Delivery cost": "Delivery cost",
-    "Checkout":"Checkout"
+    "Checkout": "Checkout"
   },
   "Menu": {
     "Main Course": "Main Course",
@@ -119,8 +119,10 @@
     "Food not found": "Food not found"
   },
   "EditForm": {
-    "Choose a Name": "Choose a Name",
-    "Description": "Description",
+    "English Name": "English Name",
+    "English Description": "English Description",
+    "Farsi Name": "Farsi Name",
+    "Farsi Description": "Farsi Description",
     "Price": "Price",
     "Category": "Category",
     "MainCourse": "MainCourse",
@@ -135,8 +137,10 @@
     "Create Menu": "Create Menu"
   },
   "Form": {
-    "Choose a Name": "Choose a Name",
-    "Description": "Description",
+    "English Name": "English Name",
+    "English Description": "English Description",
+    "Farsi Name": "Farsi Name",
+    "Farsi Description": "Farsi Description",
     "Price": "Price",
     "Category": "Category",
     "MainCourse": "MainCourse",

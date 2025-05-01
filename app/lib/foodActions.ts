@@ -48,9 +48,11 @@ export async function createFood(
 
     /// Extract text fields from formData
     const textFields = {
-      name: formData.get("name"),
-      description: formData.get("description"),
-      price: formData.get("price"),
+      farsiName: formData.get("farsiName"),
+      farsiDescription: formData.get("farsiDescription"),
+      englishName: formData.get("englishName"),
+      englishDescription: formData.get("englishDescription"),
+      price: Number(formData.get("price")) ,
       category: formData.get("category") as
         | "MainCourse"
         | "Appetizers"
@@ -63,11 +65,11 @@ export async function createFood(
       return { message: "Invalid text fields", status: 400 };
     }
     /// destructure the data object
-    const { name, description, price, category, isAvailable } = data;
+    const { farsiName, farsiDescription, englishName, englishDescription, price, category, isAvailable } = data;
     /// create food
 
     await prisma.menuItem.create({
-      data: { name, description, price, imageUrl, category, isAvailable },
+      data: { farsiName, farsiDescription, englishName, englishDescription, price: price as number, imageUrl, category, isAvailable },
     });
     revalidatePath("/users/admin/foods", "page");
     return { message: "Food created successfully.", status: 201 };
@@ -87,8 +89,10 @@ export async function editFood({
 }): Promise<{ message: string; status: number }> {
   try {
     const textFields = {
-      name: formData.get("name"),
-      description: formData.get("description"),
+      farsiName: formData.get("farsiName"),
+      farsiDescription: formData.get("farsiDescription"),
+      englishName: formData.get("englishName"),
+      englishDescription: formData.get("englishDescription"),
       price: formData.get("price"),
       category: formData.get("category"),
     };
@@ -97,7 +101,7 @@ export async function editFood({
     if (!success) {
       return { message: "Invalid text fields", status: 400 };
     }
-    const { name, description, price, category } = data;
+    const { farsiName, farsiDescription, englishName, englishDescription, price, category } = data;
 
     /// get image file
 
@@ -131,7 +135,7 @@ export async function editFood({
     /// update MenuItem ///
     await prisma.menuItem.update({
       where: { id: food.id },
-      data: { name, description, price, imageUrl, category },
+      data: { farsiName, farsiDescription, englishName, englishDescription, price, imageUrl, category },
     });
     revalidatePath("/users/admin/foods", "page");
     return { message: "Food updated successfully.", status: 200 };

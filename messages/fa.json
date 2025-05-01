@@ -123,8 +123,10 @@
     "Food not found": "غذا یافت نشد"
   },
   "EditForm": {
-    "Choose a Name": "انتخاب نام",
-    "Description": "توضیحات",
+    "English Name": "نام انگلیسی",
+    "English Description": "توضیحات انگلیسی",
+    "Farsi Name": "نام فارسی",
+    "Farsi Description": "توضیحات فارسی",
     "Price": "قیمت",
     "Category": "دسته‌بندی",
     "MainCourse": "غذای اصلی",
@@ -139,8 +141,10 @@
     "Create Menu": "ایجاد منو"
   },
   "Form": {
-    "Choose a Name": "انتخاب نام",
-    "Description": "توضیحات",
+    "English Name": "نام انگلیسی",
+    "English Description": "توضیحات انگلیسی",
+    "Farsi Name": "نام فارسی",
+    "Farsi Description": "توضیحات فارسی",
     "Price": "قیمت",
     "Category": "دسته‌بندی",
     "MainCourse": "غذای اصلی",

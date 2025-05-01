@@ -6,10 +6,11 @@ import { MenuItem } from "@prisma/client";
 import { DeleteFood, UpdateFood } from "../ui/buttons";
 import { FoodsListSkeleton } from "../skeleton";
 import { useMenu } from "@/hooks/useMenu";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 export default function FoodsList() {
   const translate = useTranslations("FoodsList")
+  const locale = useLocale()
   /// fetch foods using hook contaning use query
   const { menu, menuLoading, menuRefetch } = useMenu();
 
@@ -45,7 +46,7 @@ export default function FoodsList() {
                 <div className="h-60 w-full relative rounded-xl overflow-hidden">
                   <Image
                     src={food.imageUrl ?? "/public/images/logo/LOGO.jpg"}
-                    alt={food.name || "Food image"}
+                    alt={food.englishName || "Food image"}
                     layout="fill"
                     placeholder="empty"
                     objectFit="cover"
@@ -59,8 +60,8 @@ export default function FoodsList() {
                   >
                     {food.category}
                   </div>
-                  <h2 className="">{food.name}</h2>
-                  <p className="w-full text-sm">{food.description}</p>
+                  <h2 className="">{locale=== "fa" ? food.farsiName : food.englishName}</h2>
+                  <p className="w-full text-sm">{locale=== "fa" ? food.farsiDescription : food.englishDescription}</p>
                 </div>
 
                 <p className="absolute left-0 bottom-0 font-semibold text-yellow-300 bg-blue-600 px-2 py-1 rounded-bl-2xl rounded-tr-3xl">
@@ -142,7 +143,7 @@ export default function FoodsList() {
                   {/* Image */}
                   <td>
                     <Image
-                      alt={food.name || "Food image"}
+                      alt={food.englishName || "Food image"}
                       src={
                         typeof food.imageUrl === "string"
                           ? food.imageUrl
@@ -163,11 +164,11 @@ export default function FoodsList() {
                   </td>
                   {/* Name */}
                   <td className="whitespace-nowrap py-3 px-3">
-                    <p>{food.name}</p>
+                    <p>{locale=== "fa" ? food.farsiName : food.englishName}</p>
                   </td>
                   {/* Description */}
                   <td className="whitespace-nowrap py-3 px-3">
-                    {food.description}
+                    {locale=== "fa" ? food.farsiDescription : food.englishDescription}
                   </td>
                   {/* Price */}
                   <td className="whitespace-nowrap py-3 px-3">

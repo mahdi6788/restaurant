@@ -3,11 +3,12 @@ import Image from "next/image";
 import { MenuItem } from "@prisma/client";
 import { useOrderButton } from "@/hooks/useOrderButton";
 import { CiCircleChevDown, CiCircleChevUp } from "react-icons/ci";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 const MenuCards = ({ food }: { food: MenuItem }) => {
   const translate = useTranslations("MenuCards")
   const { quantity, handleAdd, handleDec } = useOrderButton(food);
+  const locale = useLocale()
 
   return (
     <div className="relative bg-stone-100 dark:dark-mode opacity-85 flex flex-col items-center p-2 rounded-2xl shadow-lg text-center h-96">
@@ -23,13 +24,13 @@ const MenuCards = ({ food }: { food: MenuItem }) => {
       <div className="h-60 w-full relative rounded-xl overflow-hidden">
         <Image
           src={food.imageUrl as string}
-          alt={food.name ?? ""}
+          alt={food.englishName ?? ""}
           layout="fill"
           objectFit="cover"
         />
       </div>
-      <h2 className="text-lg font-bold mt-3">{food.name}</h2>
-      <p className=" text-sm">{food.description}</p>
+      <h2 className="text-lg font-bold mt-3">{locale=== "fa" ? food.farsiName : food.englishName}</h2>
+      <p className=" text-sm">{locale=== "fa" ? food.farsiDescription : food.englishDescription}</p>
       <div className="flex items-center justify-arround w-full">
         <p className="absolute left-0 bottom-0 font-semibold text-yellow-200 bg-blue-600 px-2 py-1 rounded-bl-2xl rounded-tr-3xl">
           AED {food.price}

@@ -69,8 +69,10 @@ model Session {
 
 model MenuItem {
   id                        String      @id @default(uuid())
-  name                      String
-  description               String?
+  farsiName                 String      @default("")
+  farsiDescription          String?
+  englishName               String      @default("")
+  englishDescription        String?
   price                     Float
   category                  Category    @default(MainCourse)
   imageUrl                  String?

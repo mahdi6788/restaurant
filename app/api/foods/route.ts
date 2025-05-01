@@ -16,10 +16,10 @@ export async function GET() {
 
 //CREATE A NEW menu
 export async function POST(req: NextRequest) {
-  const { name, description, price, category, imageUrl } = await req.json();
+  const { farsiName, farsiDescription, englishName, englishDescription, price, category, imageUrl } = await req.json();
   try {
     const menu = await prisma.menuItem.create({
-      data: { name, description, price, category, imageUrl },
+      data: { farsiName, farsiDescription, englishName, englishDescription, price, category, imageUrl },
     });
     return NextResponse.json(menu, { status: 201 });
   } catch (error) {
@@ -32,12 +32,12 @@ export async function POST(req: NextRequest) {
 
 //UPDATE A menu
 export async function PUT(req: NextRequest) {
-  const { id, name, description, price, category, imageUrl, isAvailable } =
+  const { id, farsiName, farsiDescription, englishName, englishDescription, price, category, imageUrl, isAvailable } =
     await req.json();
   try {
     const updatemenu = await prisma.menuItem.update({
       where: { id: id },
-      data: { name, description, price, category, imageUrl, isAvailable },
+      data: { farsiName, farsiDescription, englishName, englishDescription, price, category, imageUrl, isAvailable },
     });
     return NextResponse.json(updatemenu, { status: 200 });
   } catch (error) {

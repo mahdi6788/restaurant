@@ -4,27 +4,28 @@ import Image from "next/image";
 import { MenuItem } from "@prisma/client";
 import { CiCircleChevUp, CiCircleChevDown } from "react-icons/ci";
 import { useOrderButton } from "@/hooks/useOrderButton";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 export default function FoodCard({ food }: { food: MenuItem }) {
   const translate = useTranslations("FoodCard")
   const {quantity, handleAdd, handleDec} = useOrderButton(food)
+  const locale = useLocale()
 
   return (
     <div className="relative max-w-sm w-2/3 p-5 pb-1 bg-stone-50 dark:dark-mode rounded-3xl shadow-lg ">
       <div className="relative h-60 w-full overflow-hidden rounded-xl">
         <Image
           src={food.imageUrl as string}
-          alt={food.name || ""}
+          alt={food.englishName || ""}
           layout="fill"
           objectFit="cover"
           className="rounded-xl"
         />
       </div>
-      <h2 className="text-lg font-semibold mt-4">{food.name}</h2>
+      <h2 className="text-lg font-semibold mt-4">{locale=== "fa" ? food.farsiName : food.englishName}</h2>
       <div className="flex items-center justify-between">
         <div>
-          <p className="text-sm w-36">{food.description}</p>
+          <p className="text-sm w-36">{locale=== "fa" ? food.farsiDescription : food.englishDescription}</p>
           <p className="text-yellow-900 dark:text-yellow-200  text-sm">AED {food.price?.toFixed(2)}</p>
         </div>
         <div className="flex items-center">

@@ -123,8 +123,10 @@
     "Food not found": "الطعام غير موجود"
   },
   "EditForm": {
-    "Choose a Name": "اختر اسمًا",
-    "Description": "الوصف",
+    "English Name": "الاسم بالإنجليزية ",
+    "English Description": "الوصف بالإنجليزية",
+    "Farsi Name": "الاسم بالفارسية",
+    "Farsi Description": "الوصف بالفارسية",
     "Price": "السعر",
     "Category": "الفئة",
     "MainCourse": "الطبق الرئيسي",
@@ -139,8 +141,10 @@
     "Create Menu": "إنشاء قائمة"
   },
   "Form": {
-    "Choose a Name": "اختر اسمًا",
-    "Description": "الوصف",
+    "English Name": "الاسم بالإنجليزية",
+    "English Description": "الوصف بالإنجليزية",
+    "Farsi Name": "الاسم بالفارسية",
+    "Farsi Description": "الوصف بالفارسية",
     "Price": "السعر",
     "Category": "الفئة",
     "MainCourse": "الطبق الرئيسي",

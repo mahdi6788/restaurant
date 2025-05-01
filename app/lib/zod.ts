@@ -21,12 +21,17 @@ export const userSchema = z.object({
 });
 
 export const MenuSchema = z.object({
-  name: z.string().min(1, "name is required"),
-  description: z
+  farsiName: z.string().min(1, "name is required"),
+  farsiDescription: z
+    .string()
+    .min(1, "description is required")
+    .max(50, "description must be less than 50 characters").optional(),
+  englishName: z.string().min(1, "name is required"),
+  englishDescription: z
     .string()
     .min(1, "description is required")
     .max(50, "description must be less than 50 characters"),
-  price: z.coerce.number().gt(0, "price must be greater than 0"),
+  price: z.coerce.number().gt(0, "price must be greater than 0").optional(),
   category: CategoryEnum.default("MainCourse"),
   isAvailable: z.boolean().default(true).optional(),
 });

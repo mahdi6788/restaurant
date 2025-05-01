@@ -4,7 +4,7 @@ import { Link } from "@/i18n/navigation";
 import toast from "react-hot-toast";
 import Button from "../ui/Button";
 import { CurrencyDollarIcon } from "@heroicons/react/24/outline";
-import { MdDescription } from "react-icons/md";
+import { MdCategory, MdDescription } from "react-icons/md";
 import { BiFoodMenu } from "react-icons/bi";
 import { createFood } from "@/app/lib/foodActions";
 import { useRouter } from "@/i18n/navigation";
@@ -42,40 +42,74 @@ export default function Form() {
   }
 
   return (
-    <form onSubmit={handleCreate}>
+    <form onSubmit={handleCreate} className="rounded-lg bg-slate-100 dark:dark-mode p-2">
       <div className="mb-6 p-4 sm:p-6 sm:mb-1">
-        {/* Name */}
+        {/* Farsi Name */}
         <div className="mb-4 relative">
-          <label htmlFor="name" className="mb-2 block text-sm font-medium">
-            {translate("Choose a Name")}
+          <label htmlFor="farsiName" className="mb-2 block text-sm font-medium">
+            {translate("Farsi Name")}
           </label>
           <input
             required
             type="text"
-            id="name"
-            name="name"
-            placeholder="Food Name"
+            id="farsiName"
+            name="farsiName"
+            placeholder="Food Name in Farsi"
             aria-describedby="name-error"
-            className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+            className="text-blue-950 peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 "
           />
-          <BiFoodMenu className="pointer-events-none absolute left-3 top-2/3 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
+          <BiFoodMenu className="pointer-events-none absolute left-3 top-2/3 h-[18px] w-[18px] -translate-y-1/2 peer-focus:text-gray-900 text-blue-950" />
         </div>
-        {/* Description */}
+        {/* Farsi Description */}
         <div className="mb-4 relative">
           <label
-            htmlFor="description"
+            htmlFor="farsiDescription"
             className="mb-2 block text-sm font-medium"
           >
-            {translate("Description")}
+            {translate("Farsi Description")}
           </label>
           <input
             type="text"
-            id="description"
-            name="description"
-            placeholder="Describe the food"
-            className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+            id="farsiDescription"
+            name="farsiDescription"
+            placeholder="Describe the food in Farsi"
+            className="text-blue-950 peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 "
           />
-          <MdDescription className="pointer-events-none absolute left-3 top-2/3 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
+          <MdDescription className="pointer-events-none absolute left-3 top-2/3 h-[18px] w-[18px] -translate-y-1/2  peer-focus:text-gray-900 text-blue-950" />
+        </div>
+
+        {/* English Name */}
+        <div className="mb-4 relative">
+          <label htmlFor="englishName" className="mb-2 block text-sm font-medium">
+            {translate("English Name")}
+          </label>
+          <input
+            required
+            type="text"
+            id="englishName"
+            name="englishName"
+            placeholder="Food Name in English"
+            aria-describedby="name-error"
+            className="text-blue-950 peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 "
+          />
+          <BiFoodMenu className="pointer-events-none absolute left-3 top-2/3 h-[18px] w-[18px] -translate-y-1/2 peer-focus:text-gray-900 text-blue-950" />
+        </div>
+        {/* English Description */}
+        <div className="mb-4 relative">
+          <label
+            htmlFor="englishDescription"
+            className="mb-2 block text-sm font-medium"
+          >
+            {translate("English Description")}
+          </label>
+          <input
+            type="text"
+            id="englishDescription"
+            name="englishDescription"
+            placeholder="Describe the food in English"
+            className="text-blue-950 peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 "
+          />
+          <MdDescription className="pointer-events-none absolute left-3 top-2/3 h-[18px] w-[18px] -translate-y-1/2 peer-focus:text-gray-900 text-blue-950" />
         </div>
         {/* Price */}
         <div className="mb-4 relative">
@@ -88,9 +122,9 @@ export default function Form() {
             id="price"
             name="price"
             placeholder="Enter AED amount"
-            className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+            className="text-blue-950 peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 "
           />
-          <CurrencyDollarIcon className="pointer-events-none absolute left-3 top-2/3 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
+          <CurrencyDollarIcon className="pointer-events-none absolute left-3 top-2/3 h-[18px] w-[18px] -translate-y-1/2 peer-focus:text-gray-900 text-blue-950" />
         </div>
         {/* Category */}
         <div className="mb-4 relative">
@@ -100,20 +134,14 @@ export default function Form() {
           <select
             id="category"
             name="category"
-            className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+            className="text-blue-950 peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 "
           >
             <option value="MainCourse">{translate("MainCourse")}</option>
             <option value="Appetizers">{translate("Appetizers")}</option>
             <option value="Drink">{translate("Drink")}</option>
           </select>
+          <MdCategory className="pointer-events-none absolute left-3 top-2/3 h-[18px] w-[18px] -translate-y-1/2  text-blue-950" />
         </div>
-        {/* Availability */}
-        {/* <div className="mb-4 relative">
-          <div className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500">
-            <label htmlFor="availability">Is Availabile?</label>
-            <input type="checkbox" id="availability" name="availability" checked/>
-          </div>
-        </div> */}
         {/* Image */}
         <ImageUploader prevImage="" />
 

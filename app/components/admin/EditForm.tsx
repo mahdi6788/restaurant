@@ -51,15 +51,15 @@ export default function EditForm({ food }: { food: MenuItem }) {
       <div>
         {/* Name */}
         <div className="mb-4 relative">
-          <label htmlFor="name" className="mb-2 block text-sm font-medium">
-            Choose a Name
+          <label htmlFor="farsiName" className="mb-2 block text-sm font-medium">
+          {translate("Farsi Name")}
           </label>
           <input
-            defaultValue={food.name}
+            defaultValue={food.farsiName}
             type="text"
-            id="name"
-            name="name"
-            placeholder="Food Name"
+            id="farsiName"
+            name="farsiName"
+            placeholder="Food Name in Farsi"
             className="text-blue-950 peer block w-full rounded-md border py-2 pl-10 text-sm outline-2"
           />
           <BiFoodMenu className="text-blue-950 pointer-events-none absolute left-3 top-2/3 h-[18px] w-[18px] -translate-y-1/2 " />
@@ -67,17 +67,50 @@ export default function EditForm({ food }: { food: MenuItem }) {
         {/* Description */}
         <div className="mb-4 relative">
           <label
-            htmlFor="description"
+            htmlFor="Description"
             className="mb-2 block text-sm font-medium"
           >
-            {translate("Description")}
+            {translate("Farsi Description")}
           </label>
           <input
-            defaultValue={food.description ?? ""}
+            defaultValue={food.farsiDescription ?? ""}
             type="text"
-            id="description"
-            name="description"
-            placeholder="Describe the food"
+            id="farsiDescription"
+            name="farsiDescription"
+            placeholder="Describe the food in Farsi"
+            className="text-blue-950 peer block w-full rounded-md border py-2 pl-10 text-sm outline-2"
+          />
+          <MdDescription className="text-blue-950 pointer-events-none absolute left-3 top-2/3 h-[18px] w-[18px] -translate-y-1/2" />
+        </div>
+        {/* Name */}
+        <div className="mb-4 relative">
+          <label htmlFor="englishName" className="mb-2 block text-sm font-medium">
+          {translate("English Name")}
+          </label>
+          <input
+            defaultValue={food.englishName}
+            type="text"
+            id="englishName"
+            name="englishName"
+            placeholder="Food Name in English"
+            className="text-blue-950 peer block w-full rounded-md border py-2 pl-10 text-sm outline-2"
+          />
+          <BiFoodMenu className="text-blue-950 pointer-events-none absolute left-3 top-2/3 h-[18px] w-[18px] -translate-y-1/2 " />
+        </div>
+        {/* Description */}
+        <div className="mb-4 relative">
+          <label
+            htmlFor="englishDescription"
+            className="mb-2 block text-sm font-medium"
+          >
+            {translate("English Description")}
+          </label>
+          <input
+            defaultValue={food.englishDescription ?? ""}
+            type="text"
+            id="englishDescription"
+            name="englishDescription"
+            placeholder="Describe the food in English"
             className="text-blue-950 peer block w-full rounded-md border py-2 pl-10 text-sm outline-2"
           />
           <MdDescription className="text-blue-950 pointer-events-none absolute left-3 top-2/3 h-[18px] w-[18px] -translate-y-1/2" />
