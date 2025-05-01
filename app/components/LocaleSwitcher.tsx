@@ -4,6 +4,8 @@ import { Locale, useLocale } from "next-intl";
 import { ChangeEvent, useTransition } from "react";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
+import Cookies from "js-cookie"
+
 
 export default function LocaleSwitcher() {
   const router = useRouter();
@@ -13,6 +15,7 @@ export default function LocaleSwitcher() {
 
   function onSelectChange(event: ChangeEvent<HTMLSelectElement>) {
     const nextLocale = event.target.value as Locale;
+    Cookies.set("locale", nextLocale)
     startTransition(() => {
       router.replace({ pathname }, { locale: nextLocale });
     });

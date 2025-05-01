@@ -64,9 +64,9 @@ export default function Home() {
               <LocaleSwitcher />
               <button onClick={toggleTheme} className="p-2">
                 {theme === "light" ? (
-                  <MdDarkMode size={30} color="black"/>
+                  <MdDarkMode size={30} color="gray" />
                 ) : (
-                  <MdLightMode size={30} color="yellow"/>
+                  <MdLightMode size={30} color="yellow" />
                 )}
               </button>
               {/* cart */}

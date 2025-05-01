@@ -4,9 +4,11 @@ import { NextRequest, NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
 import Negotiator from "negotiator";
 import { match } from "@formatjs/intl-localematcher";
+import Cookies from "js-cookie"
+
 
 const locales = ["en", "fa", "ar"];
-const defaultLocale = "en";
+const defaultLocale = Cookies.get("locale") || "en";
 
 function getLocale(request: NextRequest): string {
   const headers = {
