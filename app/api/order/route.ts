@@ -33,7 +33,12 @@ export async function GET(req: NextRequest) {
         | {
             items?: {
               some: {
-                menuItem: { name: { contains: string; mode: "insensitive" } };
+                menuItem: {
+                  OR?: Array<
+                  | {farsiName: { contains: string; mode: "insensitive" }}
+                  | {englishName: { contains: string; mode: "insensitive" }}
+                  >
+                };
               };
             };
           }
@@ -51,7 +56,10 @@ export async function GET(req: NextRequest) {
             items: {
               some: {
                 menuItem: {
-                  name: { contains: search, mode: "insensitive" },
+                  OR: [
+                    {farsiName: { contains: search, mode: "insensitive" }},
+                    {englishName: { contains: search, mode: "insensitive" }},
+                  ]
                 },
               },
             },
