@@ -7,12 +7,13 @@ import {
   ParamsType,
 } from "@/app/types/types";
 import { useQuery } from "@tanstack/react-query";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import { useEffect } from "react";
 
 export default function Details({ params }: ParamsType) {
   const translate = useTranslations("Details")
+  const locale = useLocale()
   const { search, setSearch, sortby, setSortby, setCreatedAt, createdAt } =
     useOrders();
 
@@ -189,7 +190,7 @@ export default function Details({ params }: ParamsType) {
                     >
                       <td>
                         <Image
-                          alt={orderItem.menuItem?.name ?? "Menu Image"}
+                          alt={orderItem.menuItem?.englishName ?? "Menu Image"}
                           src={
                             orderItem.menuItem?.imageUrl ??
                             "/images/logo/LOGO.jpg"
@@ -200,7 +201,7 @@ export default function Details({ params }: ParamsType) {
                         />
                       </td>
                       <td className="whitespace-nowrap py-3 px-3">
-                        {orderItem.menuItem?.name}
+                        {locale === "fa" ? orderItem.menuItem?.farsiName : orderItem.menuItem?.englishName}
                       </td>
                       <td className="whitespace-nowrap py-3 px-3">
                         {orderItem?.price}
@@ -238,7 +239,7 @@ export default function Details({ params }: ParamsType) {
                       className="w-full border-b py-3 text-sm last-of-type:border-none "
                     >
                       <td className="flex items-center gap-1 whitespace-nowrap py-1 px-1">
-                        {orderItem.menuItem?.name}
+                        {locale === "fa" ? orderItem.menuItem?.farsiName : orderItem.menuItem?.englishName}
                       </td>
                       <td className="whitespace-nowrap py-1 px-1">
                         AED {orderItem.price.toFixed(2)}
