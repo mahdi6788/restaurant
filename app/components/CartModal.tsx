@@ -53,13 +53,13 @@ export default function CartModal({ isOpen, onClose }: CartModalProps) {
         <div className="mt-6 flex items-center justify-between">
           <button
             onClick={() => clearCart()}
-            className="px-4 py-3 bg-gray-800 text-orange-500 rounded"
+            className="px-4 py-3 bg-gray-800 text-orange-500 rounded hover:bg-gray-900"
           >
             {translate("Clear Cart")}
           </button>
           <Link
             href="/checkout"
-            className="px-4 py-3 bg-gray-800 text-green-500 rounded"
+            className="px-4 py-3 bg-gray-800 text-green-500 rounded hover:bg-gray-900"
             onClick={onClose}
           >
             {translate("Total: AED")} {total.toFixed(2)} -{" "}
