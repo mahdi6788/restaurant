@@ -13,7 +13,7 @@ import { User } from "@prisma/client";
 import { useTranslations } from "next-intl";
 
 export default function Checkout() {
-  const translate = useTranslations("Checkout")
+  const translate = useTranslations("Checkout");
   const router = useRouter();
   const queryClient = useQueryClient();
   const [total, setTotal] = useState(0);
@@ -27,7 +27,7 @@ export default function Checkout() {
   const { cartItems } = useCart();
 
   const query = new URLSearchParams({
-    email: email || ""
+    email: email || "",
   }).toString();
 
   const fetchCustomer = async () => {
@@ -164,13 +164,15 @@ export default function Checkout() {
       <div className="hidden sm:grid grid-cols-2 gap-8">
         {/* Customer Information */}
         <div className=" bg-white dark:dark-mode p-2 rounded-lg shadow-md">
-          <h2 className="text-lg font-medium mb-4">{translate("Customer Information")}</h2>
-          <form onSubmit={(event) => handleCheckout(event)} className="rounded-lg p-1">
+          <h2 className="text-lg font-medium mb-4">
+            {translate("Customer Information")}
+          </h2>
+          <form
+            onSubmit={(event) => handleCheckout(event)}
+            className="rounded-lg p-1"
+          >
             <div className="mb-4">
-              <label
-                htmlFor="name"
-                className="block text-sm font-medium "
-              >
+              <label htmlFor="name" className="block text-sm font-medium ">
                 {translate("Name")}
               </label>
               <input
@@ -183,10 +185,7 @@ export default function Checkout() {
               />
             </div>
             <div className="mb-4">
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium "
-              >
+              <label htmlFor="email" className="block text-sm font-medium ">
                 {translate("Email")}
               </label>
               <input
@@ -199,10 +198,7 @@ export default function Checkout() {
               />
             </div>
             <div className="mb-4">
-              <label
-                htmlFor="address"
-                className="block text-sm font-medium "
-              >
+              <label htmlFor="address" className="block text-sm font-medium ">
                 {translate("Address")}
               </label>
               <input
@@ -215,10 +211,7 @@ export default function Checkout() {
               />
             </div>
             <div className="mb-4">
-              <label
-                htmlFor="phone"
-                className="block text-sm font-medium "
-              >
+              <label htmlFor="phone" className="block text-sm font-medium ">
                 {translate("Phone Number")}
               </label>
               <input
@@ -234,10 +227,9 @@ export default function Checkout() {
               type="submit"
               className={`w-full bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 transition-colors ${orderLoading && "animate-pulse"}`}
             >
-              {session 
-              ? translate("Checkout")
-              : translate("Sign in to checkout")
-              }
+              {session
+                ? translate("Checkout")
+                : translate("Sign in to checkout")}
             </button>
           </form>
         </div>
@@ -274,15 +266,32 @@ export default function Checkout() {
                 </thead>
                 <tbody>
                   {cartItems.map((item) => (
-                    <tr
-                      className="w-full border-b py-3 text-sm"
-                      key={item.id}
-                    >
+                    <tr className="w-full border-b py-3 text-sm" key={item.id}>
                       <CheckoutCard item={item} isMobile={false} />
                     </tr>
                   ))}
                 </tbody>
               </table>
+              <div className="p-5 space-y-5 w-full">
+                {/* Total */}
+                <div className="flex justify-between items-center gap-3">
+                  <p className=" text-lg">{translate("Delivery cost")}: </p>
+                  <p className="">AED 0.00</p>
+                </div>
+                <div className="flex justify-between items-center">
+                  <p className=" text-lg">{translate("Total")}</p>
+                  <p className=" text-xl font-bold">
+                    AED{" "}
+                    {cartItems
+                      .reduce(
+                        (sum, item) =>
+                          sum + item.menuItem.price * item.quantity,
+                        0
+                      )
+                      .toFixed(2)}
+                  </p>
+                </div>
+              </div>
             </div>
           )}
         </div>
