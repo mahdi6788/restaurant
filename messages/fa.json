@@ -60,7 +60,9 @@
     "Quantity": "تعداد",
     "Price": "قیمت",
     "Edit": "ویرایش",
-    "Remove": "حذف"
+    "Remove": "حذف",
+    "Delivery cost": "هزینه ارسال",
+    "Total":"جمع کل"
   },
   "CheckoutCard": {
     "Remove": "حذف"

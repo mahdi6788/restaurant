@@ -60,7 +60,9 @@
     "Quantity": "الكمية",
     "Price": "السعر",
     "Edit": "تعديل",
-    "Remove": "إزالة"
+    "Remove": "إزالة",
+    "Delivery cost": "تكلفة التوصيل",
+    "Total":"الإجمالي "
   },
   "CheckoutCard": {
     "Remove": "إزالة"
@@ -80,7 +82,9 @@
     "Price": "السعر",
     "Edit": "تعديل",
     "Delivery cost": "تكلفة التوصيل",
-    "Checkout":"الدفع"
+    "Checkout":"الدفع",
+    "Total":"الإجمالي "
+
 
   },
   "Menu": {

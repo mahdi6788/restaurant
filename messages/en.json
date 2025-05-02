@@ -56,7 +56,9 @@
     "Quantity": "Quantity",
     "Price": "Price",
     "Edit": "Edit",
-    "Remove": "Remove"
+    "Remove": "Remove",
+    "Delivery cost": "Delivery cost",
+    "Total": "Total"
   },
   "CheckoutCard": {
     "Remove": "Remove"
