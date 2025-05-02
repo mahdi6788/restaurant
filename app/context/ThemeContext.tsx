@@ -10,7 +10,7 @@ type ThemeContextType = {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState(Cookies.get("theme") || "light");   // Load theme from Cookies else use default 
+  const [theme, setTheme] = useState(Cookies.get("theme") || "dark");   // Load theme from Cookies else use default 
   // Update the dark class on the html element and save to Cookies
   useEffect(() => {
     if (theme === "dark") {

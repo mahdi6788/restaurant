@@ -92,14 +92,14 @@ export default function CustomersOrders({
             </table>
 
             {/* Mobile Table */}
-            <table className="table sm:hidden">
+            <table className="table sm:hidden w-full max-w-[100%] table-fixed border-collapse border border-gray-300 mb-10">
               <thead className="rounded-lg text-left text-sm">
                 <tr>
                   <th className="pl-1 py-1 border-2 font-medium">{translate("Name")}</th>
-                  <th className="pl-1 py-1 border-2 font-medium">{translate("Price")}</th>
-                  <th className="pl-1 py-1 border-2 font-medium">{translate("Qty")}</th>
-                  <th className="pl-1 py-1 border-2 font-medium">{translate("Date")}</th>
-                  <th className="pl-1 py-1 border-2 font-medium">{translate("Payment")}</th>
+                  <th className="pl-1 py-1 border-2 font-medium text-center">{translate("Price")}</th>
+                  <th className="pl-1 py-1 border-2 font-medium text-center w-[10%]">{translate("Qty")}</th>
+                  <th className="pl-1 py-1 border-2 font-medium text-center">{translate("Date")}</th>
+                  <th className="pl-1 py-1 border-2 font-medium text-center">{translate("Payment")}</th>
                 </tr>
               </thead>
               <tbody className="">
@@ -108,19 +108,19 @@ export default function CustomersOrders({
                     key={orderItem.id}
                     className="w-full border-b py-3 text-sm last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
                   >
-                    <td className="flex items-center gap-1 whitespace-nowrap py-1 px-1">
+                    <td className="flex items-center gap-1 whitespace-normal py-1 px-1">
                       {locale === "fa" ? orderItem.menuItem?.farsiName : orderItem.menuItem?.englishName}
                     </td>
-                    <td className="whitespace-nowrap py-1 px-1">
+                    <td className="whitespace-normal py-1 px-1 text-center">
                       AED {orderItem.price.toFixed(2)}
                     </td>
-                    <td className="whitespace-nowrap py-1 px-1">
+                    <td className="whitespace-normal py-1 px-1 text-center w-[10%]">
                       {orderItem.quantity}
                     </td>
-                    <td className="whitespace-nowrap py-1 px-1">
+                    <td className="whitespace-normal py-1 px-1 text-center">
                       {new Date(order.createdAt).toLocaleDateString()}
                     </td>
-                    <td className="whitespace-nowrap py-1 px-1">
+                    <td className="whitespace-normal py-1 px-1 text-center">
                       {order.status === "COMPLETED" ? "Paid" : "Pending"}
                     </td>
                   </tr>

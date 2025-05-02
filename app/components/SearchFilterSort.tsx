@@ -20,7 +20,7 @@ export default function SearchFilterSort() {
       <div>
         {translate("Sort by")}
         <select
-          className="rounded-lg p-2 ml-2 w-full sm:w-fit"
+          className="rounded-lg p-2 w-full sm:w-fit"
           name="sortby"
           id="sortby"
           value={sortby}

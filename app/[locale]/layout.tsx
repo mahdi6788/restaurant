@@ -7,7 +7,7 @@ import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { getMessages } from "next-intl/server";
-import { inter, amiri } from "../lib/fonts";
+import { lexend, amiri } from "../lib/fonts";
 
 /// Readonly: to ensure type safety and immutability.
 export default async function RootLayout({
@@ -29,7 +29,7 @@ export default async function RootLayout({
   return (
     <html
       lang={locale}
-      className={`${locale === "en" ? inter.className : amiri.className}`}
+      className={`${locale === "en" ? lexend.className : amiri.className}`}
     >
       <body>
         <NextIntlClientProvider messages={messages} locale={locale}>

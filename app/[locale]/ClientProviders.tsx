@@ -17,13 +17,13 @@ export default function ClientProviders({
 }) {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <ThemeProvider>
-      <QueryClientProvider client={queryClient}>
-        <Toaster />
+    <QueryClientProvider client={queryClient}>
+      <Toaster />
+      <ThemeProvider>
         <MobileNavbar isOpen={isOpen} setIsOpen={setIsOpen} />
         <OrderProvider>{children}</OrderProvider>
-        <MobileBottomNav />
-      </QueryClientProvider>
-    </ThemeProvider>
+      </ThemeProvider>
+      <MobileBottomNav />
+    </QueryClientProvider>
   );
 }
