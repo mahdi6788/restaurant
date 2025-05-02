@@ -12,7 +12,7 @@ export default function FoodCard({ food }: { food: MenuItem }) {
   const locale = useLocale()
 
   return (
-    <div className="relative max-w-sm w-2/3 p-5 pb-1 bg-stone-50 dark:dark-mode rounded-3xl shadow-lg ">
+    <div className="relative max-w-sm w-2/3 p-2 pb-1 bg-stone-50 dark:dark-mode rounded-3xl shadow-lg ">
       <div className="relative h-60 w-full overflow-hidden rounded-xl">
         <Image
           src={food.imageUrl as string}
