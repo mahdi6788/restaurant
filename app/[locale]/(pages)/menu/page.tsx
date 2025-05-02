@@ -23,7 +23,7 @@ export default function Menu() {
   if (menuLoading) return <Loading />;
 
   return (
-    <div className=" flex items-center justify-center bg-cover bg-center w-full max-w-screen-2xl mx-auto min-h-screen bg-[url('/images/BG/bgMenuMorning.jpg')] dark:bg-[url('/images/BG/bgMenuNight.jpg')] pt-20">
+    <div className=" flex items-center justify-center bg-cover bg-center w-full max-w-screen-2xl mx-auto min-h-screen bg-sky-100 dark:bg-sky-800 sm:bg-[url('/images/BG/bgMenuMorning.jpg')] sm:dark:bg-[url('/images/BG/bgMenuNight.jpg')] pt-20">
       <div className="fixed z-0 inset-0 backdrop-blur-sm bg-black/20"></div>
       <div className="relative pb-10 px-1">
         {/* Menu */}
