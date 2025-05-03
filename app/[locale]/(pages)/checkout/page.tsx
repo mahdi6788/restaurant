@@ -4,9 +4,9 @@ import { useRouter } from "@/i18n/navigation";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useCart } from "@/hooks/useCart";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+// import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import { CheckoutInput } from "@/app/lib/zod";
+// import { CheckoutInput } from "@/app/lib/zod";
 import { CheckoutCard } from "@/app/components/CheckoutCard";
 import CheckoutAccordion from "@/app/components/CheckoutAccordion";
 import { User } from "@prisma/client";
@@ -15,8 +15,7 @@ import { useTranslations } from "next-intl";
 export default function Checkout() {
   const translate = useTranslations("Checkout");
   const router = useRouter();
-  const queryClient = useQueryClient();
-  const [total, setTotal] = useState(0);
+  // const queryClient = useQueryClient();
   const { data: session, status, update } = useSession();
   const userId = session?.user.id;
   const name = session?.user?.name;
@@ -24,23 +23,23 @@ export default function Checkout() {
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
 
-  const { cartItems } = useCart();
+  const { cartItems, total } = useCart();
 
   const query = new URLSearchParams({
     email: email || "",
   }).toString();
 
-  const fetchCustomer = async () => {
-    const res = await fetch(`/api/users/single-user?${query}`, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    });
-    if (!res.ok) throw new Error("Something went wrong");
-    const customer = await res.json();
-    return customer as User;
-  };
-
   useEffect(() => {
+    const fetchCustomer = async () => {
+      const res = await fetch(`/api/users/single-user?${query}`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      });
+      if (!res.ok) throw new Error("Something went wrong");
+      const customer = await res.json();
+      return customer as User;
+    };
+
     fetchCustomer()
       .then((customer) => {
         setAddress(customer.address ?? "");
@@ -49,58 +48,44 @@ export default function Checkout() {
       .catch((error) => {
         console.error("Failed to fetch customer: ", error);
       });
-    setTotal(
-      cartItems.reduce(
-        (sum, item) => sum + item?.quantity * item?.menuItem.price,
-        0
-      ) ?? 0
-    );
-  }, [cartItems, session, email]);
+  }, [session, email, query]);
 
-  /// PAYMENT ///
-  //   const paymentRes = await fetch("/api/payment", {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify({ amount: total }),
-  //   });
-  //   const paymentData = await paymentRes.json();
-  //   setClientSecret(paymentData.clientSecret);
-  // }
+  // const makeOrderFn = async ({
+  //   phone,
+  //   address,
+  //   total,
+  //   userId,
+  // }: CheckoutInput) => {
+  //   try {
+  //     const res = await fetch("/api/checkout", {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify({ phone, address, total, userId }),
+  //     });
+  //     if (!res.ok) throw new Error("Failed to make the order");
+  //     const response = await res.json();
+  //     console.log(response.error);
+  //     return response;
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
-  const makeOrderFn = async ({
-    phone,
-    address,
-    total,
-    userId,
-  }: CheckoutInput) => {
-    try {
-      const res = await fetch("/api/checkout", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phone, address, total, userId }),
-      });
-      if (!res.ok) throw new Error("Failed to make the order");
-      const response = await res.json();
-      console.log(response.error);
-      return response;
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const { mutate: makeOrder, isPending: orderLoading } = useMutation({
+  //   mutationFn: makeOrderFn,
+  //   onSuccess: () => {
+  //     queryClient.invalidateQueries({ queryKey: ["checkout"] });
+  //     toast.success("Order made successfully");
+  //     router.push("/users");
+  //     router.refresh();
+  //   },
+  //   onError: (error) => {
+  //     console.log(error);
+  //     toast.error("Failed to make the order");
+  //   },
+  // });
 
-  const { mutate: makeOrder, isPending: orderLoading } = useMutation({
-    mutationFn: makeOrderFn,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["checkout"] });
-      toast.success("Order made successfully");
-      router.push("/users");
-      router.refresh();
-    },
-    onError: (error) => {
-      console.log(error);
-      toast.error("Failed to make the order");
-    },
-  });
+
 
   const handleCheckout = async (event?: React.FormEvent<HTMLFormElement>) => {
     event?.preventDefault();
@@ -148,8 +133,9 @@ export default function Checkout() {
           console.error(error);
           toast.error("Failed to update profile");
         }
+        router.push('/payment')
 
-        makeOrder({ phone, address, total, userId });
+        // makeOrder({ phone, address, total, userId });
       } else {
         toast.error("Cart is empty.");
       }
@@ -157,7 +143,7 @@ export default function Checkout() {
   };
 
   return (
-    <div className="container mx-auto px-2 py-8 pt-24 min-w-full h-screen text-orange-500 bg-emerald-900">
+    <div className="container mx-auto px-2 py-8 pt-24 min-w-full h-screen text-orange-500 bg-emerald-900 ">
       <h1 className="text-2xl font-bold mb-4 text-center sm:text-start">
         {translate("Checkout")}
       </h1>
@@ -225,7 +211,7 @@ export default function Checkout() {
             </div>
             <button
               type="submit"
-              className={`w-full bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 transition-colors ${orderLoading && "animate-pulse"}`}
+              className={`w-full bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 transition-colors `}  /// ${orderLoading && "animate-pulse"}
             >
               {session
                 ? translate("Checkout")
@@ -306,8 +292,9 @@ export default function Checkout() {
           setPhone={setPhone}
           phone={phone as string}
           cartItems={cartItems}
+          total={total}
           handleCheckout={handleCheckout}
-          orderLoading={orderLoading}
+          // orderLoading={orderLoading}
         />
       </div>
     </div>

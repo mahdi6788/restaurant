@@ -15,7 +15,8 @@ interface CheckoutProps {
   setPhone: (value: string) => void,
   phone: string;
   cartItems: CartItems;
-  orderLoading: boolean
+  total:number,
+  // orderLoading: boolean
 }
 
 export default function CheckoutAccordion({
@@ -27,7 +28,8 @@ export default function CheckoutAccordion({
   phone,
   setPhone,
   cartItems,
-  orderLoading
+  total,
+  // orderLoading
 }: CheckoutProps) {
   const translate = useTranslations("CheckoutAccordion")
   const {data:session} = useSession()
@@ -257,19 +259,13 @@ export default function CheckoutAccordion({
           <div className="flex justify-between items-center">
             <p className=" text-lg">{translate("Total")}</p>
             <p className=" text-xl font-bold">
-              AED{" "}
-              {cartItems
-                .reduce(
-                  (sum, item) => sum + item.menuItem.price * item.quantity,
-                  0
-                )
-                .toFixed(2)}
+              AED{" "}{total.toFixed(2)}
             </p>
           </div>
           <form onSubmit={(event) => handleCheckout(event)} className="w-full">
             <button
               type="submit"
-              className={`w-full text-xl font-bold bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 transition-colors ${orderLoading && "animate-pulse"}`}
+              className={`w-full text-xl font-bold bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 transition-colors `}  /// ${orderLoading && "animate-pulse"}
             >
               {session 
               ?translate("Checkout")

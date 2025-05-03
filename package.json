@@ -13,6 +13,7 @@
     "@heroicons/react": "^2.2.0",
     "@mapbox/node-pre-gyp": "^2.0.0",
     "@prisma/client": "^6.6.0",
+    "@stripe/react-stripe-js": "^3.7.0",
     "@stripe/stripe-js": "^6.1.0",
     "@tanstack/react-query": "^5.72.2",
     "axios": "^1.7.9",

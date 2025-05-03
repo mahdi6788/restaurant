@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
         address,
         phone,
         total,
-        status: "COMPLETED",
+        status: "PROCESSING",
         items: {
           create: cart.items.map((item) => ({
             menuItemId: item.menuItemId,
@@ -35,11 +35,6 @@ export async function POST(req: NextRequest) {
         },
       },
       include: { items: { include: { menuItem: true } } },
-    });
-
-    /// delete the cart item after creating the order
-    await prisma.cartItem.deleteMany({
-      where: { cartId: cart.id },
     });
     return NextResponse.json(order, { status: 201 });
   } catch (error) {

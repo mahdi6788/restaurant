@@ -5,6 +5,7 @@ import { CartItem, MenuItem } from "@prisma/client";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "@/i18n/navigation";
 import toast from "react-hot-toast";
+import { useEffect, useState } from "react";
 
 /// Fetch cart function
 export type CartItems = (CartItem & { menuItem: MenuItem })[];
@@ -60,6 +61,7 @@ const clearCartFn = async () => {
 export function useCart() {
   const router = useRouter();
   const queryClient = useQueryClient();
+  const [total, setTotal] = useState(0);
 
   /// GET
   const {
@@ -70,6 +72,15 @@ export function useCart() {
     queryKey: ["cart"],
     queryFn: fetchCartFn,
   });
+
+  useEffect(() => {
+    setTotal(
+      cartItems.reduce(
+        (sum, item) => sum + item?.quantity * item?.menuItem.price,
+        0
+      ) ?? 0
+    );
+  }, [cartItems]);
 
   /// ADD
   const {
@@ -128,6 +139,7 @@ export function useCart() {
     cartItems,
     cartItemsLoading,
     cartItemsError,
+    total,
     addToCart,
     addToCartPending,
     addToCartError,
