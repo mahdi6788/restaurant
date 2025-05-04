@@ -11,6 +11,9 @@ import { CheckoutCard } from "@/app/components/CheckoutCard";
 import CheckoutAccordion from "@/app/components/CheckoutAccordion";
 import { User } from "@prisma/client";
 import { useTranslations } from "next-intl";
+import { useQuery } from "@tanstack/react-query";
+import { BsCash } from "react-icons/bs";
+import { MdOutlinePayment } from "react-icons/md";
 
 export default function Checkout() {
   const translate = useTranslations("Checkout");
@@ -22,70 +25,30 @@ export default function Checkout() {
   const email = session?.user?.email;
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
-
+  const [showPayment, setShowPayment] = useState(false);
   const { cartItems, total } = useCart();
 
-  const query = new URLSearchParams({
-    email: email || "",
-  }).toString();
+  const query = new URLSearchParams({ email: email || "" }).toString();
+
+  const fetchCustomerFn = async () => {
+    const res = await fetch(`/api/users/single-user?${query}`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    });
+    if (!res.ok) throw new Error("Something went wrong");
+    const customer = await res.json();
+    return customer as User;
+  };
+
+  const { data: SingleCustomer } = useQuery({
+    queryKey: ["customer", email, session],
+    queryFn: fetchCustomerFn,
+  });
 
   useEffect(() => {
-    const fetchCustomer = async () => {
-      const res = await fetch(`/api/users/single-user?${query}`, {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-      });
-      if (!res.ok) throw new Error("Something went wrong");
-      const customer = await res.json();
-      return customer as User;
-    };
-
-    fetchCustomer()
-      .then((customer) => {
-        setAddress(customer.address ?? "");
-        setPhone(customer.phone ?? "");
-      })
-      .catch((error) => {
-        console.error("Failed to fetch customer: ", error);
-      });
-  }, [session, email, query]);
-
-  // const makeOrderFn = async ({
-  //   phone,
-  //   address,
-  //   total,
-  //   userId,
-  // }: CheckoutInput) => {
-  //   try {
-  //     const res = await fetch("/api/checkout", {
-  //       method: "POST",
-  //       headers: { "Content-Type": "application/json" },
-  //       body: JSON.stringify({ phone, address, total, userId }),
-  //     });
-  //     if (!res.ok) throw new Error("Failed to make the order");
-  //     const response = await res.json();
-  //     console.log(response.error);
-  //     return response;
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  // const { mutate: makeOrder, isPending: orderLoading } = useMutation({
-  //   mutationFn: makeOrderFn,
-  //   onSuccess: () => {
-  //     queryClient.invalidateQueries({ queryKey: ["checkout"] });
-  //     toast.success("Order made successfully");
-  //     router.push("/users");
-  //     router.refresh();
-  //   },
-  //   onError: (error) => {
-  //     console.log(error);
-  //     toast.error("Failed to make the order");
-  //   },
-  // });
-
-
+    setAddress(SingleCustomer?.address ?? "");
+    setPhone(SingleCustomer?.phone ?? "");
+  }, [SingleCustomer]);
 
   const handleCheckout = async (event?: React.FormEvent<HTMLFormElement>) => {
     event?.preventDefault();
@@ -121,6 +84,7 @@ export default function Checkout() {
             case 200:
               toast.success(response.message);
               /// Only trigger on a successful update to avoid redirecting on errors.
+              setShowPayment(true);
               update(session);
               break;
             case 500:
@@ -133,14 +97,34 @@ export default function Checkout() {
           console.error(error);
           toast.error("Failed to update profile");
         }
-        router.push('/payment')
-
-        // makeOrder({ phone, address, total, userId });
       } else {
         toast.error("Cart is empty.");
       }
     }
   };
+
+  const handleCOD = async () => {
+    const response = await fetch("/api/payment", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        amount: total,
+        phone,
+        address,
+        userId,
+        paymentMethod: "COD",
+      }),
+    });
+    const data = await response.json();
+    if (data.error) {
+      throw new Error(data.error);
+    }
+    alert("COD order placed successfully!");
+  };
+
+  const handleOnline = () => {
+    router.push("/payment")
+  }
 
   return (
     <div className="container mx-auto px-2 py-8 pt-24 min-w-full h-screen text-orange-500 bg-emerald-900 ">
@@ -211,7 +195,7 @@ export default function Checkout() {
             </div>
             <button
               type="submit"
-              className={`w-full bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 transition-colors `}  /// ${orderLoading && "animate-pulse"}
+              className={`w-full bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 transition-colors `} /// ${orderLoading && "animate-pulse"}
             >
               {session
                 ? translate("Checkout")
@@ -266,16 +250,21 @@ export default function Checkout() {
                 </div>
                 <div className="flex justify-between items-center">
                   <p className=" text-lg">{translate("Total")}</p>
-                  <p className=" text-xl font-bold">
-                    AED{" "}
-                    {cartItems
-                      .reduce(
-                        (sum, item) =>
-                          sum + item.menuItem.price * item.quantity,
-                        0
-                      )
-                      .toFixed(2)}
-                  </p>
+                  <p className=" text-xl font-bold">AED {total.toFixed(2)}</p>
+                </div>
+              </div>
+              {/* Patment Options */}
+              <div className={`${showPayment ? "flex flex-col": "hidden"}`}>
+                <p>Payment options:</p>
+                <div className="flex items-center justify-between">
+                  <button onClick={handleCOD} className="flex items-center justify-between gap-2 py-2 px-4 rounded-md bg-green-500 text-white hover:bg-green-600 transition-colors">
+                    <BsCash color="blue"/>
+                    <p>Cash on Delivery (COD)</p>
+                  </button>
+                  <button onClick={handleOnline} className="flex items-center justify-between gap-2 py-2 px-4 rounded-md bg-green-500 text-white hover:bg-green-600 transition-colors">
+                    <MdOutlinePayment color="blue"/>
+                    <p>Online payment</p>
+                  </button>
                 </div>
               </div>
             </div>

@@ -12,16 +12,19 @@ import { useCart } from "@/hooks/useCart";
 import { useSession } from "next-auth/react";
 
 // Initialize Stripe with your publishable key
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
+const stripePromise = loadStripe(
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
+);
 
 const PaymentForm: React.FC = () => {
+  const connectionError = true
+
   const { total } = useCart();
   const stripe = useStripe();
   const elements = useElements();
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [paymentSuccess, setPaymentSuccess] = useState(false);
-
   const { data: session } = useSession();
   const userId = session?.user.id;
   const address = session?.user?.address;
@@ -38,9 +41,18 @@ const PaymentForm: React.FC = () => {
       const response = await fetch("/api/payment", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ amount: total }),
+        body: JSON.stringify({
+          amount: total,
+          phone,
+          address,
+          userId,
+          paymentMethod: "ONLINE",
+        }),
       });
       const { clientSecret } = await response.json();
+      if (!clientSecret) {
+        throw new Error("Failed to create payment intent");
+      }
 
       // Confirm the payment with Stripe
       const cardElement = elements.getElement(CardElement);
@@ -54,16 +66,8 @@ const PaymentForm: React.FC = () => {
       if (stripeError) {
         setError(stripeError.message || "Payment failed");
       } else if (paymentIntent?.status === "succeeded") {
+        alert("Payment succeeded!");
         setPaymentSuccess(true);
-
-        /// delete the cart item after creating the order
-        await fetch("/api/cart/clearCart", { method: "DELETE" });
-        /// update the existing order by changeing the processing status to completed
-        await fetch("/api/order", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ phone, address, total, userId }),
-        });
       }
     } catch (err) {
       console.log(err);
@@ -85,10 +89,11 @@ const PaymentForm: React.FC = () => {
           </p>
         </div>
         <form onSubmit={handleSubmit} className="mt-8 space-y-6">
+          {connectionError 
+          && <p className="text-red-700 animate-bounce">Sorry, online payment is not available now</p>
+        }
           <div>
-            <label className="block text-sm font-medium ">
-              Card Details
-            </label>
+            <label className="block text-sm font-medium ">Card Details</label>
             <div className="mt-1 p-2 border border-gray-300 rounded-md">
               <CardElement
                 options={{
@@ -110,7 +115,7 @@ const PaymentForm: React.FC = () => {
           )}
           <button
             type="submit"
-            disabled={!stripe || isLoading}
+            disabled={connectionError ? true : !stripe || isLoading} 
             className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-900 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isLoading ? "Processing..." : `Pay AED ${total} `}

@@ -102,7 +102,13 @@ model Order {
   updatedAt               DateTime    @updatedAt
   address                 String
   phone                   String?
+  paymentMethod           PaymentMethod @default(COD)
   paymentId               String?
+}
+
+enum PaymentMethod {
+  COD
+  ONLINE
 }
 
 model OrderItem {
