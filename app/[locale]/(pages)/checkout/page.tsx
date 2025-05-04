@@ -120,6 +120,7 @@ export default function Checkout() {
       throw new Error(data.error);
     }
     alert("COD order placed successfully!");
+    router.push("/")
   };
 
   const handleOnline = () => {
