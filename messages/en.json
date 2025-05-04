@@ -58,7 +58,10 @@
     "Edit": "Edit",
     "Remove": "Remove",
     "Delivery cost": "Delivery cost",
-    "Total": "Total"
+    "Total": "Total",
+    "Payment options": "Payment options",
+    "Cash on Delivery":"Cash on Delivery",
+    "Online payment":"Online payment"
   },
   "CheckoutCard": {
     "Remove": "Remove"
@@ -79,7 +82,10 @@
     "Edit": "Edit",
     "Total": "Total",
     "Delivery cost": "Delivery cost",
-    "Checkout": "Checkout"
+    "Checkout": "Checkout",
+    "Payment options": "Payment options",
+    "Cash on Delivery":"Cash on Delivery",
+    "Online payment":"Online payment"
   },
   "Menu": {
     "Main Course": "Main Course",

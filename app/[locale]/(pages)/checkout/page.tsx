@@ -120,7 +120,7 @@ export default function Checkout() {
       throw new Error(data.error);
     }
     alert("COD order placed successfully!");
-    router.push("/")
+    router.push("/users")
   };
 
   const handleOnline = () => {
@@ -246,7 +246,7 @@ export default function Checkout() {
               <div className="p-5 space-y-5 w-full">
                 {/* Total */}
                 <div className="flex justify-between items-center gap-3">
-                  <p className=" text-lg">{translate("Delivery cost")}: </p>
+                  <p className=" text-lg">{translate("Delivery cost")} </p>
                   <p className="">AED 0.00</p>
                 </div>
                 <div className="flex justify-between items-center">
@@ -256,15 +256,15 @@ export default function Checkout() {
               </div>
               {/* Patment Options */}
               <div className={`${showPayment ? "flex flex-col": "hidden"}`}>
-                <p>Payment options:</p>
+                <p>{translate("Payment options")}</p>
                 <div className="flex items-center justify-between">
                   <button onClick={handleCOD} className="flex items-center justify-between gap-2 py-2 px-4 rounded-md bg-green-500 text-white hover:bg-green-600 transition-colors">
                     <BsCash color="blue"/>
-                    <p>Cash on Delivery (COD)</p>
+                    <p>{translate("Cash on Delivery")}(COD)</p>
                   </button>
                   <button onClick={handleOnline} className="flex items-center justify-between gap-2 py-2 px-4 rounded-md bg-green-500 text-white hover:bg-green-600 transition-colors">
                     <MdOutlinePayment color="blue"/>
-                    <p>Online payment</p>
+                    <p>{translate("Online payment")}</p>
                   </button>
                 </div>
               </div>
@@ -284,6 +284,9 @@ export default function Checkout() {
           cartItems={cartItems}
           total={total}
           handleCheckout={handleCheckout}
+          handleOnline={handleOnline}
+          handleCOD={handleCOD}
+          showPayment={showPayment}
           // orderLoading={orderLoading}
         />
       </div>

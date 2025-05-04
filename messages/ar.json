@@ -62,7 +62,10 @@
     "Edit": "تعديل",
     "Remove": "إزالة",
     "Delivery cost": "تكلفة التوصيل",
-    "Total":"الإجمالي "
+    "Total":"الإجمالي ",
+    "Payment options": "خيارات الدفع",
+    "Cash on Delivery":"الدفع عند الاستلام",
+    "Online payment":"الدفع الإلكتروني"
   },
   "CheckoutCard": {
     "Remove": "إزالة"
@@ -83,7 +86,10 @@
     "Edit": "تعديل",
     "Delivery cost": "تكلفة التوصيل",
     "Checkout":"الدفع",
-    "Total":"الإجمالي "
+    "Total":"الإجمالي ",
+    "Payment options": "خيارات الدفع",
+    "Cash on Delivery":"الدفع عند الاستلام",
+    "Online payment":"الدفع الإلكتروني"
 
 
   },

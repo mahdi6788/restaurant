@@ -5,17 +5,22 @@ import { CheckoutCard } from "./CheckoutCard";
 import { CartItems } from "@/hooks/useCart";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
+import { BsCash } from "react-icons/bs";
+import { MdOutlinePayment } from "react-icons/md";
 
 interface CheckoutProps {
-  handleCheckout: (event:React.FormEvent<HTMLFormElement>) => void;
+  handleCheckout: (event: React.FormEvent<HTMLFormElement>) => void;
   name: string;
   email: string;
   address: string;
-  setAddress: (value: string) => void,
-  setPhone: (value: string) => void,
+  setAddress: (value: string) => void;
+  setPhone: (value: string) => void;
   phone: string;
   cartItems: CartItems;
-  total:number,
+  total: number;
+  handleOnline: () => void;
+  handleCOD: () => void;
+  showPayment: boolean;
   // orderLoading: boolean
 }
 
@@ -29,14 +34,16 @@ export default function CheckoutAccordion({
   setPhone,
   cartItems,
   total,
+  handleOnline,
+  handleCOD,
+  showPayment,
   // orderLoading
 }: CheckoutProps) {
-  const translate = useTranslations("CheckoutAccordion")
-  const {data:session} = useSession()
+  const translate = useTranslations("CheckoutAccordion");
+  const { data: session } = useSession();
   const [infoIsOpen, setInfoIsOpen] = useState(false);
   const [orderIsOpen, setOrderIsOpen] = useState(false);
   const [totalIsOpen, setTotalIsOpen] = useState(false);
-  
 
   const handleInfo = () => {
     setInfoIsOpen(!infoIsOpen);
@@ -55,7 +62,11 @@ export default function CheckoutAccordion({
   };
 
   return (
-    <div id="accordion-collapse" data-accordion="collapse" className="text-gray-900 dark:dark-mode">
+    <div
+      id="accordion-collapse"
+      data-accordion="collapse"
+      className="text-gray-900 dark:dark-mode"
+    >
       {/* title: Customer Information */}
       <h2 id="accordion-collapse-heading-1">
         <button
@@ -63,7 +74,9 @@ export default function CheckoutAccordion({
           type="button"
           className="flex items-center justify-between w-full p-2 font-medium border border-b-0 border-gray-200 rounded-t-xl focus:ring-2 focus:ring-gray-200 gap-3"
         >
-          <p className="text-lg font-bold">{translate("Customer Information")}</p>
+          <p className="text-lg font-bold">
+            {translate("Customer Information")}
+          </p>
           <svg
             data-accordion-icon
             className="w-3 h-3 rotate-180 shrink-0"
@@ -91,10 +104,7 @@ export default function CheckoutAccordion({
         <div className="p-2">
           <form className="bg-emerald-900 rounded-md">
             <div className="mb-4">
-              <label
-                htmlFor="name"
-                className="block text-lg font-medium "
-              >
+              <label htmlFor="name" className="block text-lg font-medium ">
                 {translate("Name")}
               </label>
               <input
@@ -107,10 +117,7 @@ export default function CheckoutAccordion({
               />
             </div>
             <div className="mb-4">
-              <label
-                htmlFor="email"
-                className="block text-lg font-medium "
-              >
+              <label htmlFor="email" className="block text-lg font-medium ">
                 {translate("Email")}
               </label>
               <input
@@ -123,10 +130,7 @@ export default function CheckoutAccordion({
               />
             </div>
             <div className="mb-4">
-              <label
-                htmlFor="address"
-                className="block text-lg font-medium "
-              >
+              <label htmlFor="address" className="block text-lg font-medium ">
                 {translate("Address")}
               </label>
               <input
@@ -139,10 +143,7 @@ export default function CheckoutAccordion({
               />
             </div>
             <div className="mb-4">
-              <label
-                htmlFor="phone"
-                className="block text-lg font-medium "
-              >
+              <label htmlFor="phone" className="block text-lg font-medium ">
                 {translate("Phone Number")}
               </label>
               <input
@@ -189,7 +190,7 @@ export default function CheckoutAccordion({
         className={`${orderIsOpen ? "flex border" : "hidden"} mb-1`}
         aria-labelledby="accordion-collapse-heading-2"
       >
-        <div className="">
+        <div>
           {cartItems.length === 0 ? (
             <p>{translate("No items in the cart")}</p>
           ) : (
@@ -251,28 +252,43 @@ export default function CheckoutAccordion({
         <div className="p-5 space-y-5 w-full">
           {/* Total */}
           <div className="flex justify-between items-center gap-3">
-            <p className=" text-lg">{translate("Delivery cost")}: </p>
-            <p className="">
-              AED 0.00 
-            </p>
+            <p className=" text-lg">{translate("Delivery cost")} </p>
+            <p className="">AED 0.00</p>
           </div>
           <div className="flex justify-between items-center">
             <p className=" text-lg">{translate("Total")}</p>
-            <p className=" text-xl font-bold">
-              AED{" "}{total.toFixed(2)}
-            </p>
+            <p className=" text-xl font-bold">AED {total.toFixed(2)}</p>
           </div>
           <form onSubmit={(event) => handleCheckout(event)} className="w-full">
             <button
               type="submit"
-              className={`w-full text-xl font-bold bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 transition-colors `}  /// ${orderLoading && "animate-pulse"}
+              className={`w-full text-xl font-bold bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 transition-colors `} /// ${orderLoading && "animate-pulse"}
             >
-              {session 
-              ?translate("Checkout")
-              :translate("Sign in to checkout")
-              }
+              {session
+                ? translate("Checkout")
+                : translate("Sign in to checkout")}
             </button>
           </form>
+          {/* Patment Options */}
+          <div className={`${showPayment ? "flex flex-col gap-1" : "hidden"}`}>
+            <p>{translate("Payment options")}</p>
+            <div className="flex flex-col gap-2">
+              <button
+                onClick={handleCOD}
+                className="flex items-center justify-between gap-2 py-2 px-4 rounded-md bg-green-500 text-white hover:bg-green-600 transition-colors"
+              >
+                <BsCash color="blue" />
+                <p>{translate("Cash on Delivery")} (COD)</p>
+              </button>
+              <button
+                onClick={handleOnline}
+                className="flex items-center justify-between gap-2 py-2 px-4 rounded-md bg-green-500 text-white hover:bg-green-600 transition-colors"
+              >
+                <MdOutlinePayment color="blue" />
+                <p>{translate("Online payment")}</p>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

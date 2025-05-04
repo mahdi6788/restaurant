@@ -62,7 +62,10 @@
     "Edit": "ویرایش",
     "Remove": "حذف",
     "Delivery cost": "هزینه ارسال",
-    "Total":"جمع کل"
+    "Total":"جمع کل",
+    "Payment options": "گزینه‌های پرداخت",
+    "Cash on Delivery":"پرداخت در محل",
+    "Online payment":"پرداخت آنلاین"
   },
   "CheckoutCard": {
     "Remove": "حذف"
@@ -83,7 +86,10 @@
     "Edit": "ویرایش",
     "Total":"جمع کل",
     "Delivery cost": "هزینه ارسال",
-    "Checkout":"تسویه‌حساب"
+    "Checkout":"تسویه‌حساب",
+    "Payment options": "گزینه‌های پرداخت",
+    "Cash on Delivery":"پرداخت در محل",
+    "Online payment":"پرداخت آنلاین"
   },
   "Menu": {
     "Main Course": "غذای اصلی",
