@@ -6,7 +6,7 @@ import { useState } from "react";
 import MobileNavbar from "../components/MobileNavbar";
 import OrderProvider from "../context/OrderContext";
 import MobileBottomNav from "../components/MobileBottomNav";
-import { ThemeProvider } from "../context/ThemeContext";
+import { ThemeInitializer } from "../store/themeStore";
 
 const queryClient = new QueryClient();
 
@@ -19,10 +19,9 @@ export default function ClientProviders({
   return (
     <QueryClientProvider client={queryClient}>
       <Toaster />
-      <ThemeProvider>
+      <ThemeInitializer />
         <MobileNavbar isOpen={isOpen} setIsOpen={setIsOpen} />
         <OrderProvider>{children}</OrderProvider>
-      </ThemeProvider>
       <MobileBottomNav />
     </QueryClientProvider>
   );

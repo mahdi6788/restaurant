@@ -14,8 +14,8 @@ import { FaShoppingCart } from "react-icons/fa";
 import { useTranslations } from "next-intl";
 import LocaleSwitcher from "../components/LocaleSwitcher";
 import { Link } from "@/i18n/navigation";
-import { useTheme } from "../context/ThemeContext";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
+import { useThemeStore } from "../store/themeStore";
 
 export default function Home() {
   const translate = useTranslations("Home");
@@ -24,7 +24,7 @@ export default function Home() {
   const { cartItems, cartItemsLoading } = useCart();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const { theme, toggleTheme } = useTheme();
+  const { theme, toggleTheme } = useThemeStore();
 
   if (menuLoading) return <HomeSkeleton />;
 

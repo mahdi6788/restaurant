@@ -17,8 +17,8 @@ import { useEffect, useRef, useState } from "react";
 import LogoutModal from "./LogoutModal";
 import { useTranslations } from "next-intl";
 import LocaleSwitcher from "./LocaleSwitcher";
-import { useTheme } from "../context/ThemeContext";
 import { usePathname } from "next/navigation";
+import { useThemeStore } from "../store/themeStore";
 
 export default function MobileNavbar({
   isOpen,
@@ -31,7 +31,7 @@ export default function MobileNavbar({
   const { data: session } = useSession();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
-  const { theme, toggleTheme } = useTheme();
+  const { theme, toggleTheme } = useThemeStore();
   const pathname = usePathname()
 
   const navRef = useRef<HTMLDivElement>(null);
