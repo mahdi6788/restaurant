@@ -1,8 +1,10 @@
-import { MenuItem, Order, OrderItem, User } from "@prisma/client";
+import { CartItem, MenuItem, Order, OrderItem, User } from "@prisma/client";
 
 export type ParamsType = {
   params: { id: string };
 };
+
+export type CartItems = (CartItem & { menuItem: MenuItem })[];
 
 export type OrderItemWithmenuItem = OrderItem & { menuItem: MenuItem };
 
