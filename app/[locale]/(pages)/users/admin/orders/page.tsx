@@ -1,8 +1,8 @@
 "use client";
-import { useOrders } from "@/app/context/OrderContext";
 import CustomersOrders from "@/app/components/admin/CustomersOrders";
 import { useEffect } from "react";
 import { useTranslations } from "next-intl";
+import { useOrders } from "@/app/store/orderStore";
 
 export default function CustomersOrdersPage() {
   const translate = useTranslations("CustomersOrdersPage")
@@ -10,7 +10,7 @@ export default function CustomersOrdersPage() {
 
   useEffect(() => {
     setCreatedAt("All");
-  });
+  },[]);
 
   return (
     <div className="container mx-auto mb-5">

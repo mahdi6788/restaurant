@@ -1,7 +1,7 @@
 "use client";
 import CustomersOrders from "@/app/components/admin/CustomersOrders";
 import OrderHistory from "@/app/components/customers/OrderHistory";
-import { useOrders } from "@/app/context/OrderContext";
+import { useOrders } from "@/app/store/orderStore";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import { useEffect } from "react";
@@ -14,7 +14,7 @@ export default function HomePage() {
 
   useEffect(() => {
     setCreatedAt("today");
-  });
+  },[]);
 
   return (
     <div className="container mx-auto mb-5">

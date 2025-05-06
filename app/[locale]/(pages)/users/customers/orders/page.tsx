@@ -1,6 +1,6 @@
 "use client";
 import OrderHistory from "@/app/components/customers/OrderHistory";
-import { useOrders } from "@/app/context/OrderContext";
+import { useOrders } from "@/app/store/orderStore";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import { useEffect } from "react";
@@ -13,7 +13,7 @@ export default function OrderPage() {
 
   useEffect(() => {
     setCreatedAt("All");
-  });
+  },[]);
 
   if (!session?.user?.id) {
     return <div>{translate("Please log in to view your order history")}</div>;
