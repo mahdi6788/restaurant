@@ -2,11 +2,11 @@
 
 import { useState } from "react";
 import { CheckoutCard } from "./CheckoutCard";
-import { CartItems } from "@/hooks/useCart";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import { BsCash } from "react-icons/bs";
 import { MdOutlinePayment } from "react-icons/md";
+import { CartItems } from "../types/types";
 
 interface CheckoutProps {
   handleCheckout: (event: React.FormEvent<HTMLFormElement>) => void;
