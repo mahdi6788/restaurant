@@ -1,6 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
-import { useOrders } from "../context/OrderContext";
+import { useOrders } from "../store/orderStore";
 
 export default function SearchFilterSort() {
   const translate = useTranslations("SearchFilterSort")

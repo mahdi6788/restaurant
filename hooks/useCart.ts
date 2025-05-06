@@ -5,10 +5,26 @@ import { CartItem, MenuItem } from "@prisma/client";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "@/i18n/navigation";
 import toast from "react-hot-toast";
-import { useEffect, useState } from "react";
+import {useMemo } from "react";
 
 /// Fetch cart function
 export type CartItems = (CartItem & { menuItem: MenuItem })[];
+
+interface CartHookReturn   {
+  cartItems: CartItems,
+  cartItemsLoading: boolean,
+  cartItemsError: Error | null,
+  total: number,
+  addToCart: ({ menuItemId, quantity }: AddToCartInput) => void,
+  addToCartPending:boolean,
+  addToCartError:Error | null,
+  removeFromCart: (cartItemId: string) => void ,
+  removeFromCartPending:boolean,
+  removeFromCartError:Error | null,
+  clearCart: () => void,
+  clearCartPending: boolean,
+  clearCartError:Error | null,
+}
 
 const fetchCartFn = async (): Promise<CartItems> => {
   const res = await fetch("/api/cart", {
@@ -23,7 +39,7 @@ const fetchCartFn = async (): Promise<CartItems> => {
 const addToCartFn = async ({ menuItemId, quantity }: AddToCartInput) => {
   const res = await fetch("/api/cart", {
     method: "POST",
-    headers: { "Content-Type": "aplication/json" },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ menuItemId, quantity }),
   });
   if (!res.ok) throw new Error("Failed to add to cart");
@@ -31,7 +47,6 @@ const addToCartFn = async ({ menuItemId, quantity }: AddToCartInput) => {
 };
 /// remove item from cart function
 const removeFromCartFn = async (cartItemId: string) => {
-  try {
     const res = await fetch("/api/cart", {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
@@ -39,29 +54,21 @@ const removeFromCartFn = async (cartItemId: string) => {
     });
     if (!res.ok) throw new Error("Failed to remove from cart");
     return res.json();
-  } catch (error) {
-    console.error(error);
-  }
 };
 /// Clear cart function
 const clearCartFn = async () => {
-  try {
     const res = await fetch("/api/cart/clearCart", {
       method: "DELETE",
     });
     if (!res.ok) throw new Error("Failed to clear cart");
     return res.json();
-  } catch (error) {
-    console.error(error);
-  }
 };
 
 /// useQuery & useMutation
 
-export function useCart() {
+export function useCart():CartHookReturn {
   const router = useRouter();
   const queryClient = useQueryClient();
-  const [total, setTotal] = useState(0);
 
   /// GET
   const {
@@ -73,14 +80,11 @@ export function useCart() {
     queryFn: fetchCartFn,
   });
 
-  useEffect(() => {
-    setTotal(
-      cartItems.reduce(
-        (sum, item) => sum + item?.quantity * item?.menuItem.price,
-        0
-      ) ?? 0
-    );
-  }, [cartItems]);
+  /// Compute total using useMemo instead of using useEffect that can make infinitive loop
+  const total = useMemo (
+    () => cartItems.reduce((sum,item) => sum + item.menuItem.price * item.quantity, 0), 
+    [cartItems]
+  )
 
   /// ADD
   const {

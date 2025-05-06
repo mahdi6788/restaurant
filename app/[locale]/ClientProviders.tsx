@@ -4,7 +4,6 @@ import { Toaster } from "react-hot-toast";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState } from "react";
 import MobileNavbar from "../components/MobileNavbar";
-import OrderProvider from "../context/OrderContext";
 import MobileBottomNav from "../components/MobileBottomNav";
 import { ThemeInitializer } from "../store/themeStore";
 
@@ -20,8 +19,8 @@ export default function ClientProviders({
     <QueryClientProvider client={queryClient}>
       <Toaster />
       <ThemeInitializer />
-        <MobileNavbar isOpen={isOpen} setIsOpen={setIsOpen} />
-        <OrderProvider>{children}</OrderProvider>
+      <MobileNavbar isOpen={isOpen} setIsOpen={setIsOpen} />
+      {children}
       <MobileBottomNav />
     </QueryClientProvider>
   );

@@ -25,9 +25,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <div className="flex-none w-full sm:w-64 ">
         <Sidebar />
       </div>
-      {/* dynamic part of the layout 
-      children are all the pages inside all folders into users directory */}
-
       <div className="flex-grow p-2 sm:overflow-y-auto sm:p-12 mt-1 sm:mt-14 mb-7">
         {(pathname === "/users" ||
           pathname === "/users/customers/orders" ||

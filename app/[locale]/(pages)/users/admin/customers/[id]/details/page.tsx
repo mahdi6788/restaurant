@@ -1,6 +1,6 @@
 "use client";
 import Loading from "@/app/components/loading";
-import { useOrders } from "@/app/context/OrderContext";
+import { useOrders } from "@/app/store/orderStore";
 import {
   OrderItemWithmenuItem,
   OrderWithItems,
