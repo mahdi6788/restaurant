@@ -1,7 +1,5 @@
 # Restaurant Website
 
-![Restaurant Website](https://v0.dev/placeholder.svg?height=300&width=600)
-
 A modern, full-stack restaurant website built with Next.js, TypeScript, and Prisma. This project provides a complete solution for restaurant owners to showcase their menu, accept online orders, and process payments.
 
 ## 🌟 Features
